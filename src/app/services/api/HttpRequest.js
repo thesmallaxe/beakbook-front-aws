@@ -2,7 +2,7 @@ import { HttpConfig } from "../../constants/config/HttpConfig";
 
 class HttpRequest {
   headers = {
-    Accept: "application/json",
+    "Accept": "application/json",
     "Content-type": "application/json",
   };
 

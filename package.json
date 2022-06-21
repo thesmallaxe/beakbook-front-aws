@@ -49,7 +49,7 @@
       "react-hooks/exhaustive-deps": "warn"
     }
   },
-  "proxy": "http://dev-beakbook.dxdyhosting.xyz/api/",
+  "proxy": "https://gv083kmwld.execute-api.eu-west-2.amazonaws.com/api/",
   "browserslist": {
     "production": [
       ">0.2%",
