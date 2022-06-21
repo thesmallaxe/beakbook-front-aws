@@ -1,0 +1,61 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @include padding(1.25rem 0);
+
+  &__left {
+    display: flex;
+    flex-shrink: 1;
+    gap: 0.75rem;
+  }
+
+  &__right {
+    display: flex;
+    flex-shrink: 1;
+    gap: 0.75rem;
+    flex-direction: row-reverse;
+  }
+
+  .profile__dropdown {
+    display: none;
+    position: absolute;
+    margin: 4rem 0 0 0;
+    padding: 1rem;
+    background: #fff;
+    transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    border-radius: 5px;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 1rem;
+      height: 1rem;
+      background-color: #fff;
+      position: absolute;
+      right: 10px;
+      top: -8px;
+      transform: rotate(45deg);
+    }
+
+    ul {
+      li {
+        font-size: 1rem;
+
+        a {
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          display: block;
+
+          &:hover {
+            background-color: $primaryColorLight;
+          }
+        }
+      }
+    }
+  }
+
+  .profile__btn.active ~ .profile__dropdown {
+    display: block;
+  }
+}

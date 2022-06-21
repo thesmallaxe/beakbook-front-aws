@@ -1,0 +1,283 @@
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  gap: 6.75rem;
+
+  &__overview {
+    width: 51.25rem;
+  }
+
+  &__welcome {
+    @include margin(1.875rem 0 3.125rem);
+
+    @include devices(dekstop) {
+      @include margin(2.875rem 0 3.125rem);
+    }
+  }
+
+  &__welcome_title {
+    font-family: $primaryFont;
+    font-weight: $fontWeightLight;
+    margin-bottom: 1rem;
+
+    strong {
+      font-weight: $fontWeightMedium;
+    }
+  }
+
+  &__welcome_block {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 2rem;
+  }
+
+  &__welcome_text {
+    @include font(1.125rem, 100%);
+
+    .muted_text {
+      color: #a8a8a8;
+    }
+
+    .highlight {
+      color: $primaryColor;
+    }
+  }
+
+  &__welcome_link {
+    @include font(1.125rem, 100%);
+    width: 8rem;
+    text-align: right;
+    color: $primaryColor;
+  }
+
+  &__action {
+    select {
+      background: #f0f0f0;
+      box-shadow: 0px 4px 40px rgba(33, 132, 250, 0.02);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      min-width: 15rem;
+      font-weight: $fontWeightRegular;
+      border: none;
+    }
+  }
+
+  &__barns {
+    display: grid;
+    grid-template-columns: repeat(3, calc((51.25rem - 2.5rem) / 3) [col-start]);
+    gap: 1.5rem 1.25rem;
+    @include margin(1.5rem 0);
+  }
+
+  &__statics {
+    width: 18.37rem;
+  }
+
+  &__statics_wrapper {
+    display: flex;
+    height: 100%;
+    flex-shrink: 1;
+    flex-direction: column;
+    padding: 9rem 0 1.625rem;
+    gap: 1.7rem;
+
+    @include devices(dekstop) {
+      padding: 10rem 0 1.625rem;
+      gap: 4.5rem;
+    }
+  }
+}
+
+.barn {
+  display: block;
+  position: relative;
+  min-height: 32.1vh;
+  border-radius: 5px;
+  color: $whiteColor;
+  background: $primaryColor;
+  @include padding(1.25rem);
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0px;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(
+      0deg,
+      $primaryColor 32.16%,
+      $primaryColorLight 118.75%
+    );
+    border-radius: 0px 5px 5px 5px;
+  }
+
+  &--blue {
+    background: #01b7ff;
+
+    &::after {
+      background: linear-gradient(0deg, #01b7ff 32.16%, #72d7ff 118.75%);
+    }
+  }
+
+  &--green {
+    background: #1c9038;
+
+    &::after {
+      background: linear-gradient(180deg, #3cbe5c -36.28%, #1c9038 61.43%);
+    }
+  }
+
+  &--pink {
+    background: #ff7580;
+
+    &::after {
+      background: linear-gradient(
+        180deg,
+        #ffc7cb -20.27%,
+        rgba(237, 148, 155, 0) 57.62%
+      );
+    }
+  }
+
+  &--purple {
+    background: #6a3eff;
+
+    &::after {
+      background: linear-gradient(
+        180deg,
+        #7a54f9 0%,
+        rgba(114, 71, 255, 0) 61.43%
+      );
+    }
+  }
+
+  &--violet {
+    background: #3f3bfe;
+
+    &::after {
+      background: linear-gradient(180deg, #6a67ff 0%, #3f3bfe 46.8%);
+    }
+  }
+
+  &--navy {
+    background: #004f53;
+
+    &::after {
+      background: linear-gradient(180deg, #056267 0%, #004f53 61.43%);
+    }
+  }
+
+  &__overview {
+    position: relative;
+    z-index: 9;
+  }
+
+  &__label {
+    font-size: 1.125rem;
+    display: block;
+
+    @include devices(laptop) {
+      margin-bottom: 1rem;
+    }
+
+    @include devices(dekstop) {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &__summary {
+    font-weight: $fontWeightMedium;
+
+    @include devices(laptop) {
+      @include font(3rem, 100%);
+      margin-bottom: 1rem;
+    }
+
+    @include devices(dekstop) {
+      @include font(4.2rem, 100%);
+      margin-bottom: 1.5rem;
+    }
+
+    small {
+      @include font(1.5rem, 100%);
+      font-weight: $fontWeightRegular;
+    }
+  }
+
+  &__text {
+    font-size: 1.125rem;
+
+    @include devices(laptop) {
+      margin-bottom: 1.5rem;
+    }
+
+    @include devices(dekstop) {
+      margin-bottom: 2.25rem;
+    }
+  }
+
+  &__days,
+  &__chicken {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-sizing: border-box;
+    border-radius: 3px;
+    @include padding(1.125rem 1.25rem);
+    margin-bottom: 0.625rem;
+    display: flex;
+
+    i {
+      font-size: inherit;
+      margin-right: 0.5rem;
+    }
+
+    span {
+      font-size: 0.825rem;
+    }
+  }
+}
+
+.statics_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $whiteColor;
+  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  &__logo {
+    background-color: rgba(202, 202, 202, 0.2);
+    border-radius: 5px;
+    color: rgba(69, 66, 66, 0.95);
+    font-size: 2.5rem;
+    padding: 0.75rem;
+    margin-top: 1.25rem;
+
+    i {
+      font-size: 2.688rem !important;
+    }
+  }
+
+  &__text {
+    margin: 0.875rem 0 1.25rem;
+    font-size: 2.25rem;
+    font-weight: $fontWeightMedium;
+  }
+
+  &__label {
+    font-weight: 400;
+    display: block;
+    margin-bottom: 1.25rem;
+  }
+
+  &--orange &__logo {
+    background-color: $primaryColorLight;
+    color: $primaryColor;
+  }
+
+  &--green &__logo {
+    background-color: $greenColorLight;
+    color: $greenColor;
+  }
+}

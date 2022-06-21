@@ -1,0 +1,196 @@
+.auth {
+  background-color: $backgroundColorLight;
+  @include padding(2.75rem 5.125rem);
+  height: 100%;
+  max-height: 100vh;
+
+  &__wrapper {
+    background-color: $whiteColor;
+    display: flex;
+    border-radius: 0.625rem 0px 0px 0.625rem;
+    justify-content: space-between;
+    margin: auto;
+    aspect-ratio: 16 / 11.37;
+    overflow: hidden;
+    max-width: 100%;
+    max-height: calc(100vh - (2.75rem * 2));
+    height: calc(100vh - (2.75rem * 2));
+  }
+
+  &__content {
+    width: 51.88%;
+    @include padding(12% 5.125rem 2rem);
+
+    @include devices(dekstop) {
+      @include padding(14.4% 7.5rem 2rem 5.125rem);
+    }
+  }
+
+  &__image {
+    width: 48.19%;
+
+    figure {
+      position: relative;
+      max-height: 100%;
+      display: block;
+    }
+
+    figcaption {
+      height: (16.375rem + 3.75rem);
+      @include padding(calc(3.75rem * 2) 3.75rem 3.75rem 3.75rem);
+      position: absolute;
+      bottom: 0;
+      background: linear-gradient(360deg, #000000 0%, rgba(0, 0, 0, 0) 100%),
+        linear-gradient(360deg, #000000 0%, rgba(0, 0, 0, 0) 50%);
+
+      label {
+        font-weight: $fontWeightRegular;
+        @include font(1.125rem, 1.5rem);
+        color: $whiteColor;
+        display: block;
+        margin-bottom: 1rem;
+
+        abbr {
+          text-transform: uppercase;
+          color: $primaryColor;
+        }
+      }
+
+      p {
+        font-weight: $fontWeightRegular;
+        @include font(1.75rem, 139%);
+        color: $whiteColor;
+      }
+    }
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      height: 100%;
+    }
+  }
+
+  &__logo {
+    width: 14.75rem;
+    display: block;
+    margin-bottom: 1.2rem;
+
+    @include devices(dekstop) {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.login {
+  &__content > p {
+    font-weight: $fontWeightMedium;
+    font-size: 1.625rem;
+    line-height: 2.438rem;
+    color: #5a6576;
+    margin-bottom: 7%;
+    width: 15.75rem;
+
+    @include devices(dekstop) {
+      margin-bottom: 12%;
+    }
+  }
+
+  &__field {
+    label.MuiInputLabel-formControl {
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      color: #5a6576;
+    }
+
+    fieldset.MuiOutlinedInput-notchedOutline {
+      border-width: 1px;
+    }
+
+    .Mui-focused fieldset.MuiOutlinedInput-notchedOutline {
+      border-color: $greenColor;
+      border-width: 1px;
+    }
+
+    .MuiInputBase-input {
+      font-size: 1.125rem;
+    }
+  }
+
+  &__remember {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14%;
+
+    @include devices(dekstop) {
+      margin-bottom: 18%;
+    }
+
+    label span,
+    a {
+      font-family: $primaryFont;
+      font-size: 0.875rem;
+      line-height: 1rem;
+      color: #5a6576;
+    }
+  }
+
+  &__action-btn {
+    @include padding(1.25rem 1.25rem);
+    width: 11.875rem;
+    text-align: center;
+  }
+
+  &__error {
+    display: block;
+    color: rgba(211, 47, 47, 1);
+    border: 1px solid rgba(211, 47, 47, 1);
+    padding: 0.25rem 1rem;
+    background: rgba(248, 0, 0, 0.1);
+  }
+
+  &__back {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+
+    @include devices(dekstop) {
+      margin-bottom: 2.5rem;
+    }
+
+    abbr {
+      font-family: $secndaryFont;
+      @include font(0.875rem, 100%);
+    }
+
+    i {
+      font-size: 1.125rem;
+    }
+  }
+
+  &--forget .login__action-btn {
+    margin-top: 3.375rem;
+
+    @include devices(dekstop) {
+      margin-top: 4.375rem;
+    }
+  }
+
+  &--reset .auth__logo,
+  &--forget .auth__logo {
+    margin-bottom: 4rem;
+
+    @include devices(dekstop) {
+      margin-bottom: 5rem;
+    }
+  }
+
+  &--reset .login__action-btn {
+    margin-top: 4.875rem;
+
+    @include devices(dekstop) {
+      margin-top: 6.875rem;
+    }
+  }
+}

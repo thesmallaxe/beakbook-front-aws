@@ -1,0 +1,119 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 3.7rem;
+  min-height: 100%;
+  background-color: $whiteColor;
+  overflow: hidden;
+  transition: width 0.5s;
+  transition-timing-function: cubic-bezier(0.3, 0.9, 0.6, 0.9);
+
+  &:hover {
+    width: 15.625rem;
+  }
+
+  &:hover ~ .main-wrapper {
+    margin-left: 15.625rem;
+  }
+
+  &__logo {
+    @include padding(2.2rem 2rem 2rem 0.625rem);
+    height: 7.75rem;
+
+    img {
+      height: 1.688rem;
+      max-width: none !important;
+      width: auto !important;
+    }
+  }
+
+  &__nav_wrapper {
+    height: calc(100vh - 12rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__nav_wrapper:hover {
+    &::-webkit-scrollbar {
+      display: block;
+      width: 0px;
+      background-color: transparent;
+    }
+  }
+
+  &__items {
+    list-style: none;
+  }
+
+  &__item {
+    margin-bottom: 0.875rem;
+  }
+
+  &__item_link {
+    width: 100%;
+    @include padding(0.875rem 1.25rem);
+    display: flex;
+    align-items: center;
+    column-gap: 1.5rem;
+    color: #696c6f;
+    transition: all 0.1s ease-in-out;
+  }
+
+  &__item > &__item_link.active,
+  &__item:hover > &__item_link {
+    color: $primaryColor;
+    background-color: $primaryColorLight;
+  }
+
+  &__item_link.active:after {
+    content: "";
+    background-color: $primaryColor;
+    width: 0.2rem;
+    height: 2.25rem;
+    position: absolute;
+    right: 0;
+    border-radius: 0.625rem 0px 0px 0.625rem;
+  }
+
+  &__auth {
+    width: 15.625rem;
+  }
+
+  &__auth_link {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__profile_pic {
+    @include padding(0.5rem);
+
+    img {
+      border-radius: 10px;
+      width: 2.563rem;
+      height: 2.563rem;
+      object-fit: cover;
+    }
+  }
+
+  &__profile {
+    @include padding(0.625rem 0.5rem 0.5rem 0);
+
+    h4 {
+      font-weight: 500;
+      font-size: 1.125rem;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    span {
+      font-size: 0.875rem;
+      line-height: 1;
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "name": "beakbook",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.2",
+    "@mui/material": "^5.7.0",
+    "@mui/styled-engine-sc": "^5.7.0",
+    "@reduxjs/toolkit": "^1.8.1",
+    "bourbon": "^7.2.0",
+    "framer-motion": "^6.3.11",
+    "frappe-charts": "^1.6.2",
+    "node-sass": "^7.0.1",
+    "react": "^18.0.2",
+    "react-dom": "^18.0.2",
+    "react-frappe-charts": "^4.1.0",
+    "react-lite-toast": "^1.0.9",
+    "react-redux": "^8.0.1",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "react-shimmer-effects": "^1.0.2",
+    "react-toastify": "^9.0.4",
+    "recharts": "^2.1.10",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.1",
+    "styled-components": "^5.3.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "env-cmd -f .env.development react-scripts start",
+    "build:staging": "env-cmd -f .env.staging react-scripts build",
+    "build:development": "env-cmd -f .env.development react-scripts build",
+    "build:production": "env-cmd -f .env.production react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "plugins": [
+      "react-hooks"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
+  },
+  "proxy": "http://dev-beakbook.dxdyhosting.xyz/api/",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "redux-immutable-state-invariant": "^2.1.0"
+  }
+}

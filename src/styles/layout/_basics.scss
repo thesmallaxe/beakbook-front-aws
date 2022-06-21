@@ -1,0 +1,358 @@
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+
+  font-size: 13px;
+
+  @include devices(dekstop) {
+    font-size: 16px;
+  }
+}
+
+body {
+  @include font(1rem, 100%);
+  font-family: $primaryFont;
+  font-weight: $fontWeightLight;
+  background-color: $backgroundColor;
+}
+
+main {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+a,
+p {
+  font-style: normal;
+  font-weight: 400;
+  @include font(1rem, 100%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-style: normal;
+  line-height: 100%;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+input,
+textarea,
+select {
+  font-family: $secndaryFont !important;
+  font-size: 1rem;
+}
+
+.main-wrapper {
+  width: calc(100vw - 3.7rem);
+  margin-left: 3.7rem;
+  transition: margin 0.5s;
+  transition-timing-function: cubic-bezier(0.3, 0.9, 0.6, 0.9);
+}
+
+.container {
+  @include padding(0 3.125rem);
+}
+
+/* 
+=============================
+Form Element Styles
+=============================
+ */
+
+select,
+button,
+input,
+textarea {
+  font-weight: normal;
+  font-style: normal;
+}
+
+select {
+  background: #f0f0f0;
+  box-shadow: 0px 4px 40px rgba(33, 132, 250, 0.02);
+  border-radius: 10px;
+  @include padding(1rem 2rem 1rem 1rem);
+  min-width: 15rem;
+  min-height: 3.125rem;
+  border: none;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAUCAMAAACtdX32AAAAdVBMVEUAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhMdQaAAAAJ3RSTlMAAAECAwQGBwsOFBwkJTg5RUZ4eYCHkJefpaytrsXGy8zW3+Do8vNn0bsyAAAAYElEQVR42tXROwJDQAAA0Ymw1p9kiT+L5P5HVEi3qJn2lcPjtIuzUIJ/rhIGy762N3XaThqMN1ZPALsZPEzG1x8LrFL77DHBnEMxBewz0fJ6LyFHTPL7xhwzWYrJ9z22AqmQBV757MHfAAAAAElFTkSuQmCC);
+  background-position: 100%;
+  background-size: 1.7rem;
+  background-repeat: no-repeat;
+}
+
+input[type="radio"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #ebebeb;
+  margin: 0;
+
+  font: inherit;
+  color: currentColor;
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 0.15rem solid #ebebeb;
+  border-radius: 50%;
+  transform: translateY(-0.075rem);
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: $primaryColor;
+}
+
+input[type="radio"]:checked {
+  background-color: $whiteColor;
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+/* 
+=============================
+Button Styles
+=============================
+*/
+
+.btn {
+  background-color: $primaryColor;
+  color: $whiteColor;
+  display: flex;
+  @include padding(0.625rem 1.5rem);
+  font-size: 00.875rem;
+  line-height: 100%;
+  border-radius: 5px;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+  transition: filter 0.3s ease-in-out;
+
+  &:hover {
+    filter: brightness(95%);
+  }
+
+  &:not(&--icon) i {
+    font-size: inherit;
+    padding-right: 5px;
+  }
+
+  &--icon {
+    @include padding(0.625rem);
+  }
+
+  &--white {
+    background-color: $whiteColor;
+    color: $blackColor;
+  }
+
+  &--gray {
+    background-color: rgba(240, 240, 240, 1);
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  &--green {
+    background-color: rgba(28, 144, 56, 1);
+  }
+
+  &--light-orange {
+    background-color: rgba(254, 243, 237, 1);
+    color: $primaryColor;
+  }
+
+  &--border {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  &--round {
+    border-radius: 15px;
+  }
+
+  &--notification {
+    padding: 0.25rem 0.38rem;
+
+    img {
+      width: 2rem;
+    }
+  }
+
+  &--loading {
+    opacity: 0.7;
+    cursor: wait;
+  }
+  &--disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+/* 
+=============================
+Aleert Styles
+=============================
+*/
+
+.alert {
+  @include padding(0.5rem 1rem);
+  @include margin(0 0 1rem 0);
+
+  &--error {
+    color: $redColor;
+    background-color: $redColorLight;
+    border: 1px solid $redColor;
+  }
+
+  &--success {
+    color: $greenColor;
+    background-color: $greenColorLight;
+    border: 1px solid $greenColor;
+  }
+
+  label.alert__label {
+    @include font(0.825rem, 100%);
+    font-weight: $fontWeightMedium;
+    color: currentColor;
+  }
+
+  p.alert__text {
+    @include font(1.125rem, 100%);
+    color: currentColor;
+    margin: 0;
+    font-weight: $fontWeightRegular;
+    max-width: 100%;
+  }
+}
+
+/* 
+=============================
+Tooltip Styles
+=============================
+ */
+
+.tooltip {
+  background-color: $whiteColor;
+  box-shadow: 10px 14px 44px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  padding: 1rem;
+
+  &__heading {
+    background: #f9f9f9;
+    border-radius: 0.625rem;
+    @include padding(0.625rem 0.75rem);
+    display: flex;
+    margin-bottom: 0.5rem;
+
+    &_left {
+      flex-grow: 1;
+
+      p {
+        font-weight: 400;
+        font-size: 0.75rem;
+        line-height: 0.875rem;
+        align-items: center;
+        color: #000000;
+        opacity: 0.5;
+        margin-top: 0.5rem;
+      }
+    }
+
+    &_right {
+      align-items: center;
+      display: flex;
+
+      label {
+        font-size: 1.375rem;
+        line-height: 100%;
+        color: #000000;
+        font-weight: 400;
+      }
+    }
+  }
+
+  h3 {
+    font-size: 0.875rem;
+    font-weight: $fontWeightMedium;
+    font-weight: 400;
+  }
+}
+
+/* 
+=============================
+Paginator Styles
+=============================
+*/
+
+.paginator {
+  @include margin(1rem);
+
+  .MuiPaginationItem-root:hover {
+    background-color: $primaryColorLight;
+  }
+
+  .MuiPaginationItem-page.Mui-selected {
+    background-color: $primaryColorLight;
+  }
+}
+
+/* 
+=============================
+Override Styles
+=============================
+ */
+
+.shimmer-card {
+  box-shadow: none !important;
+}
+
+line.recharts-cartesian-axis-line {
+  opacity: 0;
+}
+
+text.recharts-text.recharts-cartesian-axis-tick-value {
+  font-size: 0.813rem;
+}
+
+.recharts-label {
+  font-size: 0.813rem;
+  font-weight: $fontWeightMedium;
+}
+
+#chart-left-label {
+  text-anchor: middle;
+}

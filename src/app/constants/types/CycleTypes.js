@@ -1,0 +1,2 @@
+export const SHOW_CYCLE_OPEN = 'OPEN_CYCLE_POPUP';
+export const SHOW_CYCLE_CLOSE = 'CLOSE_CYCLE_POPUP';

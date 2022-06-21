@@ -1,0 +1,100 @@
+.settings {
+  @include padding(34px null 21px null);
+
+  &__welcome_title {
+    font-family: $primaryFont;
+    font-weight: $fontWeightLight;
+    margin-bottom: 1rem;
+    font-size: 32px;
+
+    strong {
+      font-weight: $fontWeightMedium;
+    }
+  }
+
+  &__welcome_text {
+    @include font(1.385rem, 100%);
+    opacity: 0.5;
+  }
+
+  &__change-password {
+    @include margin(45px auto 20px auto);
+    @include padding(28px 30px);
+    background: $whiteColor;
+
+    &__title {
+      @include font(1.385rem, 100%);
+      font-family: $primaryFont;
+      font-weight: $fontWeightMedium;
+      color: $blackColor;
+      margin-bottom: 40px;
+    }
+
+    &__field-wrapper {
+      display: flex;
+      flex-flow: row wrap;
+      column-gap: 30px;
+      row-gap: 37px;
+      width: 70%;
+
+      & > .MuiFormControl-root {
+        width: 48%;
+      }
+
+      .MuiButton-containedPrimary {
+        @include padding(18px 37px);
+        @include font(16px, 19.12px);
+        height: 54px;
+        text-transform: none;
+        color: $whiteColor;
+        font-family: $primaryFont;
+        font-weight: $fontWeightRegular;
+        background: $greenColor;
+        border-radius: 5px;
+
+        &:hover {
+          background: $primaryColor;
+        }
+      }
+    }
+  }
+
+  &__share-feedback {
+    @include margin(45px auto 20px auto);
+    @include padding(28px 30px);
+    background: $whiteColor;
+
+    &__title {
+      @include font(1.385rem, 100%);
+      font-family: $primaryFont;
+      font-weight: $fontWeightMedium;
+      color: $blackColor;
+      margin-bottom: 40px;
+    }
+
+    .MuiTextField-root {
+      width: 100%;
+    }
+
+    &__button-wrapper {
+      margin-top: 30px;
+      text-align: right;
+
+      .MuiButton-containedPrimary {
+        @include padding(18px 72px);
+        @include font(16px, 19.12px);
+        height: 54px;
+        text-transform: none;
+        color: $whiteColor;
+        font-family: $primaryFont;
+        font-weight: $fontWeightRegular;
+        background: $greenColor;
+        border-radius: 5px;
+
+        &:hover {
+          background: $primaryColor;
+        }
+      }
+    }
+  }
+}

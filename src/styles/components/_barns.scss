@@ -1,0 +1,318 @@
+.barns {
+  @include padding(34px null 21px null);
+
+  &__welcome_title {
+    font-family: $primaryFont;
+    font-weight: $fontWeightLight;
+    margin-bottom: 1rem;
+    font-size: 32px;
+
+    strong {
+      font-weight: $fontWeightMedium;
+    }
+  }
+
+  &__welcome_text {
+    @include font(1.385rem, 100%);
+    opacity: 0.5;
+  }
+
+  &__overview {
+    margin-top: 45px;
+    background: $whiteColor;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__table-title-block {
+    @include padding(28px 26px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__table-title {
+    font-weight: $fontWeightMedium;
+    @include font(24px, 100%);
+  }
+
+  &__search-form {
+    @include padding(17.24px 19.59px);
+    display: flex;
+    align-items: center;
+    column-gap: 16.63px;
+    background: $backgroundColor;
+    border-radius: 0.625rem;
+    width: 262px;
+    height: 49px;
+    box-shadow: 0px 4px 40px rgba(33, 132, 250, 0.02);
+  }
+
+  &__search-input {
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+
+    &::placeholder {
+      font-size: 1.25rem;
+      line-height: 1.25rem;
+    }
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+
+    tr {
+      &:first-child {
+        border-top: 2px solid rgba($blackColor, 0.1);
+        border-bottom: 2px solid rgba($blackColor, 0.1);
+      }
+
+      border-bottom: 1px solid rgba($blackColor, 0.1);
+    }
+
+    th {
+      @include padding(0.875rem null 0.875rem null);
+      @include font(1rem, 100%);
+      font-weight: $fontWeightMedium;
+      opacity: 0.7;
+
+      &:first-child {
+        text-align: left;
+        padding-left: 2rem;
+      }
+    }
+
+    td {
+      //   @include padding(1.875rem null 1.875rem null);
+      height: 4.875rem;
+      text-align: center;
+      @include font(1rem, 100%);
+      font-weight: $fontWeightRegular;
+      color: #4c4c4c;
+
+      &:first-child {
+        text-align: left;
+        padding-left: 2rem;
+
+        a {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+      }
+
+      &:nth-child(5) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 1rem;
+      }
+
+      &:nth-child(5) {
+        column-gap: 0.625rem;
+      }
+
+      &:last-child {
+        position: relative;
+      }
+    }
+
+    .barn-icon {
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+
+    &__weight-increased {
+      color: $greenColor;
+    }
+
+    &__weight-decreased {
+      color: $redColorRegular;
+    }
+
+    &__baseline {
+      width: 0.625rem;
+      height: 0.625rem;
+      border-radius: 50%;
+
+      &.above {
+        background: $greenColorBright;
+      }
+
+      &.under {
+        background: $redColorBright;
+      }
+
+      &.near {
+        background: $primaryColor;
+      }
+    }
+
+    &__options-icon {
+      &:hover ~ .barns__table__options {
+        display: block;
+      }
+    }
+
+    &__options {
+      @include padding(0.25rem 0.875px);
+      position: absolute;
+      right: 27px;
+      top: 44px;
+      width: 121px;
+      background: $whiteColor;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      display: none;
+      z-index: 999;
+
+      &:hover {
+        display: block;
+      }
+
+      a {
+        display: block;
+        padding: 0.625rem 1.375rem;
+        border-radius: 5px;
+
+        &:hover {
+          background-color: $primaryColorLight;
+        }
+      }
+    }
+  }
+
+  &__add-new {
+    width: 62px;
+    height: 62px;
+    background: $primaryColor;
+    box-shadow: 20px 0.875rem 44px rgba(249, 121, 22, 0.19);
+    border-radius: 20px;
+    position: fixed;
+    bottom: 21px;
+    right: 33px;
+
+    i {
+      color: $whiteColor;
+      font-size: 2.5rem;
+    }
+  }
+
+  &__modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(1, 6, 3, 0.62);
+
+    &--show {
+      display: block;
+    }
+  }
+
+  &__modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border-radius: 21px;
+    width: 343px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+  }
+
+  &__modal-body {
+    @include padding(36px 25px 33px 25px);
+    text-align: center;
+
+    &__title {
+      @include font(32px, 100%);
+      font-weight: $fontWeightMedium;
+      color: $blackColor;
+      margin-bottom: 30.21px;
+
+      span {
+        color: $primaryColor;
+      }
+    }
+
+    &__field {
+      margin-bottom: 23.38px;
+    }
+
+    .MuiInputLabel-formControl {
+      font-family: $primaryFont;
+      font-weight: $fontWeightRegular;
+    }
+
+    .MuiTextField-root {
+      width: 90%;
+    }
+
+    &__btn-wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      .MuiButton-contained {
+        width: 48%;
+        height: 44px;
+        text-transform: none;
+        color: $whiteColor;
+        @include font(18px, 21.06px);
+        font-family: $primaryFont;
+        font-weight: $fontWeightRegular;
+
+        &:first-child {
+          background: $greenColor;
+          text-transform: none;
+          color: $whiteColor;
+        }
+        &:last-child {
+          background: $lightpinkColor;
+          text-transform: none;
+          color: $primaryColor;
+        }
+      }
+    }
+  }
+
+  @-webkit-keyframes animatetop {
+    from {
+      top: -300px;
+      opacity: 0;
+    }
+
+    to {
+      top: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes animatetop {
+    from {
+      top: -300px;
+      opacity: 0;
+    }
+
+    to {
+      top: 0;
+      opacity: 1;
+    }
+  }
+}
+
+.add_favourite {
+  &:hover,
+  &--add {
+    color: $primaryColor;
+  }
+}

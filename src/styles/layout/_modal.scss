@@ -1,0 +1,97 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+
+  &--show {
+    display: block;
+  }
+
+  &__content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 10vh auto;
+    padding: 0;
+    border-radius: 10px;
+    width: 50%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+  }
+
+  &__body {
+    @include padding(2.25rem 25px);
+    text-align: left;
+
+    &__title {
+      @include font(32px, 100%);
+      font-weight: $fontWeightRegular;
+      color: $blackColor;
+      margin-bottom: 0.875rem;
+
+      span {
+        font-weight: $fontWeightMedium;
+        color: $primaryColor;
+      }
+    }
+
+    &__description {
+      font-weight: $fontWeightRegular;
+      font-size: 1.12rem;
+      line-height: 100%;
+      color: $blackColor;
+      opacity: 0.5;
+      margin-bottom: 3rem;
+    }
+
+    &__row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 0.875rem;
+    }
+
+    &__field {
+      margin-bottom: 1.75rem;
+
+      fieldset {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    &__action_wrapper {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+
+      .MuiButton-contained {
+        @include padding(1rem 3.5rem);
+        text-transform: none;
+        color: $whiteColor;
+        @include font(1rem, 100%);
+        font-family: $primaryFont;
+        font-weight: $fontWeightRegular;
+
+        &:first-child {
+          background: $greenColor;
+          text-transform: none;
+          color: $whiteColor;
+        }
+        &:last-child {
+          background: $lightpinkColor;
+          text-transform: none;
+          color: $primaryColor;
+        }
+      }
+    }
+  }
+}

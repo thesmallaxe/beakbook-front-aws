@@ -1,0 +1,311 @@
+.barn_details {
+  @include padding(0 2.5rem);
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    @include margin(1.875rem 0 2.813rem);
+    gap: 1.875rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    width: 24.37rem;
+    gap: 0.75rem;
+  }
+
+  &__graphs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex-shrink: 1;
+    width: calc(100% - (24.37rem + 1.875rem));
+  }
+}
+
+.widget {
+  width: 100%;
+  background-color: $whiteColor;
+  border-radius: 10px;
+  min-height: 5rem;
+  @include padding(1.25rem);
+
+  &__title {
+    padding-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      font-size: 1.313rem;
+      line-height: 1.5rem;
+      font-weight: $fontWeightMedium;
+      display: flex;
+      gap: 1rem;
+
+      i {
+        color: #c4c4c4;
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  &__button {
+    background-color: rgba(255, 147, 86, 0.19);
+    color: $primaryColor;
+
+    i {
+      color: currentColor;
+    }
+  }
+
+  &__action {
+    display: flex;
+    gap: 0.825rem;
+
+    .MuiFormControl-root {
+      margin: 0;
+    }
+  }
+
+  &__color_wrapper {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-right: 1rem;
+
+    span {
+      border-radius: 5px;
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    padding-top: 0.75rem;
+  }
+
+  &__list_item {
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    gap: 1rem;
+    @include padding(1rem);
+  }
+
+  &__icon_block {
+    width: 3.125rem;
+    height: 3.125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(249, 121, 22, 0.1);
+    border-radius: 5px;
+
+    i {
+      font-size: 1.75rem;
+      color: $primaryColor;
+    }
+
+    &.--blue {
+      background-color: rgba(1, 183, 255, 0.1);
+      i {
+        color: #01b7ff;
+      }
+    }
+
+    &.--gray {
+      background-color: rgba(202, 202, 202, 0.2);
+      i {
+        color: rgba(69, 66, 66, 0.95);
+      }
+    }
+
+    &.--green {
+      background-color: rgba(40, 157, 68, 0.1);
+      i {
+        color: #289d44;
+      }
+    }
+  }
+
+  &__text_block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  &__count {
+    font-weight: $fontWeightMedium;
+    display: flex;
+    gap: 0.5rem;
+
+    small {
+      font-size: 0.875rem;
+      opacity: 0.6;
+      font-weight: $fontWeightRegular;
+    }
+  }
+
+  &__label {
+    font-weight: $fontWeightRegular;
+    font-size: 0.875rem;
+  }
+
+  &__row {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__field {
+    margin-bottom: 1rem !important;
+
+    fieldset {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.cycle_selection {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: calc(2rem - 0.75rem);
+
+  &__download {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $greenColor;
+    cursor: pointer;
+  }
+}
+
+.download_popup {
+  display: none;
+
+  &--show {
+    display: block;
+  }
+
+  &__overlay {
+    position: fixed;
+    width: 100%;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    background-color: rgba(1, 6, 3, 0.62);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__box {
+    width: 24.37vw;
+    background-color: $whiteColor;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.25rem;
+    padding: 1.875rem;
+    text-align: center;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    position: relative;
+  }
+
+  @-webkit-keyframes animatetop {
+    from {
+      top: -300px;
+      opacity: 0;
+    }
+
+    to {
+      top: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes animatetop {
+    from {
+      top: -300px;
+      opacity: 0;
+    }
+
+    to {
+      top: 0;
+      opacity: 1;
+    }
+  }
+
+  &__heading {
+    h2 {
+      font-weight: $fontWeightMedium;
+      @include font(2rem, 100%);
+      @include margin(0 0 1rem 0);
+
+      span {
+        color: $primaryColor;
+      }
+    }
+
+    p {
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 1.125rem;
+      @include margin(0 0 1.5rem 0);
+    }
+  }
+
+  &__body {
+    select {
+      width: 100%;
+      border-radius: 5px;
+      @include font(1.5rem, 1);
+      font-weight: $fontWeightRegular;
+      @include margin(0 0 2rem 0);
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 2rem;
+
+      & > label {
+        color: #a5a5a5;
+        @include font(1.125rem);
+        font-weight: $fontWeightRegular;
+        @include margin(0 0 1rem 0);
+        display: block;
+      }
+    }
+
+    .check_input_wrapper {
+      display: flex;
+      gap: 2.125rem;
+    }
+
+    .check_input {
+      display: flex;
+      gap: 1rem;
+
+      label {
+        font-weight: $fontWeightRegular;
+      }
+    }
+  }
+
+  &__action {
+    display: flex;
+    gap: 0.813rem;
+
+    .btn {
+      width: 100%;
+      font-size: 1rem;
+      font-weight: $fontWeightRegular;
+      @include padding(0.75rem 1rem);
+    }
+  }
+}

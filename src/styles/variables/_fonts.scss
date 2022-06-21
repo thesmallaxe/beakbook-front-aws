@@ -1,0 +1,674 @@
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../../assets/font/GTWalsheimPro-Light.eot");
+  src: local("GT Walsheim Pro Light"), local("GTWalsheimPro-Light"),
+    url("../../assets/font/GTWalsheimPro-Light.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-Light.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-Light.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../../assets/font/GTWalsheimPro-Regular.eot");
+  src: local("GT Walsheim Pro Regular"), local("GTWalsheimPro-Regular"),
+    url("../../assets/font/GTWalsheimPro-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-Regular.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-Regular.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../../assets/font/GTWalsheimPro-ThinOblique.eot");
+  src: local("GT Walsheim Pro Thin Oblique"), local("GTWalsheimPro-ThinOblique"),
+    url("../../assets/font/GTWalsheimPro-ThinOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-ThinOblique.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-ThinOblique.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-ThinOblique.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../../assets/font/GTWalsheimPro-Thin.eot");
+  src: local("GT Walsheim Pro Thin"), local("GTWalsheimPro-Thin"),
+    url("../../assets/font/GTWalsheimPro-Thin.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-Thin.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-Thin.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../../assets/font/GTWalsheimPro-BoldOblique.eot");
+  src: local("GT Walsheim Pro Bold Oblique"), local("GTWalsheimPro-BoldOblique"),
+    url("../../assets/font/GTWalsheimPro-BoldOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-BoldOblique.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-BoldOblique.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-BoldOblique.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Ultra";
+  src: url("../../assets/font/GTWalsheimPro-UltraBold.eot");
+  src: local("GT Walsheim Pro Ultra Bold"), local("GTWalsheimPro-UltraBold"),
+    url("../../assets/font/GTWalsheimPro-UltraBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-UltraBold.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-UltraBold.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-UltraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Ultra";
+  src: url("../../assets/font/GTWalsheimPro-UltraBoldOblique.eot");
+  src: local("GT Walsheim Pro Ultra Bold Oblique"),
+    local("GTWalsheimPro-UltraBoldOblique"),
+    url("../../assets/font/GTWalsheimPro-UltraBoldOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-UltraBoldOblique.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-UltraBoldOblique.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-UltraBoldOblique.ttf")
+      format("truetype");
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../../assets/font/GTWalsheimPro-MediumOblique.eot");
+  src: local("GT Walsheim Pro Medium Oblique"),
+    local("GTWalsheimPro-MediumOblique"),
+    url("../../assets/font/GTWalsheimPro-MediumOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-MediumOblique.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-MediumOblique.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-MediumOblique.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../../assets/font/GTWalsheimPro-Bold.eot");
+  src: local("GT Walsheim Pro Bold"), local("GTWalsheimPro-Bold"),
+    url("../../assets/font/GTWalsheimPro-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-Bold.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-Bold.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../../assets/font/GTWalsheimPro-Medium.eot");
+  src: local("GT Walsheim Pro Medium"), local("GTWalsheimPro-Medium"),
+    url("../../assets/font/GTWalsheimPro-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-Medium.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-Medium.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../../assets/font/GTWalsheimPro-RegularOblique.eot");
+  src: local("GT Walsheim Pro Regular Oblique"),
+    local("GTWalsheimPro-RegularOblique"),
+    url("../../assets/font/GTWalsheimPro-RegularOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-RegularOblique.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-RegularOblique.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-RegularOblique.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../../assets/font/GTWalsheimPro-LightOblique.eot");
+  src: local("GT Walsheim Pro Light Oblique"),
+    local("GTWalsheimPro-LightOblique"),
+    url("../../assets/font/GTWalsheimPro-LightOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-LightOblique.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-LightOblique.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-LightOblique.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Ultra";
+  src: url("../../assets/font/GTWalsheimPro-UltraLight.eot");
+  src: local("GT Walsheim Pro Ultra Light"), local("GTWalsheimPro-UltraLight"),
+    url("../../assets/font/GTWalsheimPro-UltraLight.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-UltraLight.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-UltraLight.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-UltraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Ultra";
+  src: url("../../assets/font/GTWalsheimPro-UltraLightOblique.eot");
+  src: local("GT Walsheim Pro Ultra Light Oblique"),
+    local("GTWalsheimPro-UltraLightOblique"),
+    url("../../assets/font/GTWalsheimPro-UltraLightOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-UltraLightOblique.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-UltraLightOblique.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-UltraLightOblique.ttf")
+      format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../../assets/font/GTWalsheimPro-BlackOblique.eot");
+  src: local("GT Walsheim Pro Black Oblique"),
+    local("GTWalsheimPro-BlackOblique"),
+    url("../../assets/font/GTWalsheimPro-BlackOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-BlackOblique.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-BlackOblique.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-BlackOblique.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../../assets/font/GTWalsheimPro-Black.eot");
+  src: local("GT Walsheim Pro Black"), local("GTWalsheimPro-Black"),
+    url("../../assets/font/GTWalsheimPro-Black.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-Black.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-Black.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Cond Ultra";
+  src: url("../../assets/font/GTWalsheimPro-CondensedUltraBold.eot");
+  src: local("GT Walsheim Pro Condensed Ultra Bold"),
+    local("GTWalsheimPro-CondensedUltraBold"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraBold.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraBold.woff")
+      format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraBold.ttf")
+      format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Condensed";
+  src: url("../../assets/font/GTWalsheimPro-CondensedLight.eot");
+  src: local("GT Walsheim Pro Condensed Light"),
+    local("GTWalsheimPro-CondensedLight"),
+    url("../../assets/font/GTWalsheimPro-CondensedLight.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedLight.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedLight.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedLight.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Condensed";
+  src: url("../../assets/font/GTWalsheimPro-CondensedBoldOblique.eot");
+  src: local("GT Walsheim Pro Condensed Bold Oblique"),
+    local("GTWalsheimPro-CondensedBoldOblique"),
+    url("../../assets/font/GTWalsheimPro-CondensedBoldOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedBoldOblique.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedBoldOblique.woff")
+      format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedBoldOblique.ttf")
+      format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Condensed";
+  src: url("../../assets/font/GTWalsheimPro-CondensedLightOblique.eot");
+  src: local("GT Walsheim Pro Condensed Light Oblique"),
+    local("GTWalsheimPro-CondensedLightOblique"),
+    url("../../assets/font/GTWalsheimPro-CondensedLightOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedLightOblique.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedLightOblique.woff")
+      format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedLightOblique.ttf")
+      format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Condensed";
+  src: url("../../assets/font/GTWalsheimPro-CondensedThin.eot");
+  src: local("GT Walsheim Pro Condensed Thin"),
+    local("GTWalsheimPro-CondensedThin"),
+    url("../../assets/font/GTWalsheimPro-CondensedThin.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedThin.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedThin.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedThin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GTWalsheimPro-CondensedULightIt";
+  src: url("../../assets/font/GTWalsheimPro-CondensedUltraLightOblique.eot");
+  src: local("GT Walsheim Pro Condensed Ultra Light Oblique"),
+    local("GTWalsheimPro-CondensedUltraLightOblique"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraLightOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraLightOblique.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraLightOblique.woff")
+      format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraLightOblique.ttf")
+      format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Cond";
+  src: url("../../assets/font/GTWalsheimPro-CondensedMedium.eot");
+  src: local("GT Walsheim Pro Condensed Medium"),
+    local("GTWalsheimPro-CondensedMedium"),
+    url("../../assets/font/GTWalsheimPro-CondensedMedium.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedMedium.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedMedium.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedMedium.ttf")
+      format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Condensed";
+  src: url("../../assets/font/GTWalsheimPro-CondensedBlackOblique.eot");
+  src: local("GT Walsheim Pro Condensed Black Oblique"),
+    local("GTWalsheimPro-CondensedBlackOblique"),
+    url("../../assets/font/GTWalsheimPro-CondensedBlackOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedBlackOblique.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedBlackOblique.woff")
+      format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedBlackOblique.ttf")
+      format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Condensed";
+  src: url("../../assets/font/GTWalsheimPro-CondensedRegular.eot");
+  src: local("GT Walsheim Pro Condensed Regular"),
+    local("GTWalsheimPro-CondensedRegular"),
+    url("../../assets/font/GTWalsheimPro-CondensedRegular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedRegular.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedRegular.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedRegular.ttf")
+      format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Condensed";
+  src: url("../../assets/font/GTWalsheimPro-CondensedThinOblique.eot");
+  src: local("GT Walsheim Pro Condensed Thin Oblique"),
+    local("GTWalsheimPro-CondensedThinOblique"),
+    url("../../assets/font/GTWalsheimPro-CondensedThinOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedThinOblique.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedThinOblique.woff")
+      format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedThinOblique.ttf")
+      format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Condensed";
+  src: url("../../assets/font/GTWalsheimPro-CondensedBold.eot");
+  src: local("GT Walsheim Pro Condensed Bold"),
+    local("GTWalsheimPro-CondensedBold"),
+    url("../../assets/font/GTWalsheimPro-CondensedBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedBold.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedBold.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedBold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Condensed";
+  src: url("../../assets/font/GTWalsheimPro-CondensedRegularOblique.eot");
+  src: local("GT Walsheim Pro Condensed Regular Oblique"),
+    local("GTWalsheimPro-CondensedRegularOblique"),
+    url("../../assets/font/GTWalsheimPro-CondensedRegularOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedRegularOblique.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedRegularOblique.woff")
+      format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedRegularOblique.ttf")
+      format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GTWalsheimPro-CondensedULight";
+  src: url("../../assets/font/GTWalsheimPro-CondensedUltraLight.eot");
+  src: local("GT Walsheim Pro Condensed Ultra Light"),
+    local("GTWalsheimPro-CondensedUltraLight"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraLight.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraLight.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraLight.woff")
+      format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraLight.ttf")
+      format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Cond Ultra";
+  src: url("../../assets/font/GTWalsheimPro-CondensedUltraBoldOblique.eot");
+  src: local("GT Walsheim Pro Condensed Ultra Bold Oblique"),
+    local("GTWalsheimPro-CondensedUltraBoldOblique"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraBoldOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraBoldOblique.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraBoldOblique.woff")
+      format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedUltraBoldOblique.ttf")
+      format("truetype");
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Cond";
+  src: url("../../assets/font/GTWalsheimPro-CondensedMediumOblique.eot");
+  src: local("GT Walsheim Pro Condensed Medium Oblique"),
+    local("GTWalsheimPro-CondensedMediumOblique"),
+    url("../../assets/font/GTWalsheimPro-CondensedMediumOblique.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedMediumOblique.woff2")
+      format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedMediumOblique.woff")
+      format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedMediumOblique.ttf")
+      format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Condensed";
+  src: url("../../assets/font/GTWalsheimPro-CondensedBlack.eot");
+  src: local("GT Walsheim Pro Condensed Black"),
+    local("GTWalsheimPro-CondensedBlack"),
+    url("../../assets/font/GTWalsheimPro-CondensedBlack.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/font/GTWalsheimPro-CondensedBlack.woff2") format("woff2"),
+    url("../../assets/font/GTWalsheimPro-CondensedBlack.woff") format("woff"),
+    url("../../assets/font/GTWalsheimPro-CondensedBlack.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+// TT Commons Font
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-ThinItalic.eot");
+  src: local("TT Commons Thin Italic"), local("TTCommons-ThinItalic"),
+    url("../../assets/font/TTCommons-ThinItalic.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-ThinItalic.woff") format("woff"),
+    url("../../assets/font/TTCommons-ThinItalic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-Light.eot");
+  src: local("TT Commons Light"), local("TTCommons-Light"),
+    url("../../assets/font/TTCommons-Light.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-Light.woff") format("woff"),
+    url("../../assets/font/TTCommons-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-Black.eot");
+  src: local("TT Commons Black"), local("TTCommons-Black"),
+    url("../../assets/font/TTCommons-Black.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-Black.woff") format("woff"),
+    url("../../assets/font/TTCommons-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-Medium.eot");
+  src: local("TT Commons Medium"), local("TTCommons-Medium"),
+    url("../../assets/font/TTCommons-Medium.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-Medium.woff") format("woff"),
+    url("../../assets/font/TTCommons-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-Italic.eot");
+  src: local("TT Commons Italic"), local("TTCommons-Italic"),
+    url("../../assets/font/TTCommons-Italic.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-Italic.woff") format("woff"),
+    url("../../assets/font/TTCommons-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-Regular.eot");
+  src: local("TT Commons Regular"), local("TTCommons-Regular"),
+    url("../../assets/font/TTCommons-Regular.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-Regular.woff") format("woff"),
+    url("../../assets/font/TTCommons-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-BlackItalic.eot");
+  src: local("TT Commons Black Italic"), local("TTCommons-BlackItalic"),
+    url("../../assets/font/TTCommons-BlackItalic.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-BlackItalic.woff") format("woff"),
+    url("../../assets/font/TTCommons-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-ExtraBold.eot");
+  src: local("TT Commons ExtraBold"), local("TTCommons-ExtraBold"),
+    url("../../assets/font/TTCommons-ExtraBold.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-ExtraBold.woff") format("woff"),
+    url("../../assets/font/TTCommons-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-BoldItalic.eot");
+  src: local("TT Commons Bold Italic"), local("TTCommons-BoldItalic"),
+    url("../../assets/font/TTCommons-BoldItalic.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-BoldItalic.woff") format("woff"),
+    url("../../assets/font/TTCommons-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-DemiBoldItalic.eot");
+  src: local("TT Commons DemiBold Italic"), local("TTCommons-DemiBoldItalic"),
+    url("../../assets/font/TTCommons-DemiBoldItalic.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-DemiBoldItalic.woff") format("woff"),
+    url("../../assets/font/TTCommons-DemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-Bold.eot");
+  src: local("TT Commons Bold"), local("TTCommons-Bold"),
+    url("../../assets/font/TTCommons-Bold.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-Bold.woff") format("woff"),
+    url("../../assets/font/TTCommons-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-ExtraLight.eot");
+  src: local("TT Commons ExtraLight"), local("TTCommons-ExtraLight"),
+    url("../../assets/font/TTCommons-ExtraLight.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-ExtraLight.woff") format("woff"),
+    url("../../assets/font/TTCommons-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-DemiBold.eot");
+  src: local("TT Commons DemiBold"), local("TTCommons-DemiBold"),
+    url("../../assets/font/TTCommons-DemiBold.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-DemiBold.woff") format("woff"),
+    url("../../assets/font/TTCommons-DemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-ExtraLightItalic.eot");
+  src: local("TT Commons ExtraLight Italic"),
+    local("TTCommons-ExtraLightItalic"),
+    url("../../assets/font/TTCommons-ExtraLightItalic.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-ExtraLightItalic.woff") format("woff"),
+    url("../../assets/font/TTCommons-ExtraLightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-ExtraBoldItalic.eot");
+  src: local("TT Commons ExtraBold Italic"), local("TTCommons-ExtraBoldItalic"),
+    url("../../assets/font/TTCommons-ExtraBoldItalic.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-ExtraBoldItalic.woff") format("woff"),
+    url("../../assets/font/TTCommons-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-MediumItalic.eot");
+  src: local("TT Commons Medium Italic"), local("TTCommons-MediumItalic"),
+    url("../../assets/font/TTCommons-MediumItalic.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-MediumItalic.woff") format("woff"),
+    url("../../assets/font/TTCommons-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-LightItalic.eot");
+  src: local("TT Commons Light Italic"), local("TTCommons-LightItalic"),
+    url("../../assets/font/TTCommons-LightItalic.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-LightItalic.woff") format("woff"),
+    url("../../assets/font/TTCommons-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "TT Commons";
+  src: url("../../assets/font/TTCommons-Thin.eot");
+  src: local("TT Commons Thin"), local("TTCommons-Thin"),
+    url("../../assets/font/TTCommons-Thin.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/font/TTCommons-Thin.woff") format("woff"),
+    url("../../assets/font/TTCommons-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
