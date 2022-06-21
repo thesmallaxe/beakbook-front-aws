@@ -4,9 +4,10 @@ frontend:
     install:
       runtime-versions:
          nodejs: 16
+         
     preBuild:
       commands:
-        - npm install -g env-cmd
+        - npm install env-cmd
 	      - npm install
     build:
       commands:
