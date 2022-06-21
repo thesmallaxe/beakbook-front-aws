@@ -25,7 +25,7 @@ class HttpRequest {
     const options = {
       headers,
       method,
-      mode: "no-cors",
+      // mode: "no-cors",
     };
 
     if (data) {
