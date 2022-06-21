@@ -1,19 +1,21 @@
 version: 0.2
-frontend:
-  phases:
-    install:
-      runtime-versions:
-         nodejs: 16
-         
-    preBuild:
-      commands:
-        - npm install env-cmd
-        - npm install
-    build:
-      commands:
-        - echo "running on staging" 
-        - npm run build:staging 
-  artifacts:
-    base-directory: build
-    files:
-      - '**/*'
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+
+  pre_build:
+    commands:      
+      - echo Installing dependencies...
+      - npm install env-cmd
+      - npm install
+  build:
+    commands:
+      - echo running on staging...
+      - npm run build:staging
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
+  base-directory: build
