@@ -2,7 +2,7 @@ import { HttpConfig } from "../../constants/config/HttpConfig";
 
 class HttpRequest {
   headers = {
-    "Accept": "application/json",
+    Accept: "application/json",
     "Content-type": "application/json",
   };
 
@@ -25,6 +25,7 @@ class HttpRequest {
     const options = {
       headers,
       method,
+      mode: "no-cors",
     };
 
     if (data) {

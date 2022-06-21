@@ -83,7 +83,7 @@ export const getSingleBarnDetails = (id = null, cycle_id = null) => {
 
     dispatch(resetSingleGraph());
 
-    request.get(`dashboard/?barnId=${id}&cycleId=${cycle_id}`).then((res) => {
+    request.get(`dashboard?barnId=${id}&cycleId=${cycle_id}`).then((res) => {
       dispatch(stopLoading());
 
       if (res.status) {
@@ -105,7 +105,7 @@ export const getSingleBarnDetailsGraphs = (
 
     request
       .get(
-        `dashboard/graphs/?barnId=${id}&cycleId=${cycle_id}&graphName=${grapgh_name}`
+        `dashboard/graphs?barnId=${id}&cycleId=${cycle_id}&graphName=${grapgh_name}`
       )
       .then((res) => {
         if (res.status) {
