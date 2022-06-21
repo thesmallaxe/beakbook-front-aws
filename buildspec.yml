@@ -8,7 +8,7 @@ frontend:
     preBuild:
       commands:
         - npm install env-cmd
-       - npm install
+        - npm install
     build:
       commands:
         - echo "running on staging" 
