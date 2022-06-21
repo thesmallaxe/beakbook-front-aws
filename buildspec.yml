@@ -14,9 +14,6 @@ frontend:
         - echo "running on staging" 
         - npm run build:staging 
   artifacts:
-    baseDirectory: build
+    base-directory: build
     files:
       - '**/*'
-  cache:
-    paths:
-      - node_modules/**/*
