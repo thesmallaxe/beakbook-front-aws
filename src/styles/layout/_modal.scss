@@ -10,6 +10,10 @@
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 
+  &--small &__content {
+    max-width: 21.438rem;
+  }
+
   &--show {
     display: block;
   }
@@ -80,6 +84,7 @@
         @include font(1rem, 100%);
         font-family: $primaryFont;
         font-weight: $fontWeightRegular;
+        box-shadow: none;
 
         &:first-child {
           background: $greenColor;
@@ -91,6 +96,42 @@
           text-transform: none;
           color: $primaryColor;
         }
+      }
+    }
+  }
+
+  &#mortalityPopup {
+    .modal__image {
+      text-align: center;
+      img {
+        width: 6.5rem;
+      }
+    }
+
+    .modal__desc {
+      margin-bottom: 1.75rem;
+
+      h3,
+      p {
+        font-weight: 400;
+        @include font(1.75rem, 2rem);
+        text-align: center;
+
+        abbr {
+          font-weight: 500;
+          color: $primaryColor;
+        }
+      }
+    }
+
+    .modal__body__field {
+      text-align: center;
+
+      .MuiInputBase-root {
+        width: 90%;
+        margin: 0 auto 0.5rem auto;
+        background: #f9f9f9;
+        border: 0;
       }
     }
   }
