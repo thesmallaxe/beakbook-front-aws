@@ -1,11 +1,10 @@
-import React from "react";
 import { connect } from "react-redux";
 import { ChangePasswordForm } from "../components/settings/ChangePasswordForm";
 import { submitUpdatePassword } from "../../app/actions/AuthActions";
 import { FeedbackForm } from "../components/settings/FeedbackForm";
 import { submitFeedbackRequest } from "../../app/actions/SettingActions";
 
-function Settings(props) {
+const Settings = (props) => {
   const { user, submitFeedback } = props;
 
   return (

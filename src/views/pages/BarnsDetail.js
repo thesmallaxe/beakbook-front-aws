@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import {
   AverageWeight,
@@ -19,13 +19,18 @@ import {
   handleAverageWeight,
   getSingleBarnDetailsGraphs,
 } from "../../app/actions/BarnDetailActions";
+import {
+  showCyclePopup,
+  showMortalityPopup,
+} from "../../app/actions/CycleActions";
 import { mapGraphs } from "../../app/services/Helper";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 import { NewCycleModel } from "../components/barns/NewCycleModel";
-import { showCyclePopup } from "../../app/actions/CycleActions";
+import { MortalityPopup } from "../components/barns/MortalityPopup";
 
-function BarnsDetail(props) {
+const BarnsDetail = (props) => {
   const { barn_id, cycle_id } = useParams();
+  const location = useLocation();
   const {
     fetchSingleBarn,
     fetchSingleGraphs,
@@ -35,17 +40,13 @@ function BarnsDetail(props) {
     download,
     user,
     showNewCycle,
+    showNewMotality,
   } = props;
 
   const graphs = barn_single.graphs ? mapGraphs(barn_single.graphs) : {};
   const barn_overview = barn_single.barnOverview
     ? barn_single.barnOverview[0]
     : {};
-
-  const back_btn = {
-    label: barn_overview?.name ? barn_overview.name + " Details" : "Back",
-    action: "/",
-  };
 
   useEffect(() => {
     if (barn_id && cycle_id) {
@@ -66,15 +67,23 @@ function BarnsDetail(props) {
     });
   }, [barn_id, cycle_id, fetchSingleGraphs]);
 
+  const back_btn = {
+    label: barn_overview?.name ? barn_overview.name + " Details" : "Back",
+    action: location?.state?.from?.pathname ?? "/",
+  };
+
   return (
     <div className="barn_details">
       <Header back={back_btn}>
         <button className="btn" onClick={() => showNewCycle()}>
           Add new cycle
         </button>
-        <Link className="btn btn--white btn--border" to="/">
+        <button
+          className="btn btn--white btn--border"
+          onClick={() => showNewMotality()}
+        >
           Add mortality count
-        </Link>
+        </button>
       </Header>
       <div className="barn_details__wrapper">
         <div className="barn_details__actions">
@@ -121,12 +130,13 @@ function BarnsDetail(props) {
                   );
               }
             })}
-          <NewCycleModel/>
+          <NewCycleModel barn_id={barn_id} />
+          <MortalityPopup barn_id={barn_id} cycle={barn_single.cycleDetails} />
         </div>
       </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -150,6 +160,7 @@ const mapDispatchToProps = (dispatch) => {
     editCycleDetails: () => dispatch(editCycleDetails()),
     handleAverageWeight: (arg = "barn") => dispatch(handleAverageWeight(arg)),
     showNewCycle: () => dispatch(showCyclePopup()),
+    showNewMotality: () => dispatch(showMortalityPopup()),
   };
 };
 

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { fetchDashboardData } from "../../app/actions/DashboardActions";
 import { BarnItem } from "../components/dashboard/BarnItem";
 import { ShimmerThumbnail } from "react-shimmer-effects";
@@ -8,8 +8,9 @@ import { StaticBox } from "../components/dashboard/StaticBox";
 import { formatNumber } from "../../app/services/Helper";
 import Header from "../components/Header";
 
-function Dashboard(props) {
+const Dashboard = (props) => {
   const { getData, favourite_barns, stats, loading, user } = props;
+  const location = useLocation();
 
   useEffect(() => {
     getData();
@@ -53,6 +54,7 @@ function Dashboard(props) {
                 {Object.keys(barns).map((key) => (
                   <Link
                     key={key}
+                    state={{ from: location }}
                     to={
                       "/barns/" +
                       barns[key].barnId +

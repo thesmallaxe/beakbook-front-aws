@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { connect } from "react-redux";
 import { createDevice, searchDevices } from "../../app/actions/DeviceActions";
 import { ShimmerTable } from "react-shimmer-effects";
@@ -6,7 +6,7 @@ import { AddDeviceModel } from "../components/devices/AddDeviceModel";
 import { DeviceTableItem } from "../components/devices/DeviceTableItem";
 import Paginator from "../components/Paginator";
 
-function Devices(props) {
+const Devices = (props) => {
   const {
     loading,
     success,
