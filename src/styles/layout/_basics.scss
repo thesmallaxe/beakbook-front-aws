@@ -3,10 +3,13 @@ html {
   -webkit-font-smoothing: antialiased;
   position: relative;
   overflow-x: hidden;
+  font-size: 16px; 
 
-  font-size: 13px;
+  @include devices(laptop) {
+    font-size: 13px;
+  }
 
-  @include devices(dekstop) {
+  @include devices(tablet) {
     font-size: 16px;
   }
 }

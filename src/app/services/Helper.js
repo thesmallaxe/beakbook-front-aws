@@ -1,3 +1,9 @@
+export const graphNames = {
+  area: "graph1",
+  bar: "graph2",
+  line: "graph3",
+};
+
 export const mapGraphs = (graphs) => {
   let graphArray = {};
 
@@ -19,7 +25,10 @@ export const mapSectionsData = (graph) => {
   let graphs = graph.barnGraph ?? false;
   let sections = graph.allSections ?? false;
 
-  if (Object.keys(graphs).length !== 0) data.push(graphs);
+  if (Object.keys(graphs).length !== 0) {
+    data.push(graphs);
+    data.push(graphs);
+  }
 
   if (Object.keys(sections).length !== 0) {
     sections.forEach(function (item, key) {
@@ -27,10 +36,18 @@ export const mapSectionsData = (graph) => {
     });
   }
 
+  const names = ["barn", "all", "s1", "s2", "s3", "s4"];
+  const section_names = {
+    s1: "Section 1",
+    s2: "Section 2",
+    s3: "Section 3",
+    s4: "Section 4",
+  };
+
   if (Object.keys(data).length !== 0) {
     data.forEach(function (element, key) {
       let newElement = [];
-      let name = key === 0 ? "barn" : "s" + key;
+      let name = names[key];
       element.forEach(function (item, index) {
         let arr = {};
         arr[name] = item.value;
@@ -38,6 +55,20 @@ export const mapSectionsData = (graph) => {
 
         if (key !== 0) {
           updateData["barn"][index] = { ...updateData["barn"][index], ...arr };
+        }
+
+        if (key === 2) {
+          updateData["all"][index]["miniGraph"] = [];
+        }
+
+        if (key > 1) {
+          updateData["all"][index] = { ...updateData["all"][index], ...arr };
+          if (item.value > 0) {
+            updateData["all"][index]["miniGraph"].push({
+              time: section_names[name],
+              value: item.value,
+            });
+          }
         }
       });
 

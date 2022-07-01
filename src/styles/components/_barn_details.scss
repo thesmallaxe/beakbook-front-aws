@@ -21,6 +21,36 @@
     gap: 0.75rem;
     flex-shrink: 1;
     width: calc(100% - (24.37rem + 1.875rem));
+
+    &__actions {
+      display: flex;
+      margin-top: 1.25rem;
+      flex-direction: row-reverse;
+
+      button {
+        font-size: 1.125rem;
+        @include padding(0.625rem 1.25rem);
+        height: 2.75rem;
+      }
+    }
+  }
+
+  &__no_graph {
+    background-color: #f0f0f0;
+    text-align: center;
+    @include padding(17.375rem);
+
+    p {
+      @include font(1.375rem, 1.5rem);
+      font-weight: $fontWeightRegular;
+    }
+
+    button {
+      display: unset;
+      margin-top: 2rem;
+      height: 2.75rem;
+      font-size: 1rem;
+    }
   }
 }
 

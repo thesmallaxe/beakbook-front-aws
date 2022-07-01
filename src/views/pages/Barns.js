@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { connect } from "react-redux";
 import {
   createBarn,
@@ -19,7 +19,7 @@ import { DownloadPopup } from "../components/barns/DownloadPopup";
 import { RenameBarnModel } from "../components/barns/listing/RenameBarnMode";
 import Paginator from "../components/Paginator";
 
-function Barns(props) {
+const Barns = (props) => {
   const {
     loading,
     success,
@@ -111,7 +111,7 @@ function Barns(props) {
                     <th>Barn Name</th>
                     <th>Weight</th>
                     <th>Farm</th>
-                    <th>Deaths</th>
+                    <th>Mortality</th>
                     <th></th>
                     <th></th>
                   </tr>
@@ -176,7 +176,7 @@ function Barns(props) {
       </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {

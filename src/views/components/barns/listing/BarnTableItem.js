@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const BarnTableItem = (props) => {
   const [fav, setFav] = useState(false);
+  const location = useLocation();
   const barn = props.barn;
   const barn_id = barn.barn_id;
   const cycles = barn.cycle_id;
@@ -31,7 +32,7 @@ export const BarnTableItem = (props) => {
   return (
     <tr>
       <td>
-        <Link key={barn_id} to={url}>
+        <Link key={barn_id} state={{ from: location }} to={url}>
           <i className="icon icon-shop"></i> {barn.name}
         </Link>
       </td>

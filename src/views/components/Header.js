@@ -1,10 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Header = (props) => {
   const { back } = props;
   const location = useLocation();
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
 
   const toggleAuthMenu = () => {
     setShow(!show);
@@ -20,8 +20,8 @@ const Header = (props) => {
         )}
 
         {back && (
-          <Link className="btn btn--white" to={back.action ?? "/"}>
-            <i className="icon icon-arrow-left"></i> {back.label ?? "Back"}
+          <Link className="btn btn--white" to={back?.action ?? "/"}>
+            <i className="icon icon-arrow-left"></i> {back?.label ?? "Back"}
           </Link>
         )}
       </div>
