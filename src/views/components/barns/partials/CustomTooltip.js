@@ -2,7 +2,7 @@ import React from "react";
 import { BarChart, Bar, XAxis, YAxis, Cell } from "recharts";
 
 export const CustomizedLabel = (props) => {
-  const { x, y, width, fill, value, unit } = props;
+  const { x, y, width, value, unit } = props;
 
   return (
     <text
