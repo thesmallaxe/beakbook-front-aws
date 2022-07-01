@@ -11,9 +11,13 @@ import {
   GET_DOWNLOAD_URL,
   FETCHING_SINGLE_GRAPH,
   RESET_SINGLE_GRAPH,
+  SHOW_GRAPH_MODAL,
+  CLOSE_GRAPH_MODAL,
+  UPDATE_BARN_VISIBILITY,
 } from "../constants/types/BarnDetailTypes";
 import HttpRequest from "../services/api/HttpRequest";
 import { downloadFile } from "../services/Helper";
+import { notifyError, notifySuccess } from "../services/ToastHelper";
 
 export const startLoading = () => {
   return {
@@ -88,6 +92,17 @@ export const getSingleBarnDetails = (id = null, cycle_id = null) => {
 
       if (res.status) {
         dispatch(updateSingleBarnDetails(res));
+
+        const graphNames = [
+          "Average Weight",
+          "Total Activity",
+          "Standard Deviation",
+        ];
+        graphNames.forEach((name) => {
+          if (id && cycle_id) {
+            dispatch(getSingleBarnDetailsGraphs(id, cycle_id, name));
+          }
+        });
       } else {
         console.error("Failed", res);
       }
@@ -149,5 +164,47 @@ export const triggerDownload = (obj) => {
         console.error("Failed", res);
       }
     });
+  };
+};
+
+export const showGraphPopup = (payload) => {
+  return {
+    type: SHOW_GRAPH_MODAL,
+    payload: payload,
+  };
+};
+
+export const closeGraphPopup = () => {
+  return {
+    type: CLOSE_GRAPH_MODAL,
+  };
+};
+
+export const updateBarnVisibility = (payload) => {
+  return {
+    type: UPDATE_BARN_VISIBILITY,
+    payload: payload,
+  };
+};
+
+export const submitGraphVisible = (barn_id, cycle_id, obj) => {
+  return (dispatch) => {
+    const request = new HttpRequest();
+
+    request
+      .post(`add-graph-visibility`, obj)
+      .then((res) => {
+        dispatch(closeGraphPopup());
+
+        dispatch(updateBarnVisibility(obj));
+
+        dispatch(getSingleBarnDetails(barn_id, cycle_id));
+
+        notifySuccess(res.message);
+      })
+      .catch((error) => {
+        // Error log
+        notifyError(error.message);
+      });
   };
 };

@@ -1,39 +1,52 @@
 import React from "react";
-import { BarChart, Bar, XAxis, YAxis } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Cell } from "recharts";
 
 export const CustomizedLabel = (props) => {
-  const { x, y, width, fill, value } = props;
- 
+  const { x, y, width, fill, value, unit } = props;
+
   return (
     <text
       x={x + width + 10}
       y={y + 10}
       fontSize="12"
       fontFamily="sans-serif"
-      fill={fill}
+      fill="#000"
       textAnchor="start"
     >
-      {value.toFixed(2)} g
+      {value.toFixed(2)} {unit}
     </text>
   );
 };
 
-export const CustomTooltip = ({ active, payload, label }) => {
+export const CustomTooltip = ({
+  name,
+  active,
+  payload,
+  label,
+  unit,
+  color,
+}) => {
   if (active && payload && payload.length) {
-
     let data = payload[0].payload.miniGraph ?? [];
+    let value = parseFloat(payload[0].payload.value).toFixed(2);
+
+    if (value === "0.00" || value === 0) {
+      return "";
+    }
 
     return (
       <div className="widget__tooltip tooltip">
         <div className="tooltip__heading">
           <div className="tooltip__heading_left">
-            <h3>Average Weight</h3>
+            <h3>{name}</h3>
             <p className="label">
-              {payload[0].payload.value.toFixed(2)} g / {label} days
+              {value} {unit} / {label} days
             </p>
           </div>
           <div className="tooltip__heading_right">
-            <label>{payload[0].payload.value.toFixed(2)} g</label>
+            <label>
+              {value} {unit}
+            </label>
           </div>
         </div>
         <div className="tooltip__body">
@@ -56,11 +69,16 @@ export const CustomTooltip = ({ active, payload, label }) => {
 
               <Bar
                 dataKey="value"
-                fill="#F97916"
+                fill={color}
                 barSize={10}
                 radius={[10, 10, 10, 10]}
-                label={<CustomizedLabel />}
-              />
+                label={<CustomizedLabel unit={unit} />}
+              >
+                {payload.map((entry, index) => {
+                  console.log(entry);
+                  return <Cell key={`cell-${index}`} fill={entry.color} />;
+                })}
+              </Bar>
             </BarChart>
           )}
         </div>

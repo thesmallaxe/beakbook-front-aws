@@ -11,10 +11,17 @@ import {
   GET_DOWNLOAD_URL,
   FETCHING_SINGLE_GRAPH,
   RESET_SINGLE_GRAPH,
+  SHOW_GRAPH_MODAL,
+  CLOSE_GRAPH_MODAL,
+  UPDATE_BARN_VISIBILITY,
 } from "../constants/types/BarnDetailTypes";
 
 const initialState = {
   loading: false,
+  graph_addition: {
+    show_modal: false,
+    graphs: {},
+  },
   barn_overview: {
     edit: true,
     update: false,
@@ -104,6 +111,10 @@ const BarnDetailReducer = (state = initialState, action) => {
       return {
         ...state,
         barn_details: { ...state.barn_details, ...action.payload },
+        graph_addition: {
+          ...state.graph_addition,
+          graphs: action.payload.graphVisibility,
+        },
       };
 
     case FETCHING_SINGLE_GRAPH:
@@ -140,6 +151,33 @@ const BarnDetailReducer = (state = initialState, action) => {
         download: {
           ...state.download,
           download: action.payload.data,
+        },
+      };
+
+    case SHOW_GRAPH_MODAL:
+      return {
+        ...state,
+        graph_addition: {
+          ...state.graph_addition,
+          show_modal: true,
+        },
+      };
+
+    case CLOSE_GRAPH_MODAL:
+      return {
+        ...state,
+        graph_addition: {
+          ...state.graph_addition,
+          show_modal: false,
+        },
+      };
+
+    case UPDATE_BARN_VISIBILITY:
+      return {
+        ...state,
+        graph_addition: {
+          ...state.graph_addition,
+          graphs: action.payload,
         },
       };
 

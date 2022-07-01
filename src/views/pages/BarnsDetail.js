@@ -17,7 +17,7 @@ import {
   editBarnOverview,
   editCycleDetails,
   handleAverageWeight,
-  getSingleBarnDetailsGraphs,
+  showGraphPopup,
 } from "../../app/actions/BarnDetailActions";
 import {
   showCyclePopup,
@@ -27,13 +27,13 @@ import { mapGraphs } from "../../app/services/Helper";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 import { NewCycleModel } from "../components/barns/NewCycleModel";
 import { MortalityPopup } from "../components/barns/MortalityPopup";
+import { AddGraphPopup } from "../components/barns/AddGraphPopup";
 
 const BarnsDetail = (props) => {
   const { barn_id, cycle_id } = useParams();
   const location = useLocation();
   const {
     fetchSingleBarn,
-    fetchSingleGraphs,
     loading,
     barn_single,
     handleAverageWeight,
@@ -41,31 +41,23 @@ const BarnsDetail = (props) => {
     user,
     showNewCycle,
     showNewMotality,
+    graph_modal,
+    showGraphModal,
   } = props;
 
+  const barn_modal = graph_modal?.show_modal;
+  const graph_status = graph_modal?.graphs?.graph_status;
   const graphs = barn_single.graphs ? mapGraphs(barn_single.graphs) : {};
+
   const barn_overview = barn_single.barnOverview
     ? barn_single.barnOverview[0]
     : {};
 
   useEffect(() => {
-    if (barn_id && cycle_id) {
+    if (barn_id && cycle_id && !barn_modal) {
       fetchSingleBarn(barn_id, cycle_id);
     }
-  }, [barn_id, cycle_id, fetchSingleBarn]);
-
-  useEffect(() => {
-    const graphNames = [
-      "Average Weight",
-      "Total Activity",
-      "Standard Deviation",
-    ];
-    graphNames.forEach((name) => {
-      if (barn_id && cycle_id) {
-        fetchSingleGraphs(barn_id, cycle_id, name);
-      }
-    });
-  }, [barn_id, cycle_id, fetchSingleGraphs]);
+  }, [barn_modal, barn_id, cycle_id, fetchSingleBarn]);
 
   const back_btn = {
     label: barn_overview?.name ? barn_overview.name + " Details" : "Back",
@@ -106,32 +98,72 @@ const BarnsDetail = (props) => {
               switch (key) {
                 case "area":
                   return (
-                    <AverageWeight
-                      graph={graph}
-                      loading={loading}
-                      average_weight={props.average_weight}
-                      handleEvent={handleAverageWeight}
-                      key={key}
-                    />
+                    graph_status &&
+                    (graph_status[0]?.value === 1 ||
+                      graph_status[0]?.value === "1") && (
+                      <AverageWeight
+                        graph={graph}
+                        loading={loading}
+                        average_weight={props.average_weight}
+                        handleEvent={handleAverageWeight}
+                        key={key}
+                      />
+                    )
                   );
 
                 case "bar":
                   return (
-                    <TotalActivity graph={graph} loading={loading} key={key} />
+                    graph_status &&
+                    (graph_status[1]?.value === 1 ||
+                      graph_status[1]?.value === "1") && (
+                      <TotalActivity
+                        graph={graph}
+                        loading={loading}
+                        key={key}
+                      />
+                    )
+                  );
+
+                case "line":
+                  return (
+                    graph_status &&
+                    (graph_status[2]?.value === 1 ||
+                      graph_status[2]?.value === "1") && (
+                      <StandardDeviation
+                        graph={graph}
+                        loading={loading}
+                        key={key}
+                      />
+                    )
                   );
 
                 default:
-                  return (
-                    <StandardDeviation
-                      graph={graph}
-                      loading={loading}
-                      key={key}
-                    />
-                  );
+                  return "";
               }
             })}
           <NewCycleModel barn_id={barn_id} />
           <MortalityPopup barn_id={barn_id} cycle={barn_single.cycleDetails} />
+          <AddGraphPopup barn_id={barn_id} />
+          {graph_status &&
+          Object.values(graph_status).every(
+            (x) => x.value === "0" || x.value === 0
+          ) ? (
+            <div className="barn_details__no_graph">
+              <p>
+                Graphs are not availble for the movment.<br /> Please add the
+                graph{" "}
+              </p>
+              <button className="btn btn--green" onClick={showGraphModal}>
+                + Add a graph
+              </button>
+            </div>
+          ) : (
+            <div className="barn_details__graphs__actions">
+              <button className="btn btn--green" onClick={showGraphModal}>
+                + Add a graph
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -145,6 +177,7 @@ const mapStateToProps = (state) => {
     barn_overview: state.barn_detail.barn_overview,
     cycle_details: state.barn_detail.cycle_details,
     average_weight: state.barn_detail.average_weight,
+    graph_modal: state.barn_detail.graph_addition,
     download: state.barn_detail.download,
     user: state.auth.user,
   };
@@ -154,13 +187,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchSingleBarn: (barn_id, cycle_id) =>
       dispatch(getSingleBarnDetails(barn_id, cycle_id)),
-    fetchSingleGraphs: (barn_id, cycle_id, name) =>
-      dispatch(getSingleBarnDetailsGraphs(barn_id, cycle_id, name)),
     editBarnOverview: () => dispatch(editBarnOverview()),
     editCycleDetails: () => dispatch(editCycleDetails()),
     handleAverageWeight: (arg = "barn") => dispatch(handleAverageWeight(arg)),
     showNewCycle: () => dispatch(showCyclePopup()),
     showNewMotality: () => dispatch(showMortalityPopup()),
+    showGraphModal: () => dispatch(showGraphPopup()),
   };
 };
 

@@ -11,66 +11,17 @@ import {
   Tooltip,
   Area,
 } from "recharts";
-import { Select } from "@mui/material";
-import FormControl from "@mui/material/FormControl";
-import MenuItem from "@mui/material/MenuItem";
 import { mapSectionsData } from "../../../app/services/Helper";
 import { CustomTooltip } from "./partials/CustomTooltip";
+import { WidgetChild } from "./partials/AverageWeightWidgetChild";
 
-const colors = {
+export const colors = {
   barn: "#F97916",
+  all: "#F97916",
   s1: "#F97916",
   s2: "#289D44",
   s3: "#FABE22",
   s4: "#01B7FF",
-};
-
-export const WidgetChild = (props) => {
-  const allSections = props.graph.allSections ?? {};
-  const averageWeight = props.averageWeight;
-
-  const HandleChange = (e) => {
-    let updatedValue = { current: e.target.value };
-    props.setAverageWeight((averageWeight) => ({
-      ...averageWeight,
-      ...updatedValue,
-    }));
-  };
-
-  return (
-    <div className="widget__action">
-      {averageWeight.current === "all" &&
-        allSections &&
-        allSections.map((section, i) => (
-          <div key={i} className="widget__color_wrapper">
-            <span
-              style={{ backgroundColor: `${colors["s" + (i + 1)]}` }}
-            ></span>{" "}
-            {section.sectionName}
-          </div>
-        ))}
-
-      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <Select
-          id="demo-select-small"
-          value={averageWeight.current}
-          onChange={HandleChange}
-        >
-          <MenuItem value="barn">Barn</MenuItem>
-          {allSections && <MenuItem value="all">All Sections</MenuItem>}
-          {allSections &&
-            allSections.map((section, i) => (
-              <MenuItem key={i} value={"s" + (i + 1)}>
-                {section.sectionName}
-              </MenuItem>
-            ))}
-        </Select>
-      </FormControl>
-      <button className="btn btn--icon btn--gray">
-        <i className="icon icon-trash"></i>
-      </button>
-    </div>
-  );
 };
 
 export const AverageWeight = ({ graph = {}, loading }) => {
@@ -88,11 +39,13 @@ export const AverageWeight = ({ graph = {}, loading }) => {
     }));
   }, [setAverageWeight, graph]);
 
+  let colorName =
+    averageWeight.current === "all"
+      ? colors["barn"]
+      : colors[averageWeight.current];
   let data = averageWeight.data;
-  data =
-    averageWeight.current !== "all"
-      ? data[averageWeight.current]
-      : data["barn"];
+  data = data[averageWeight.current];
+  console.log(averageWeight.data);
 
   return (
     <Widget
@@ -144,13 +97,22 @@ export const AverageWeight = ({ graph = {}, loading }) => {
             />
           </YAxis>
           <CartesianGrid strokeDasharray="1 5 " />
-          <Tooltip content={<CustomTooltip data={data} />} />
+          <Tooltip
+            content={
+              <CustomTooltip
+                data={data}
+                name={graph.graphName}
+                unit="g"
+                color={colorName}
+              />
+            }
+          />
           {averageWeight.data && averageWeight.current === "all" ? (
             Object.keys(averageWeight.data).map(function (name) {
-              if (name === "barn") {
+              if (name === "barn" || name === "all") {
                 return null;
               }
-              let dataKey = name === "barn" ? "value" : name;
+              let dataKey = name === "barn" || name === "all" ? "value" : name;
               return (
                 <Area
                   key={name}

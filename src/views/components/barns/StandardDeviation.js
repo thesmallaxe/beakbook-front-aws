@@ -10,64 +10,17 @@ import {
   Line,
   Tooltip,
 } from "recharts";
-import { Select } from "@mui/material";
-import FormControl from "@mui/material/FormControl";
-import MenuItem from "@mui/material/MenuItem";
 import { mapSectionsData } from "../../../app/services/Helper";
+import { CustomTooltip } from "./partials/CustomTooltip";
+import { WidgetChild } from "./partials/StandardDeviationWidgetChild";
 
-const colors = {
+export const colors = {
   barn: "#F97916",
+  all: "#F97916",
   s1: "#F97916",
   s2: "#289D44",
   s3: "#FABE22",
   s4: "#01B7FF",
-};
-
-const WidgetChild = (props) => {
-  const allSections = props.graph.allSections ?? {};
-  const deviation = props.deviation;
-
-  const HandleChange = (e) => {
-    let updatedValue = { current: e.target.value };
-    props.setDeviation((deviation) => ({
-      ...deviation,
-      ...updatedValue,
-    }));
-  };
-
-  return (
-    <div className="widget__action">
-      {deviation.current === "all" &&
-        allSections &&
-        allSections.map((section, i) => (
-          <div key={i} className="widget__color_wrapper">
-            <span
-              style={{ backgroundColor: `${colors["s" + (i + 1)]}` }}
-            ></span>{" "}
-            {section.sectionName}
-          </div>
-        ))}
-      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <Select
-          id="demo-select-small"
-          value={deviation.current}
-          onChange={HandleChange}
-        >
-          <MenuItem value="barn">Barn</MenuItem>
-          {allSections && <MenuItem value="all">All Sections</MenuItem>}
-          {allSections &&
-            allSections.map((section, i) => (
-              <MenuItem key={i} value={"s" + (i + 1)}>
-                {section.sectionName}
-              </MenuItem>
-            ))}
-        </Select>
-      </FormControl>
-      <button className="btn btn--icon btn--gray">
-        <i className="icon icon-trash"></i>
-      </button>
-    </div>
-  );
 };
 
 export const StandardDeviation = ({ graph, loading }) => {
@@ -85,8 +38,10 @@ export const StandardDeviation = ({ graph, loading }) => {
     }));
   }, [setDeviation, graph]);
 
+  let colorName =
+    deviation.current === "all" ? colors["barn"] : colors[deviation.current];
   let data = deviation.data;
-  data = deviation.current !== "all" ? data[deviation.current] : data["barn"];
+  data = data[deviation.current];
   const yLabel =
     deviation.current === "barn" ? graph.yLabelBarn : graph.yLabelSection;
 
@@ -126,13 +81,22 @@ export const StandardDeviation = ({ graph, loading }) => {
             />
           </YAxis>
           <CartesianGrid strokeDasharray="3 5" vertical={false} />
-          <Tooltip />
+          <Tooltip
+            content={
+              <CustomTooltip
+                data={data}
+                name={graph.graphName}
+                unit="g"
+                color={colorName}
+              />
+            }
+          />
           {deviation.data && deviation.current === "all" ? (
             Object.keys(deviation.data).map(function (name) {
-              if (name === "barn") {
+              if (name === "barn" || name === "all") {
                 return null;
               }
-              let dataKey = name === "barn" ? "value" : name;
+              let dataKey = name === "barn" || name === "all" ? "value" : name;
               return (
                 <Line
                   type="monotone"

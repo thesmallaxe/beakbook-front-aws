@@ -21,7 +21,7 @@
   &__content {
     position: relative;
     background-color: #fefefe;
-    margin: 10vh auto;
+    margin: 15vh auto;
     padding: 0;
     border-radius: 10px;
     width: 50%;
@@ -36,6 +36,10 @@
   &__body {
     @include padding(2.25rem 25px);
     text-align: left;
+
+    &--center {
+      text-align: center;
+    }
 
     &__title {
       @include font(32px, 100%);
@@ -133,6 +137,13 @@
         background: #f9f9f9;
         border: 0;
       }
+    }
+  }
+
+  &#addGraphPopup {
+    .modal__content {
+      max-width: 24.375rem;
+      width: 100%;
     }
   }
 }
