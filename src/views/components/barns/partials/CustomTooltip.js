@@ -2,7 +2,6 @@ import React from "react";
 import { BarChart, Bar, XAxis, YAxis, Cell } from "recharts";
 
 export const CustomizedLabel = (props) => {
-
   const { x, y, width, value, unit } = props;
 
   return (
@@ -27,9 +26,7 @@ export const CustomTooltip = ({
   unit,
   color,
 }) => {
-
   if (active && payload && payload.length) {
-    
     let data = payload[0].payload.miniGraph ?? [];
     let value = parseFloat(payload[0].payload.value).toFixed(2);
 
@@ -78,7 +75,6 @@ export const CustomTooltip = ({
                 label={<CustomizedLabel unit={unit} />}
               >
                 {payload.map((entry, index) => {
-                  console.log(entry);
                   return <Cell key={`cell-${index}`} fill={entry.color} />;
                 })}
               </Bar>
