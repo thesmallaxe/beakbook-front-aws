@@ -34,7 +34,7 @@ export const NewCycleModel = ({ barn_id }) => {
       ...data,
       barn_id: barn_id,
     }));
-  }, []);
+  }, [barn_id]);
 
   useEffect(() => {
     setData((data) => ({
@@ -42,7 +42,7 @@ export const NewCycleModel = ({ barn_id }) => {
       ...cycle,
     }));
     dispatch(hideCyclePopup());
-  }, [success]);
+  }, [success, cycle, dispatch]);
 
   return (
     <div className={"modal " + showModel}>
@@ -128,8 +128,12 @@ export const NewCycleModel = ({ barn_id }) => {
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                   label="Starting Date"
+                  wrapperClassName="date-picker"
                   value={data?.selected_start_date}
                   minDate={new Date()}
+                  onOpen={(args) => {
+                    console.log(args);
+                  }}
                   onChange={(value) => {
                     setData({
                       ...data,
@@ -148,6 +152,7 @@ export const NewCycleModel = ({ barn_id }) => {
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                   label="Desired Harvest Date"
+                  wrapperClassName="date-picker"
                   minDate={new Date(data?.selected_start_date ?? "")}
                   value={data?.selected_end_date}
                   onChange={(value) => {

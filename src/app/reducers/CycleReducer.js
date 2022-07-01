@@ -5,6 +5,7 @@ import {
   SHOW_MORTALITY_CLOSE,
   SHOW_MORTALITY_OPEN,
   SHOW_SUCCESS,
+  UPDATE_MORTALITY,
 } from "../constants/types/CycleTypes";
 
 const initialState = {
@@ -13,6 +14,13 @@ const initialState = {
   error: {},
   cycle_modal: false,
   mortality_modal: false,
+  mortality: {
+    barn_id: 0,
+    cycle_id: 0,
+    date: "",
+    mortality_number: "",
+    selected_date: null,
+  },
   cycle: {
     breed: "",
     origin: "",
@@ -40,6 +48,9 @@ const CycleReducer = (state = initialState, action) => {
 
     case SHOW_MORTALITY_CLOSE:
       return { ...state, mortality_modal: false };
+
+    case UPDATE_MORTALITY:
+      return { ...state, mortality: action.payload };
 
     case SHOW_SUCCESS:
       return { ...state, success: action.payload };

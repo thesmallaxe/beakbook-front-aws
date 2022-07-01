@@ -1,25 +1,21 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, TextField } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  checkMortalityCount,
   createMortalitySubmit,
   hideMortalityPopup,
+  updateMortality,
 } from "../../../app/actions/CycleActions";
 import { format } from "date-fns";
 
 export const MortalityPopup = ({ barn_id, cycle }) => {
   const dispatch = useDispatch();
   const cycle_state = useSelector((state) => state.cycle);
-  const [mortality, setMortality] = useState({
-    barn_id: barn_id,
-    cycle_id: cycle?.id,
-    date: "",
-    mortality_number: "",
-    selected_date: null,
-  });
+  const [mortality, setMortality] = useState(cycle_state.mortality);
 
   const showModel = cycle_state.mortality_modal ? "modal--show" : "modal--hide";
 
@@ -32,27 +28,38 @@ export const MortalityPopup = ({ barn_id, cycle }) => {
     }
   };
 
+  const handleDateChange = (value) => {
+    const formatted_date = format(new Date(value), "yyyy-MM-dd");
+
+    const state = {
+      ...mortality,
+      date: formatted_date,
+      selected_date: value,
+    };
+
+    setMortality(state);
+
+    dispatch(checkMortalityCount(state));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(createMortalitySubmit(mortality));
   };
 
-  React.useEffect(() => {
-    setMortality((mortality) => ({
-      ...mortality,
-      cycle_id: cycle?.id,
-    }));
-  }, [cycle]);
+  useEffect(() => {
+    dispatch(
+      updateMortality((mortality) => ({
+        ...mortality,
+        barn_id: barn_id,
+        cycle_id: cycle?.id,
+      }))
+    );
+  }, [showModel, cycle, barn_id, dispatch]);
 
-  React.useEffect(() => {
-    setMortality((mortality) => ({
-      ...mortality,
-      date: "",
-      mortality_number: "",
-      selected_date: null,
-    }));
-    dispatch(hideMortalityPopup());
-  }, [cycle_state.success, dispatch]);
+  useEffect(() => {
+    setMortality(cycle_state.mortality);
+  }, [cycle_state]);
 
   return (
     <div className={"modal modal--small " + showModel} id="mortalityPopup">
@@ -73,13 +80,7 @@ export const MortalityPopup = ({ barn_id, cycle }) => {
                 minDate={new Date(cycle?.starting_date ?? "")}
                 maxDate={new Date(cycle?.end_date ?? "")}
                 value={mortality?.selected_date}
-                onChange={(value) => {
-                  setMortality({
-                    ...mortality,
-                    date: format(new Date(value), "yyyy-MM-dd"),
-                    selected_date: value,
-                  });
-                }}
+                onChange={handleDateChange}
                 renderInput={(params) => (
                   <TextField {...params} fullWidth required />
                 )}

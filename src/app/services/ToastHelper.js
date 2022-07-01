@@ -14,6 +14,10 @@ export const createToast = () => {
   return toast.loading("Processing...");
 };
 
+export const clearToast = () => {
+  return toast.dismiss();
+};
+
 export const toastSuccess = (id, res) => {
   toast.update(id, {
     render: res.message || res.success,
