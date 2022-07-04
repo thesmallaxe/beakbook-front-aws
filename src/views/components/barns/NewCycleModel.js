@@ -186,7 +186,7 @@ export const NewCycleModel = ({ barn_id }) => {
           </div>
 
           <div className="modal__body__action_wrapper">
-            <Button type="submit" variant="contained">
+            <Button type="submit" variant="contained" disabled>
               Start cycle now
             </Button>
             <Button

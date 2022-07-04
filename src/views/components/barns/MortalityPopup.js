@@ -100,7 +100,7 @@ export const MortalityPopup = ({ barn_id, cycle }) => {
           </div>
 
           <div className="modal__body__action_wrapper">
-            <Button type="submit" variant="contained">
+            <Button type="submit" variant="contained" disabled>
               Add
             </Button>
             <Button
