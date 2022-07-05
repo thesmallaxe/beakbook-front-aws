@@ -1,19 +1,17 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux/es/exports";
 import { Widget } from "../partials/Widget";
 import { TextField } from "@mui/material";
 import { ShimmerCategoryList } from "react-shimmer-effects";
+import { updateBarnOverviewAction } from "../../../app/actions/BarnDetailActions";
 
 export const BarnOverview = (props) => {
   // Defining method variables
   const state = props.barn;
   const barn_overview = state.barn_overview;
-  const overview = state.barn_single.barnOverview
-    ? state.barn_single.barnOverview[0]
-    : {};
-
-  if (state.loading) {
-    return <ShimmerCategoryList title items={3} categoryStyle="STYLE_FOUR" />;
-  }
+  const overview = barn_overview.data;
+  const [barn, setBarn] = useState({});
+  const dispatch = useDispatch();
 
   const WidgetChild = () => {
     return (
@@ -26,6 +24,26 @@ export const BarnOverview = (props) => {
     );
   };
 
+  const handleChange = (event) => {
+    setBarn((barn) => ({
+      ...barn,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    dispatch(updateBarnOverviewAction(barn));
+  };
+
+  useEffect(() => {
+    const barn_data = overview ? overview[0] : {};
+    setBarn(barn_data);
+  }, [overview]);
+
+  if (state.loading) {
+    return <ShimmerCategoryList title items={3} categoryStyle="STYLE_FOUR" />;
+  }
+
   return (
     <Widget
       title="Barn Overview"
@@ -33,35 +51,44 @@ export const BarnOverview = (props) => {
     >
       <TextField
         className="widget__field"
-        name="barn_name"
+        name="name"
         label="Barn Name"
-        value={overview.name ?? ""}
+        value={barn.name ?? ""}
         variant="outlined"
+        onChange={handleChange}
         InputProps={{
           readOnly: barn_overview.read_only,
         }}
+        fullWidth
       />
       <TextField
         className="widget__field"
         name="farm_name"
         label="Farm Name"
-        value={overview.farm ? overview.farm.name : ""}
+        value={barn.farm ? barn.farm.name : ""}
         variant="outlined"
         InputProps={{
-          readOnly: barn_overview.read_only,
+          readOnly: true,
         }}
+        fullWidth
       />
       <TextField
         className="widget__field"
         name="location"
         label="Location"
-        value={overview.location ?? ""}
+        value={barn.location ?? ""}
         variant="outlined"
+        onChange={handleChange}
         InputProps={{
           readOnly: barn_overview.read_only,
         }}
+        fullWidth
       />
-      {barn_overview.update && <button className="btn">Update</button>}
+      {barn_overview.update && (
+        <button type="submit" onClick={handleSubmit} className="btn">
+          Update
+        </button>
+      )}
     </Widget>
   );
 };

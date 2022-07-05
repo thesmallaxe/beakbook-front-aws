@@ -2,6 +2,7 @@ import {
   START_LOADING,
   END_LOADING,
   EDIT_BARN_OVERVIEW,
+  UPDATE_BARN_OVERVIEW,
   EDIT_CYCLE_DETAILS,
   FETCHING_SINGLE_BARN,
   HANDLE_AVERAGE_WEIGHT,
@@ -14,6 +15,7 @@ import {
   SHOW_GRAPH_MODAL,
   CLOSE_GRAPH_MODAL,
   UPDATE_BARN_VISIBILITY,
+  UPDATE_CYCLE_DETAILS,
 } from "../constants/types/BarnDetailTypes";
 
 const initialState = {
@@ -91,9 +93,22 @@ const BarnDetailReducer = (state = initialState, action) => {
       return {
         ...state,
         barn_overview: {
+          ...state.barn_overview,
           edit: false,
           update: true,
           read_only: false,
+        },
+      };
+
+    case UPDATE_BARN_OVERVIEW:
+      return {
+        ...state,
+        barn_overview: {
+          ...state.barn_overview,
+          edit: true,
+          update: false,
+          read_only: true,
+          data: [action.payload],
         },
       };
 
@@ -107,6 +122,18 @@ const BarnDetailReducer = (state = initialState, action) => {
         },
       };
 
+    case UPDATE_CYCLE_DETAILS:
+      return {
+        ...state,
+        cycle_details: {
+          ...state.barn_overview,
+          edit: true,
+          update: false,
+          read_only: true,
+          data: action.payload,
+        },
+      };
+
     case FETCHING_SINGLE_BARN:
       return {
         ...state,
@@ -114,6 +141,20 @@ const BarnDetailReducer = (state = initialState, action) => {
         graph_addition: {
           ...state.graph_addition,
           graphs: action.payload.graphVisibility,
+        },
+        barn_overview: {
+          ...state.barn_overview,
+          edit: true,
+          update: false,
+          read_only: true,
+          data: action.payload.barnOverview,
+        },
+        cycle_details: {
+          ...state.barn_overview,
+          edit: true,
+          update: false,
+          read_only: true,
+          data: action.payload.cycleDetails,
         },
       };
 

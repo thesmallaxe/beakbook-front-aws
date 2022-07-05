@@ -45,7 +45,6 @@ export const AverageWeight = ({ graph = {}, loading }) => {
       : colors[averageWeight.current];
   let data = averageWeight.data;
   data = data[averageWeight.current];
-  console.log(averageWeight.data);
 
   return (
     <Widget

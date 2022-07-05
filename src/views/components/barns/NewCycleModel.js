@@ -131,9 +131,6 @@ export const NewCycleModel = ({ barn_id }) => {
                   wrapperClassName="date-picker"
                   value={data?.selected_start_date}
                   minDate={new Date()}
-                  onOpen={(args) => {
-                    console.log(args);
-                  }}
                   onChange={(value) => {
                     setData({
                       ...data,
