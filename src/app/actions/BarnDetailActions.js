@@ -1,3 +1,14 @@
+import HttpRequest from "../services/api/HttpRequest";
+import { downloadFile } from "../services/Helper";
+import {
+  createToast,
+  notifyError,
+  notifySuccess,
+  toastError,
+  toastSuccess,
+} from "../services/ToastHelper";
+
+// Types
 import {
   END_LOADING,
   START_LOADING,
@@ -14,11 +25,15 @@ import {
   SHOW_GRAPH_MODAL,
   CLOSE_GRAPH_MODAL,
   UPDATE_BARN_VISIBILITY,
+  UPDATE_BARN_OVERVIEW,
+  UPDATE_CYCLE_DETAILS,
 } from "../constants/types/BarnDetailTypes";
-import HttpRequest from "../services/api/HttpRequest";
-import { downloadFile } from "../services/Helper";
-import { notifyError, notifySuccess } from "../services/ToastHelper";
 
+// Endpoints
+const BARN_UPDATE_URL = `update/barn`;
+const CYCLE_UPDATE_URL = `update-cycle`;
+
+// Actions
 export const startLoading = () => {
   return {
     type: START_LOADING,
@@ -37,9 +52,23 @@ export const editBarnOverview = () => {
   };
 };
 
+export const updateBarnOverview = (obj) => {
+  return {
+    type: UPDATE_BARN_OVERVIEW,
+    payload: obj,
+  };
+};
+
 export const editCycleDetails = () => {
   return {
     type: EDIT_CYCLE_DETAILS,
+  };
+};
+
+export const updateCycleDetails = (obj) => {
+  return {
+    type: UPDATE_CYCLE_DETAILS,
+    payload: obj,
   };
 };
 
@@ -205,6 +234,53 @@ export const submitGraphVisible = (barn_id, cycle_id, obj) => {
       .catch((error) => {
         // Error log
         notifyError(error.message);
+      });
+  };
+};
+
+export const updateBarnOverviewAction = (obj) => {
+  return (dispatch) => {
+    const request = new HttpRequest();
+
+    // Starting laoding screen
+    const id = createToast();
+
+    request
+      .post(BARN_UPDATE_URL, obj)
+      .then((res) => {
+        // Set response to state
+        toastSuccess(id, res);
+
+        // Set despatch baren
+        dispatch(updateBarnOverview(obj));
+      })
+      .catch((error) => {
+        // Error log
+        toastError(id, error);
+      });
+  };
+};
+
+export const updateCycleDetailAction = (obj) => {
+  return (dispatch) => {
+    const request = new HttpRequest();
+
+    // Starting laoding screen
+    const id = createToast();
+
+    request
+      .post(CYCLE_UPDATE_URL, obj)
+      .then((res) => {
+        // Set response to state
+        toastSuccess(id, res);
+
+        // Set despatch baren
+        dispatch(getSingleBarnDetails(obj.barn_id, obj.id));
+
+      })
+      .catch((error) => {
+        // Error log
+        toastError(id, error);
       });
   };
 };
