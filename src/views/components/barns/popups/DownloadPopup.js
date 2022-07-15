@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import {
   hideDwnloadPopup,
   triggerDownload,
-} from "../../../app/actions/BarnDetailActions";
-import Alert from "../partials/Alert";
+} from "../../../../app/actions/BarnDetailActions";
+import Alert from "../../partials/Alert";
 
 export const DownloadPopup = ({
   barn_id = null,

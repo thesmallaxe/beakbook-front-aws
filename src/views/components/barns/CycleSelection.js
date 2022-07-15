@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { showDownloadPopup } from "../../../app/actions/BarnDetailActions";
-import { DownloadPopup } from "./DownloadPopup";
+import { DownloadPopup } from "./popups/DownloadPopup";
 
 export const CycleSelection = (props) => {
   let navigate = useNavigate();

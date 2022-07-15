@@ -61,7 +61,11 @@ export const AverageWeight = ({ graph = {}, loading }) => {
         ),
       }}
     >
-      <ResponsiveContainer hwidth="100%" height={300}>
+      <ResponsiveContainer
+        hwidth="100%"
+        height={300}
+        className={averageWeight.current === "all" ? "all" : ""}
+      >
         <AreaChart data={data} margin={{ bottom: 20 }}>
           <defs>
             {Object.keys(colors).map(function (name) {

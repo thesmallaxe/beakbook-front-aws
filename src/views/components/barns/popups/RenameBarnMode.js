@@ -57,7 +57,7 @@ export const RenameBarnModel = ({
           </div>
           <div className="barns__modal-body__btn-wrapper">
             <Button type="submit" variant="contained" disabled>
-              Add
+              Rename
             </Button>
             <Button variant="contained" onClick={cancelAction}>
               Cancel

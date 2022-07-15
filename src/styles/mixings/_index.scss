@@ -17,13 +17,13 @@ Media Query Mixins for Responsive
   }
 
   @if $breakpoint == tablet {
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       @content;
     }
   }
 
   @if $breakpoint == mobile {
-    @media (max-width: 481px) {
+    @media (max-width: 540px) {
       @content;
     }
   }

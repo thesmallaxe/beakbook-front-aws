@@ -22,82 +22,84 @@ const Dashboard = (props) => {
   const box_colors = ["blue", "orange", "green"];
 
   return (
-    <div className="container">
+    <div className="container--fluid">
       <Header />
-      <section className="dashboard">
-        <div className="dashboard__overview">
-          <div className="dashboard__welcome">
-            <h3 className="dashboard__welcome_title">
-              Hello, <strong>{user?.name ?? "User"}</strong>
-            </h3>
-            <div className="dashboard__welcome_block">
-              <p className="dashboard__welcome_text">
-                <span className="muted_text">Welcome to your dashboard,</span>{" "}
-                here is an overview of your favorite{" "}
-                <span className="highlight">barns.</span>
-              </p>
-              <Link className="dashboard__welcome_link" to="/barns">
-                View All Barns
-              </Link>
+      <div className="container--dashboard">
+        <div className="dashboard__welcome">
+          <h3 className="dashboard__welcome_title">
+            Hello, <strong>{user?.name ?? "User"}</strong>
+          </h3>
+          <div className="dashboard__welcome_block">
+            <p className="dashboard__welcome_text">
+              <span className="muted_text">Welcome to your dashboard,</span>{" "}
+              here is an overview of your favorite{" "}
+              <span className="highlight">barns.</span>
+            </p>
+            <Link className="dashboard__welcome_link" to="/barns">
+              View All Barns
+            </Link>
+          </div>
+        </div>
+        <section className="dashboard">
+          <div className="dashboard__overview">
+            <div className="dashboard__starred">
+              {loading && (
+                <div className="dashboard__barns">
+                  {Array.from({ length: 5 }, (value, key) => (
+                    <ShimmerThumbnail key={key} height={300} rounded />
+                  ))}
+                </div>
+              )}
+              {!loading && barns && (
+                <div className="dashboard__barns">
+                  {Object.keys(barns).map((key) => (
+                    <Link
+                      key={key}
+                      state={{ from: location }}
+                      to={
+                        "/barns/" +
+                        barns[key].barnId +
+                        "/cycle/" +
+                        barns[key].cycleId
+                      }
+                    >
+                      <BarnItem
+                        barn={barns[key]}
+                        color={pickColor(key, colors)}
+                      />
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
-          <div className="dashboard__starred">
-            {loading && (
-              <div className="dashboard__barns">
-                {Array.from({ length: 5 }, (value, key) => (
-                  <ShimmerThumbnail key={key} height={300} rounded />
-                ))}
-              </div>
-            )}
-            {!loading && barns && (
-              <div className="dashboard__barns">
-                {Object.keys(barns).map((key) => (
-                  <Link
-                    key={key}
-                    state={{ from: location }}
-                    to={
-                      "/barns/" +
-                      barns[key].barnId +
-                      "/cycle/" +
-                      barns[key].cycleId
-                    }
-                  >
-                    <BarnItem
-                      barn={barns[key]}
-                      color={pickColor(key, colors)}
-                    />
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="dashboard__statics">
-          <div className="dashboard__statics_wrapper">
-            {loading && (
-              <div>
-                {Array.from({ length: 3 }, (value, key) => (
-                  <ShimmerThumbnail key={key} height={150} rounded />
-                ))}
-              </div>
-            )}
+          <div className="dashboard__statics">
+            <div className="dashboard__statics_wrapper">
+              {loading && (
+                <div>
+                  {Array.from({ length: 3 }, (value, key) => (
+                    <ShimmerThumbnail key={key} height={150} rounded />
+                  ))}
+                </div>
+              )}
 
-            {statisticts &&
-              Object.keys(statisticts).map((key) => (
-                <StaticBox
-                  key={key}
-                  color={pickColor(key, box_colors)}
-                  logo={pickIcon(key)}
-                  label={statisticts[key].label}
-                  value={formatNumber(statisticts[key].value)}
-                />
-              ))}
+              {statisticts &&
+                Object.keys(statisticts).map((key) => (
+                  <StaticBox
+                    key={key}
+                    color={pickColor(key, box_colors)}
+                    logo={pickIcon(key)}
+                    label={statisticts[key].label}
+                    value={formatNumber(statisticts[key].value)}
+                  />
+                ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
-}
+};
 
 const pickIcon = (index) => {
   const icons = ["icon-chicken-lg", "icon-scale", "icon-shop"];

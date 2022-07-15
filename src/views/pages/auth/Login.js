@@ -71,9 +71,7 @@ function Login({ loading, success, error, loginUser }) {
 
   return (
     <div className="login">
-      <Link to="/" className="auth__logo">
-        <img src="/assets/img/logo.svg" alt="Logo" />
-      </Link>
+       
       <div className="login__content">
         <p>Please Log In to your Account</p>
         {error?.message && <Alert action="error" message={error.message} />}

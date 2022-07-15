@@ -63,7 +63,11 @@ export const TotalActivity = ({ graph, loading }) => {
         ),
       }}
     >
-      <ResponsiveContainer hwidth="100%" height={300}>
+      <ResponsiveContainer
+        hwidth="100%"
+        height={300}
+        className={totalActivity.current === "all" ? "all" : ""}
+      >
         <BarChart data={data} barSize={12} barGap={20} margin={{ bottom: 20 }}>
           <defs>
             {Object.keys(colors).map(function (name) {

@@ -3,15 +3,30 @@
   flex-direction: row;
   gap: 6.75rem;
 
+  @include devices(tablet) {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+
   &__overview {
     width: 51.25rem;
+
+    @include devices(tablet) {
+      width: 100%;
+    }
   }
 
   &__welcome {
+    width: 51.25rem;
     @include margin(1.875rem 0 3.125rem);
 
     @include devices(dekstop) {
       @include margin(2.875rem 0 3.125rem);
+    }
+
+    @include devices(tablet) {
+      width: 100%;
+      @include margin(2.875rem 0 1rem);
     }
   }
 
@@ -19,6 +34,10 @@
     font-family: $primaryFont;
     font-weight: $fontWeightLight;
     margin-bottom: 1rem;
+
+    @include devices(tablet) {
+      font-size: 1.5rem;
+    }
 
     strong {
       font-weight: $fontWeightMedium;
@@ -29,10 +48,18 @@
     display: flex;
     justify-content: space-between;
     column-gap: 2rem;
+
+    @include devices(mobile) {
+      flex-direction: column;
+    }
   }
 
   &__welcome_text {
     @include font(1.125rem, 100%);
+
+    @include devices(tablet) {
+      @include font(0.875rem, 100%);
+    }
 
     .muted_text {
       color: #a8a8a8;
@@ -48,6 +75,17 @@
     width: 8rem;
     text-align: right;
     color: $primaryColor;
+
+    @include devices(tablet) {
+      @include font(0.875rem, 100%);
+    }
+
+    @include devices(mobile) {
+      position: absolute;
+      right: 1rem;
+      margin-top: -4rem;
+      font-size: 14px;
+    }
   }
 
   &__action {
@@ -67,10 +105,24 @@
     grid-template-columns: repeat(3, calc((51.25rem - 2.5rem) / 3) [col-start]);
     gap: 1.5rem 1.25rem;
     @include margin(1.5rem 0);
+
+    @include devices(tablet) {
+      grid-template-columns: repeat(3, calc((100% - 2.5rem) / 3) [col-start]);
+    }
+
+    @include devices(mobile) {
+      grid-template-columns: repeat(2, calc(50% - 0.25rem) [col-start]);
+      gap: 0.5rem;
+      @include margin(0 0 2.5rem 0);
+    }
   }
 
   &__statics {
     width: 18.37rem;
+
+    @include devices(tablet) {
+      width: 100%;
+    }
   }
 
   &__statics_wrapper {
@@ -78,12 +130,18 @@
     height: 100%;
     flex-shrink: 1;
     flex-direction: column;
-    padding: 9rem 0 1.625rem;
+    padding: 1.5rem 0 1.625rem;
     gap: 1.7rem;
 
     @include devices(dekstop) {
-      padding: 10rem 0 1.625rem;
       gap: 4.5rem;
+    }
+
+    @include devices(tablet) {
+      padding: 0;
+      flex-direction: row;
+      gap: unset;
+      justify-content: space-around;
     }
   }
 }
@@ -96,6 +154,11 @@
   color: $whiteColor;
   background: $primaryColor;
   @include padding(1.25rem);
+
+  @include devices(tablet) {
+    min-height: unset;
+    @include padding(0.75rem 0.75rem 0.5rem);
+  }
 
   &::after {
     content: "";
@@ -184,6 +247,11 @@
     @include devices(dekstop) {
       margin-bottom: 1.5rem;
     }
+
+    @include devices(mobile) {
+      font-size: 0.625rem;
+      margin: 0;
+    }
   }
 
   &__summary {
@@ -199,9 +267,19 @@
       margin-bottom: 1.5rem;
     }
 
+    @include devices(mobile) {
+      font-size: 1.875rem;
+      margin: 0;
+    }
+
     small {
       @include font(1.5rem, 100%);
       font-weight: $fontWeightRegular;
+
+      @include devices(mobile) {
+        font-weight: $fontWeightLight;
+        font-size: 0.875rem;
+      }
     }
   }
 
@@ -215,6 +293,11 @@
     @include devices(dekstop) {
       margin-bottom: 2.25rem;
     }
+
+    @include devices(mobile) {
+      font-size: 0.75rem;
+      margin: 0 0 0.5rem;
+    }
   }
 
   &__days,
@@ -226,6 +309,11 @@
     margin-bottom: 0.625rem;
     display: flex;
 
+    @include devices(mobile) {
+      font-size: 0.625rem;
+      @include padding(0.375rem);
+    }
+
     i {
       font-size: inherit;
       margin-right: 0.5rem;
@@ -233,6 +321,10 @@
 
     span {
       font-size: 0.825rem;
+
+      @include devices(mobile) {
+        font-size: 0.625rem;
+      }
     }
   }
 }
@@ -246,6 +338,12 @@
   border-radius: 5px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
+  @include devices(tablet) {
+    box-shadow: unset;
+    border: none;
+    background-color: unset;
+  }
+
   &__logo {
     background-color: rgba(202, 202, 202, 0.2);
     border-radius: 5px;
@@ -254,8 +352,17 @@
     padding: 0.75rem;
     margin-top: 1.25rem;
 
+    @include devices(tablet) {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
+    }
+
     i {
       font-size: 2.688rem !important;
+
+      @include devices(tablet) {
+        font-size: 1.625rem !important;
+      }
     }
   }
 
@@ -263,12 +370,21 @@
     margin: 0.875rem 0 1.25rem;
     font-size: 2.25rem;
     font-weight: $fontWeightMedium;
+
+    @include devices(tablet) {
+      font-size: 1.25rem !important;
+      margin: 1rem 0 0 0;
+    }
   }
 
   &__label {
     font-weight: 400;
     display: block;
     margin-bottom: 1.25rem;
+
+    @include devices(mobile) {
+      font-size: 0.75rem !important;
+    }
   }
 
   &--orange &__logo {

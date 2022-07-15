@@ -1,5 +1,9 @@
 .settings {
-  @include padding(34px null 21px null);
+  @include padding(0 null 21px null);
+
+  @include devices(tablet) {
+    padding: 0;
+  }
 
   &__welcome_title {
     font-family: $primaryFont;
@@ -22,12 +26,20 @@
     @include padding(28px 30px);
     background: $whiteColor;
 
+    @include devices(tablet) {
+      @include margin(1.5rem auto);
+    }
+
     &__title {
       @include font(1.385rem, 100%);
       font-family: $primaryFont;
       font-weight: $fontWeightMedium;
       color: $blackColor;
       margin-bottom: 40px;
+
+      @include devices(mobile) {
+        @include font(1rem, 100%);
+      }
     }
 
     &__field-wrapper {
@@ -37,8 +49,17 @@
       row-gap: 37px;
       width: 70%;
 
+      @include devices(tablet) {
+        width: 100%;
+        row-gap: 1.5rem;
+      }
+
       & > .MuiFormControl-root {
         width: 48%;
+
+        @include devices(tablet) {
+          width: 100%;
+        }
       }
 
       .MuiButton-containedPrimary {
@@ -51,6 +72,10 @@
         font-weight: $fontWeightRegular;
         background: $greenColor;
         border-radius: 5px;
+
+        @include devices(mobile) {
+          width: 100%;
+        }
 
         &:hover {
           background: $primaryColor;
@@ -70,6 +95,11 @@
       font-weight: $fontWeightMedium;
       color: $blackColor;
       margin-bottom: 40px;
+
+      @include devices(tablet) {
+        @include font(1rem, 100%);
+        margin-bottom: 1.5rem;
+      }
     }
 
     .MuiTextField-root {
@@ -93,6 +123,10 @@
 
         &:hover {
           background: $primaryColor;
+        }
+
+        @include devices(mobile) {
+          width: 100%;
         }
       }
     }

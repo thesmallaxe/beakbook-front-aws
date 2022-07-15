@@ -3,13 +3,17 @@ html {
   -webkit-font-smoothing: antialiased;
   position: relative;
   overflow-x: hidden;
-  font-size: 16px; 
+  font-size: 16px;
 
   @include devices(laptop) {
     font-size: 13px;
   }
 
   @include devices(tablet) {
+    font-size: 16px;
+  }
+
+  @include devices(mobile) {
     font-size: 16px;
   }
 }
@@ -26,6 +30,20 @@ main {
   display: inline-block;
   box-sizing: border-box;
   width: 100%;
+  transition: opacity 1.5s cubic-bezier(0.5, -0.005, 0.2, 1);
+}
+
+main.menu-open::after {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  content: "";
+  background-color: #000000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  z-index: 999;
 }
 
 a,
@@ -71,15 +89,40 @@ select {
   font-size: 1rem;
 }
 
+.main.menu-open .main-wrapper {
+  pointer-events: none;
+}
+
+.main.menu-close .sidebar {
+  left: -80%;
+}
+
 .main-wrapper {
   width: calc(100vw - 3.7rem);
   margin-left: 3.7rem;
   transition: margin 0.5s;
   transition-timing-function: cubic-bezier(0.3, 0.9, 0.6, 0.9);
+
+  @include devices(mobile) {
+    width: 100%;
+    margin-left: unset;
+  }
 }
 
 .container {
+  @include padding(0 2.5rem);
+
+  @include devices(mobile) {
+    @include padding(0 1rem);
+  }
+}
+
+.container--dashboard {
   @include padding(0 3.125rem);
+
+  @include devices(mobile) {
+    @include padding(0 1rem);
+  }
 }
 
 /* 
@@ -110,6 +153,11 @@ select {
   background-position: 100%;
   background-size: 1.7rem;
   background-repeat: no-repeat;
+
+  @include devices(mobile) {
+    min-width: 12rem;
+    font-size: 0.75rem;
+  }
 }
 
 input[type="radio"] {
@@ -174,6 +222,19 @@ Button Styles
   &:not(&--icon) i {
     font-size: inherit;
     padding-right: 5px;
+  }
+
+  &--link {
+    background-color: unset;
+    color: $primaryColor;
+
+    &--green {
+      color: $greenColor;
+    }
+  }
+
+  &--black {
+    color: $blackColor;
   }
 
   &--icon {
@@ -274,6 +335,10 @@ Tooltip Styles
   border-radius: 6px;
   padding: 1rem;
 
+  @include devices(mobile) {
+    max-width: 65vw;
+  }
+
   &__heading {
     background: #f9f9f9;
     border-radius: 0.625rem;
@@ -304,6 +369,10 @@ Tooltip Styles
         line-height: 100%;
         color: #000000;
         font-weight: 400;
+
+        @include devices(mobile) {
+          font-size: 1rem;
+        }
       }
     }
   }

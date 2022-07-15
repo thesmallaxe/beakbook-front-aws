@@ -12,12 +12,16 @@ import {
   addToFavourite,
   removeFromFavourite,
 } from "../../app/actions/FavouriteActions";
-import { BarnTableItem } from "../components/barns/listing/BarnTableItem";
+import {
+  BarnTableItem,
+  AddBarnModel,
+  BarnMobileItem,
+  RenameBarnModel,
+} from "../components/barns/listing";
 import { ShimmerTable } from "react-shimmer-effects";
-import { AddBarnModel } from "../components/barns/listing/AddBarnModel";
-import { DownloadPopup } from "../components/barns/DownloadPopup";
-import { RenameBarnModel } from "../components/barns/listing/RenameBarnMode";
 import Paginator from "../components/Paginator";
+import Header from "../components/Header";
+import { DownloadPopup } from "../components/barns/popups/DownloadPopup";
 
 const Barns = (props) => {
   const {
@@ -79,100 +83,134 @@ const Barns = (props) => {
   };
 
   return (
-    <div className="container">
-      <div className="barns">
-        <h3 className="barns__welcome_title">
-          Hello, <strong>{user?.name ?? "User"}</strong>
-        </h3>
-        <p className="barns__welcome_text">
-          Here you can view all of your Barns
-        </p>
-        <div className="barns__overview">
-          <div className="barns__table-title-block">
-            <h3 className="barns__table-title">Barn Overview</h3>
-            <form className="barns__search-form">
-              <i className="icon icon-search"></i>
-              <input
-                className="barns__search-input"
-                type="search"
-                placeholder="Search Barns"
-                onInput={handleChange}
-              />
-            </form>
+    <div className="container--fluid">
+      <Header />
+      <div className="container">
+        <div className="dashboard__welcome">
+          <h3 className="dashboard__welcome_title">
+            Hello, <strong>{user?.name ?? "User"}</strong>
+          </h3>
+          <div className="dashboard__welcome_block">
+            <p className="dashboard__welcome_text">
+              <span className="muted_text">
+                Here you can view all of your Barns
+              </span>
+            </p>
           </div>
-          <div className="barns__table-content">
-            {Object.keys(barns).length === 0 && loading && (
-              <ShimmerTable row={5} col={5} />
-            )}
-            {barns && (
-              <table className="barns__table">
-                <thead>
-                  <tr>
-                    <th>Barn Name</th>
-                    <th>Weight</th>
-                    <th>Farm</th>
-                    <th>Mortality</th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {barns &&
-                    Object.keys(barns).map((key) => {
-                      return (
-                        <BarnTableItem
-                          user={user}
-                          key={key}
-                          barn={barns[key]}
-                          showDownloadPopup={handleShowPopup}
-                          showRenamebarn={handleShowRenameBarn}
-                          addToFavourite={addToFavourite}
-                          removeFromFavourite={removeFromFavourite}
-                        />
-                      );
-                    })}
-                </tbody>
-              </table>
-            )}
-          </div>
-          <Paginator
-            path="barns"
-            data={pagination}
-            paginateAction={handlePagination}
-            search={search.search}
-          />
         </div>
-        <button className="barns__add-new" id="myBtn" onClick={handleShowBarn}>
-          <i className="icon icon-add"></i>
-        </button>
-        <RenameBarnModel
-          barn={barnDetail}
-          show={showRename}
-          loading={loading}
-          success={success}
-          error={error}
-          cancelAction={handleShowRenameBarn}
-          handleRenameAction={renameBarn}
-        />
-        <AddBarnModel
-          farm_details={farm_details}
-          show={show}
-          loading={loading}
-          success={success}
-          error={error}
-          cancelAction={handleShowBarn}
-          handleCreateAction={addNewBarn}
-        />
-        {props.download.show && (
-          <DownloadPopup
-            state={props}
-            show={props.download.show}
-            barn_id={barn.barn_id}
-            cycle_id={barn.cycle_id}
-            cycles={barn.cycles}
-            user={user}
+        <div className="barns">
+          <div className="barns__overview">
+            <div className="barns__table-title-block">
+              <h3 className="barns__table-title">Barn Overview</h3>
+              <form className="barns__search-form">
+                <i className="icon icon-search"></i>
+                <input
+                  className="barns__search-input"
+                  type="search"
+                  placeholder="Search Barns"
+                  onInput={handleChange}
+                />
+              </form>
+            </div>
+            {window.innerWidth >= 768 ? (
+              <>
+                <div className="barns__table-content">
+                  {Object.keys(barns).length === 0 && loading && (
+                    <ShimmerTable row={5} col={5} />
+                  )}
+                  {barns && (
+                    <table className="barns__table">
+                      <thead>
+                        <tr>
+                          <th>Barn Name</th>
+                          <th>Weight</th>
+                          <th>Farm</th>
+                          <th>Mortality</th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {barns &&
+                          Object.keys(barns).map((key) => {
+                            return (
+                              <BarnTableItem
+                                user={user}
+                                key={key}
+                                barn={barns[key]}
+                                showDownloadPopup={handleShowPopup}
+                                showRenamebarn={handleShowRenameBarn}
+                                addToFavourite={addToFavourite}
+                                removeFromFavourite={removeFromFavourite}
+                              />
+                            );
+                          })}
+                      </tbody>
+                    </table>
+                  )}
+                </div>
+              </>
+            ) : (
+              <div className="barns__list">
+                {barns &&
+                  Object.keys(barns).map((key) => {
+                    return (
+                      <BarnMobileItem
+                        user={user}
+                        key={key}
+                        barn={barns[key]}
+                        showDownloadPopup={handleShowPopup}
+                        showRenamebarn={handleShowRenameBarn}
+                        addToFavourite={addToFavourite}
+                        removeFromFavourite={removeFromFavourite}
+                      />
+                    );
+                  })}
+              </div>
+            )}
+            <Paginator
+              path="barns"
+              data={pagination}
+              paginateAction={handlePagination}
+              search={search.search}
+            />
+          </div>
+          <button
+            className="barns__add-new"
+            id="myBtn"
+            onClick={handleShowBarn}
+          >
+            <i className="icon icon-add"></i>
+          </button>
+          <RenameBarnModel
+            barn={barnDetail}
+            show={showRename}
+            loading={loading}
+            success={success}
+            error={error}
+            cancelAction={handleShowRenameBarn}
+            handleRenameAction={renameBarn}
           />
-        )}
+          <AddBarnModel
+            farm_details={farm_details}
+            show={show}
+            loading={loading}
+            success={success}
+            error={error}
+            cancelAction={handleShowBarn}
+            handleCreateAction={addNewBarn}
+          />
+          {props.download.show && (
+            <DownloadPopup
+              state={props}
+              show={props.download.show}
+              barn_id={barn.barn_id}
+              cycle_id={barn.cycle_id}
+              cycles={barn.cycles}
+              user={user}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

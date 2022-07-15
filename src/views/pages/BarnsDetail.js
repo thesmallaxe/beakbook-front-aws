@@ -25,9 +25,9 @@ import {
 } from "../../app/actions/CycleActions";
 import { mapGraphs } from "../../app/services/Helper";
 import { ShimmerThumbnail } from "react-shimmer-effects";
-import { NewCycleModel } from "../components/barns/NewCycleModel";
-import { MortalityPopup } from "../components/barns/MortalityPopup";
-import { AddGraphPopup } from "../components/barns/AddGraphPopup";
+import { NewCycleModel } from "../components/barns/popups/NewCycleModel";
+import { MortalityPopup } from "../components/barns/popups/MortalityPopup";
+import { AddGraphPopup } from "../components/barns/popups/AddGraphPopup";
 
 const BarnsDetail = (props) => {
   const { barn_id, cycle_id } = useParams();
@@ -65,7 +65,7 @@ const BarnsDetail = (props) => {
   };
 
   return (
-    <div className="barn_details">
+    <div className="container--fluid">
       <Header back={back_btn}>
         <button className="btn" onClick={() => showNewCycle()}>
           Add new cycle
@@ -77,93 +77,127 @@ const BarnsDetail = (props) => {
           Add mortality count
         </button>
       </Header>
-      <div className="barn_details__wrapper">
-        <div className="barn_details__actions">
-          <BarnAnalysis loading={loading} analysis={barn_single.barnAnalysis} />
-          <BarnOverview barn={props} />
-          <CycleDetails cycle={props} />
-        </div>
-        <div className="barn_details__graphs">
-          <CycleSelection user={user} cycle={props} download={download} />
-          {Object.keys(graphs).length === 0 && (
-            <div>
-              <ShimmerThumbnail height={300} rounded />
-              <ShimmerThumbnail height={300} rounded />
-              <ShimmerThumbnail height={300} rounded />
+      <div className="container">
+        <div className="barn_details">
+          <div className="barn_details__wrapper">
+            <div className="barn_details__actions">
+              {window.innerWidth >= 768 && (
+                <BarnAnalysis
+                  loading={loading}
+                  analysis={barn_single.barnAnalysis}
+                />
+              )}
+              <BarnOverview barn={props} />
+              <CycleDetails cycle={props} />
             </div>
-          )}
-          {graphs &&
-            Object.keys(graphs).map((key) => {
-              let graph = graphs[key] ?? {};
-              switch (key) {
-                case "area":
-                  return (
-                    graph_status &&
-                    (graph_status[0]?.value === 1 ||
-                      graph_status[0]?.value === "1") && (
-                      <AverageWeight
-                        graph={graph}
-                        loading={loading}
-                        average_weight={props.average_weight}
-                        handleEvent={handleAverageWeight}
-                        key={key}
-                      />
-                    )
-                  );
+            <div className="barn_details__graphs">
+              {window.innerWidth <= 768 && (
+                <div className="barn_details__links">
+                  <button
+                    className="btn btn--link"
+                    onClick={() => showNewCycle()}
+                  >
+                    Add new cycle
+                  </button>
+                  <button
+                    className="btn btn--link btn--black"
+                    onClick={() => showNewMotality()}
+                  >
+                    Add mortality count
+                  </button>
+                </div>
+              )}
+              <CycleSelection user={user} cycle={props} download={download} />
+              {Object.keys(graphs).length === 0 && (
+                <div>
+                  <ShimmerThumbnail height={300} rounded />
+                  <ShimmerThumbnail height={300} rounded />
+                  <ShimmerThumbnail height={300} rounded />
+                </div>
+              )}
+              {window.innerWidth < 768 && (
+                <BarnAnalysis
+                  loading={loading}
+                  analysis={barn_single.barnAnalysis}
+                />
+              )}
+              {graphs &&
+                Object.keys(graphs).map((key) => {
+                  let graph = graphs[key] ?? {};
+                  switch (key) {
+                    case "area":
+                      return (
+                        graph_status &&
+                        (graph_status[0]?.value === 1 ||
+                          graph_status[0]?.value === "1") && (
+                          <AverageWeight
+                            graph={graph}
+                            loading={loading}
+                            average_weight={props.average_weight}
+                            handleEvent={handleAverageWeight}
+                            key={key}
+                          />
+                        )
+                      );
 
-                case "bar":
-                  return (
-                    graph_status &&
-                    (graph_status[1]?.value === 1 ||
-                      graph_status[1]?.value === "1") && (
-                      <TotalActivity
-                        graph={graph}
-                        loading={loading}
-                        key={key}
-                      />
-                    )
-                  );
+                    case "bar":
+                      return (
+                        graph_status &&
+                        (graph_status[1]?.value === 1 ||
+                          graph_status[1]?.value === "1") && (
+                          <TotalActivity
+                            graph={graph}
+                            loading={loading}
+                            key={key}
+                          />
+                        )
+                      );
 
-                case "line":
-                  return (
-                    graph_status &&
-                    (graph_status[2]?.value === 1 ||
-                      graph_status[2]?.value === "1") && (
-                      <StandardDeviation
-                        graph={graph}
-                        loading={loading}
-                        key={key}
-                      />
-                    )
-                  );
+                    case "line":
+                      return (
+                        graph_status &&
+                        (graph_status[2]?.value === 1 ||
+                          graph_status[2]?.value === "1") && (
+                          <StandardDeviation
+                            graph={graph}
+                            loading={loading}
+                            key={key}
+                          />
+                        )
+                      );
 
-                default:
-                  return "";
-              }
-            })}
-          <NewCycleModel barn_id={barn_id} />
-          <MortalityPopup barn_id={barn_id} cycle={barn_single.cycleDetails} />
-          <AddGraphPopup barn_id={barn_id} />
-          {graph_status &&
-          Object.values(graph_status).every(
-            (x) => x.value === "0" || x.value === 0
-          ) ? (
-            <div className="barn_details__no_graph">
-              <p>
-                Graphs are not availble for the movment.<br /> Please add the
-                graph{" "}
-              </p>
-              <button className="btn btn--green" onClick={showGraphModal}>
-                + Add a graph
-              </button>
+                    default:
+                      return "";
+                  }
+                })}
+              <NewCycleModel barn_id={barn_id} />
+              <MortalityPopup
+                barn_id={barn_id}
+                cycle={barn_single.cycleDetails}
+              />
+              <AddGraphPopup barn_id={barn_id} />
+              {graph_status &&
+              Object.values(graph_status).every(
+                (x) => x.value === "0" || x.value === 0
+              ) ? (
+                <div className="barn_details__no_graph">
+                  <p>
+                    Graphs are not availble for the movment.
+                    <br /> Please add the graph{" "}
+                  </p>
+                  <button className="btn btn--green" onClick={showGraphModal}>
+                    + Add a graph
+                  </button>
+                </div>
+              ) : (
+                <div className="barn_details__graphs__actions">
+                  <button className="btn btn--green" onClick={showGraphModal}>
+                    + Add a graph
+                  </button>
+                </div>
+              )}
             </div>
-          ) : (
-            <div className="barn_details__graphs__actions">
-              <button className="btn btn--green" onClick={showGraphModal}>
-                + Add a graph
-              </button>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

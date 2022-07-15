@@ -72,6 +72,9 @@ $icon-font-path: "../fonts" !default;
 /*------------------------
   rotated/flipped icons
 -------------------------*/
+.icon-rotate-45 {
+  transform: rotate(45deg);
+}
 
 .icon-rotate-90 {
   transform: rotate(90deg);
@@ -95,7 +98,6 @@ $icon-font-path: "../fonts" !default;
 /*------------------------
 	icons
 -------------------------*/
-
 
 .icon-add::before {
   content: "\ea01";
@@ -146,11 +148,11 @@ $icon-font-path: "../fonts" !default;
 }
 
 .icon-favourite-alt::before {
-  content: "\ea0e";
+  content: "\ea0d";
 }
 
 .icon-favourite::before {
-  content: "\ea0d";
+  content: "\ea0e";
 }
 
 .icon-grid::before {
@@ -199,4 +201,12 @@ $icon-font-path: "../fonts" !default;
 
 .icon-weight::before {
   content: "\ea1a";
+}
+
+.icon-logout::before {
+  content: "\ea1b";
+}
+
+.icon-menu::before {
+  content: "\ea1c";
 }

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   closeGraphPopup,
   submitGraphVisible,
-} from "../../../app/actions/BarnDetailActions";
+} from "../../../../app/actions/BarnDetailActions";
 import { useParams } from "react-router-dom";
 
 export const AddGraphPopup = () => {
