@@ -4,8 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, Cell } from "recharts";
 export const CustomizedLabel = (props) => {
   const { x, y, width, value, unit, name } = props;
 
-  let miniValue =
-    name === "Total Activity" ? value : parseFloat(value).toFixed(2);
+  let miniValue = name === "Total Activity" ? value : parseFloat(value).toFixed(2);
 
   return (
     <text
