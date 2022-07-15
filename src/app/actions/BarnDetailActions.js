@@ -116,26 +116,30 @@ export const getSingleBarnDetails = (id = null, cycle_id = null) => {
 
     dispatch(resetSingleGraph());
 
-    request.get(`dashboard?barnId=${id}&cycleId=${cycle_id}`).then((res) => {
-      dispatch(stopLoading());
+    try {
+      request.get(`dashboard?barnId=${id}&cycleId=${cycle_id}`).then((res) => {
+        dispatch(stopLoading());
 
-      if (res.status) {
-        dispatch(updateSingleBarnDetails(res));
+        if (res.status) {
+          dispatch(updateSingleBarnDetails(res));
 
-        const graphNames = [
-          "Average Weight",
-          "Total Activity",
-          "Standard Deviation",
-        ];
-        graphNames.forEach((name) => {
-          if (id && cycle_id) {
-            dispatch(getSingleBarnDetailsGraphs(id, cycle_id, name));
-          }
-        });
-      } else {
-        console.error("Failed", res);
-      }
-    });
+          const graphNames = [
+            "Average Weight",
+            "Total Activity",
+            "Standard Deviation",
+          ];
+          graphNames.forEach((name) => {
+            if (id && cycle_id) {
+              dispatch(getSingleBarnDetailsGraphs(id, cycle_id, name));
+            }
+          });
+        } else {
+          console.error("Failed", res);
+        }
+      });
+    } catch (e) {
+      console.error("Failed", e);
+    }
   };
 };
 
@@ -220,9 +224,9 @@ export const submitGraphVisible = (barn_id, cycle_id, obj) => {
   return (dispatch) => {
     const request = new HttpRequest();
 
-    request
-      .post(`add-graph-visibility`, obj)
-      .then((res) => {
+    try {
+      
+      request.post(`add-graph-visibility`, obj).then((res) => {
         dispatch(closeGraphPopup());
 
         dispatch(updateBarnVisibility(obj));
@@ -230,11 +234,11 @@ export const submitGraphVisible = (barn_id, cycle_id, obj) => {
         dispatch(getSingleBarnDetails(barn_id, cycle_id));
 
         notifySuccess(res.message);
-      })
-      .catch((error) => {
-        // Error log
-        notifyError(error.message);
       });
+
+    } catch (e) {
+      notifyError(e.message);
+    }
   };
 };
 
@@ -276,7 +280,6 @@ export const updateCycleDetailAction = (obj) => {
 
         // Set despatch baren
         dispatch(getSingleBarnDetails(obj.barn_id, obj.id));
-
       })
       .catch((error) => {
         // Error log

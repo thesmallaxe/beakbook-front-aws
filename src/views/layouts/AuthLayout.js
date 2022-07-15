@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 
 export const AuthLayout = () => {
   const location = useLocation();
@@ -33,6 +33,11 @@ export const AuthLayout = () => {
               </p>
             </figcaption>
           </figure>
+        </div>
+        <div className="auth__login">
+          <Link to="/" className="auth__login__logo">
+            <img src="/assets/img/logo.svg" alt="Logo" />
+          </Link>
         </div>
       </section>
     </main>

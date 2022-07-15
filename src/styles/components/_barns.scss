@@ -1,5 +1,5 @@
 .barns {
-  @include padding(34px null 21px null);
+  @include padding(0 null 1.375rem null);
 
   &__welcome_title {
     font-family: $primaryFont;
@@ -22,30 +22,50 @@
     background: $whiteColor;
     display: flex;
     flex-direction: column;
+
+    @include devices(mobile) {
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
   }
 
   &__table-title-block {
-    @include padding(28px 26px);
+    @include padding(1.75rem 1.625rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @include devices(mobile) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+      @include padding(1rem 0.625rem 1.75rem 0.625rem);
+    }
   }
 
   &__table-title {
     font-weight: $fontWeightMedium;
-    @include font(24px, 100%);
+    @include font(1.5rem, 100%);
+
+    @include devices(mobile) {
+      @include font(1rem, 100%);
+    }
   }
 
   &__search-form {
     @include padding(17.24px 19.59px);
     display: flex;
     align-items: center;
-    column-gap: 16.63px;
+    column-gap: 1rem;
     background: $backgroundColor;
     border-radius: 0.625rem;
     width: 262px;
     height: 49px;
     box-shadow: 0px 4px 40px rgba(33, 132, 250, 0.02);
+
+    @include devices(mobile) {
+      width: 100%;
+    }
   }
 
   &__search-input {
@@ -183,6 +203,84 @@
     }
   }
 
+  &__item {
+    @include padding(1rem 0.625rem);
+    position: relative;
+  }
+
+  &__item::after {
+    border-bottom: 1px solid #cacaca;
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 1rem auto 0;
+    width: 94%;
+  }
+
+  &__item__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__head__right {
+    text-align: right;
+    display: flex;
+  }
+
+  &__head__left {
+    button {
+      padding-left: 0;
+    }
+  }
+
+  &__head__item {
+    margin-bottom: 0.5rem;
+
+    label {
+      @include font(0.625rem, 1);
+      color: $blackColor;
+      opacity: 0.7;
+    }
+
+    p {
+      @include font(1.125rem, 1);
+      color: $blackColor;
+      opacity: 0.7;
+
+      strong {
+        font-weight: $fontWeightMedium;
+      }
+
+      abbr.increased {
+        color: $greenColor;
+      }
+
+      abbr.decreased {
+        color: $redColorRegular;
+      }
+
+      abbr {
+        font-size: 0.75rem;
+        padding-left: 2px;
+      }
+    }
+
+    &__status {
+      background: $greenColor;
+      border-radius: 6px;
+      width: 0.625rem;
+      height: 0.625rem;
+      display: inline-block;
+      margin-left: 0.25rem;
+
+      &.deactive {
+        background: $redColorBright;
+      }
+    }
+  }
+
   &__add-new {
     width: 62px;
     height: 62px;
@@ -314,5 +412,11 @@
   &:hover,
   &--add {
     color: $primaryColor;
+  }
+
+  @include devices(mobile) {
+    i {
+      font-size: 1.25rem;
+    }
   }
 }

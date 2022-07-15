@@ -4,6 +4,14 @@
   height: 100%;
   max-height: 100vh;
 
+  @include devices(tablet) {
+    @include padding(2.75rem 1rem);
+  }
+
+  @include devices(mobile) {
+    padding: 0;
+  }
+
   &__wrapper {
     background-color: $whiteColor;
     display: flex;
@@ -15,6 +23,36 @@
     max-width: 100%;
     max-height: calc(100vh - (2.75rem * 2));
     height: calc(100vh - (2.75rem * 2));
+
+    @include devices(tablet) {
+      height: auto;
+    }
+
+    @include devices(mobile) {
+      flex-direction: column-reverse;
+      aspect-ratio: unset;
+      max-height: unset;
+      gap: 1vh;
+      padding: 1.125rem;
+      height: 100vh;
+      justify-content: start;
+    }
+  }
+
+  &__login {
+    display: none;
+
+    @include devices(mobile) {
+      display: block;
+
+      &__logo {
+        display: block;
+
+        img {
+          width: 60%;
+        }
+      }
+    }
   }
 
   &__content {
@@ -24,10 +62,28 @@
     @include devices(dekstop) {
       @include padding(14.4% 7.5rem 2rem 5.125rem);
     }
+
+    @include devices(tablet) {
+      @include padding(9% 2.125rem 2rem 2rem);
+    }
+
+    @include devices(mobile) {
+      width: 100%;
+      display: flex;
+      @include padding(3vh 0 0 0);
+      flex-direction: column;
+    }
   }
 
   &__image {
     width: 48.19%;
+
+    @include devices(mobile) {
+      width: 100%;
+      display: flex;
+      max-height: 34.5vh;
+      flex-direction: column;
+    }
 
     figure {
       position: relative;
@@ -43,12 +99,23 @@
       background: linear-gradient(360deg, #000000 0%, rgba(0, 0, 0, 0) 100%),
         linear-gradient(360deg, #000000 0%, rgba(0, 0, 0, 0) 50%);
 
+      @include devices(mobile) {
+        height: auto;
+        position: absolute;
+        bottom: 0;
+        @include padding(2rem);
+      }
+
       label {
         font-weight: $fontWeightRegular;
         @include font(1.125rem, 1.5rem);
         color: $whiteColor;
         display: block;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
+
+        @include devices(mobile) {
+          @include font(1rem, 1.125rem);
+        }
 
         abbr {
           text-transform: uppercase;
@@ -60,6 +127,14 @@
         font-weight: $fontWeightRegular;
         @include font(1.75rem, 139%);
         color: $whiteColor;
+
+        @include devices(tablet) {
+          @include font(1.5rem, 120%);
+        }
+
+        @include devices(mobile) {
+          @include font(0.875rem, 1.125rem);
+        }
       }
     }
 
@@ -78,6 +153,10 @@
     @include devices(dekstop) {
       margin-bottom: 2rem;
     }
+
+    @include devices(mobile) {
+      display: none;
+    }
   }
 }
 
@@ -92,6 +171,18 @@
 
     @include devices(dekstop) {
       margin-bottom: 12%;
+    }
+
+    @include devices(tablet) {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+
+    @include devices(mobile) {
+      width: 100%;
+      margin-bottom: 1vh;
+      font-size: 1.25rem;
+      line-height: 1.5rem;
     }
   }
 
@@ -126,6 +217,10 @@
       margin-bottom: 18%;
     }
 
+    @include devices(mobile) {
+      margin-bottom: 0.5rem;
+    }
+
     label span,
     a {
       font-family: $primaryFont;
@@ -139,6 +234,10 @@
     @include padding(1.25rem 1.25rem);
     width: 11.875rem;
     text-align: center;
+
+    @include devices(mobile) {
+      width: 100%;
+    }
   }
 
   &__error {
@@ -157,6 +256,11 @@
 
     @include devices(dekstop) {
       margin-bottom: 2.5rem;
+    }
+
+    @include devices(mobile) {
+      position: absolute;
+      margin-top: -1.5rem;
     }
 
     abbr {
@@ -191,6 +295,10 @@
 
     @include devices(dekstop) {
       margin-top: 6.875rem;
+    }
+
+    @include devices(mobile) {
+      margin-top: 0;
     }
   }
 }

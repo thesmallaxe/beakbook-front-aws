@@ -1,8 +1,53 @@
 .header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  @include padding(1.25rem 0);
+  &__mobile {
+    display: none;
+
+    @include devices(mobile) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      @include padding(1rem);
+      background-color: $whiteColor;
+    }
+  }
+
+  &__logo {
+    width: 50%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__menu {
+    position: relative;
+  }
+
+  &__kebab {
+    position: absolute;
+    right: -0.5rem;
+    top: -0.425rem;
+
+    button:focus ~ .sidebar {
+      width: 15.625rem;
+    }
+
+    i {
+      font-size: 2.5rem;
+    }
+  }
+
+  &__dekstop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    @include padding(1.25rem 2.5rem);
+    gap: 1rem;
+
+    @include devices(mobile) {
+      display: none;
+    }
+  }
 
   &__left {
     display: flex;

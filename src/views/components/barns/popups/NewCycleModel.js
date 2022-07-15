@@ -7,7 +7,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import {
   createCycleSubmit,
   hideCyclePopup,
-} from "../../../app/actions/CycleActions";
+} from "../../../../app/actions/CycleActions";
 import { format } from "date-fns";
 
 export const NewCycleModel = ({ barn_id }) => {
@@ -82,7 +82,7 @@ export const NewCycleModel = ({ barn_id }) => {
             </div>
           </div>
           <div className="modal__body__row">
-            <div className="modal__body__row">
+            <div className="modal__body__row--two-column">
               <div className="modal__body__field">
                 <TextField
                   label="Starting Age (days)"
@@ -183,8 +183,8 @@ export const NewCycleModel = ({ barn_id }) => {
           </div>
 
           <div className="modal__body__action_wrapper">
-            <Button type="submit" variant="contained" disabled>
-              Start cycle now
+            <Button type="submit" variant="contained">
+              Start Cycle
             </Button>
             <Button
               variant="contained"

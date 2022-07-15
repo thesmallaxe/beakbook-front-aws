@@ -14,6 +14,7 @@ import {
   toastError,
   toastSuccess,
 } from "../services/ToastHelper";
+import { getSingleBarnDetails } from "./BarnDetailActions";
 
 // Constant variables
 const NEW_CYCLE_ENDPOINT = `create-cycle`;
@@ -121,6 +122,8 @@ export const createMortalitySubmit = (obj) => {
         toastSuccess(id, res);
         // Reset Mortality array
         dispatch(resetMortality());
+        // Dispatch Refresh Barn
+        dispatch(getSingleBarnDetails(obj.barn_id, obj.cycle_id));
         // Close popup
         dispatch(hideMortalityPopup());
       })

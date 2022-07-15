@@ -48,16 +48,18 @@ export const WidgetChild = (props) => {
 
   return (
     <div className="widget__action">
-      {averageWeight.current === "all" &&
-        allSections &&
-        allSections.map((section, i) => (
-          <div key={i} className="widget__color_wrapper">
-            <span
-              style={{ backgroundColor: `${colors["s" + (i + 1)]}` }}
-            ></span>{" "}
-            {section.sectionName}
-          </div>
-        ))}
+      <div className="widget__color">
+        {averageWeight.current === "all" &&
+          allSections &&
+          allSections.map((section, i) => (
+            <div key={i} className="widget__color_wrapper">
+              <span
+                style={{ backgroundColor: `${colors["s" + (i + 1)]}` }}
+              ></span>{" "}
+              {section.sectionName}
+            </div>
+          ))}
+      </div>
 
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
         <Select

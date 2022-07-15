@@ -20,6 +20,11 @@ export class Menu extends React.Component {
         <MenuItem className="icon-settings" to="/settings">
           Settings
         </MenuItem>
+        {window.innerWidth < 768 && (
+          <MenuItem className="icon-logout" to="/logout">
+            Logout
+          </MenuItem>
+        )}
       </ul>
     );
   }

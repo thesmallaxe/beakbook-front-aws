@@ -2,7 +2,10 @@ import React from "react";
 import { BarChart, Bar, XAxis, YAxis, Cell } from "recharts";
 
 export const CustomizedLabel = (props) => {
-  const { x, y, width, value, unit } = props;
+  const { x, y, width, value, unit, name } = props;
+
+  let miniValue =
+    name === "Total Activity" ? value : parseFloat(value).toFixed(2);
 
   return (
     <text
@@ -13,7 +16,7 @@ export const CustomizedLabel = (props) => {
       fill="#000"
       textAnchor="start"
     >
-      {value.toFixed(2)} {unit}
+      {miniValue} {unit}
     </text>
   );
 };
@@ -28,7 +31,11 @@ export const CustomTooltip = ({
 }) => {
   if (active && payload && payload.length) {
     let data = payload[0].payload.miniGraph ?? [];
-    let value = parseFloat(payload[0].payload.value).toFixed(2);
+    // let value = parseFloat(payload[0].payload.value).toFixed(2);
+    let value =
+      name === "Total Activity"
+        ? payload[0].payload.value
+        : parseFloat(payload[0].payload.value).toFixed(2);
 
     if (value === "0.00" || value === 0) {
       return "";
@@ -52,11 +59,11 @@ export const CustomTooltip = ({
         <div className="tooltip__body">
           {data.length > 0 && (
             <BarChart
-              height={150}
-              width={300}
+              height={window.innerWidth < 764 ? 100 : 150}
+              width={window.innerWidth < 764 ? 200 : 300}
               layout="vertical"
               barCategoryGap={1}
-              margin={{ top: 0, right: 50, left: 0, bottom: 0 }}
+              margin={{ top: 0, right: 60, left: 10, bottom: 0 }}
               data={data}
             >
               <XAxis tickLine={false} type="number" hide />
@@ -72,7 +79,7 @@ export const CustomTooltip = ({
                 fill={color}
                 barSize={10}
                 radius={[10, 10, 10, 10]}
-                label={<CustomizedLabel unit={unit} />}
+                label={<CustomizedLabel unit={unit} name={name} />}
               >
                 {payload.map((entry, index) => {
                   return <Cell key={`cell-${index}`} fill={entry.color} />;

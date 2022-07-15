@@ -6,15 +6,57 @@
   min-height: 100%;
   background-color: $whiteColor;
   overflow: hidden;
-  transition: width 0.5s;
-  transition-timing-function: cubic-bezier(0.3, 0.9, 0.6, 0.9);
+  transition: left 0.5s;
+  transition-timing-function: cubic-bezier(0.17, 0.67, 0.83, 0.67);
+
+  @include devices(mobile) {
+    width: 80%;
+    left: -80%;
+    z-index: 9999999;
+  }
 
   &:hover {
     width: 15.625rem;
+
+    @include devices(mobile) {
+      width: 80%;
+      left: -80%;
+    }
+  }
+
+  &.active {
+    left: 0;
   }
 
   &:hover ~ .main-wrapper {
     margin-left: 15.625rem;
+
+    @include devices(mobile) {
+      margin-left: 0;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    display: none;
+
+    @include devices(mobile) {
+      display: block;
+    }
+
+    &__btn {
+      padding: 0.125rem;
+      background-color: rgba(126, 134, 158, 0.25);
+      border-radius: 50%;
+      display: flex;
+
+      i {
+        font-size: 1.25rem;
+        color: $whiteColor;
+      }
+    }
   }
 
   &__logo {

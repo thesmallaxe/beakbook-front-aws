@@ -60,7 +60,11 @@ export const StandardDeviation = ({ graph, loading }) => {
         ),
       }}
     >
-      <ResponsiveContainer hwidth="100%" height={300}>
+      <ResponsiveContainer
+        hwidth="100%"
+        height={300}
+        className={deviation.current === "all" ? "all" : ""}
+      >
         <LineChart
           width={730}
           height={250}

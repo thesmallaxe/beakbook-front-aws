@@ -9,7 +9,7 @@ import {
   createMortalitySubmit,
   hideMortalityPopup,
   updateMortality,
-} from "../../../app/actions/CycleActions";
+} from "../../../../app/actions/CycleActions";
 import { format } from "date-fns";
 
 export const MortalityPopup = ({ barn_id, cycle }) => {
@@ -100,7 +100,7 @@ export const MortalityPopup = ({ barn_id, cycle }) => {
           </div>
 
           <div className="modal__body__action_wrapper">
-            <Button type="submit" variant="contained" disabled>
+            <Button type="submit" variant="contained">
               Add
             </Button>
             <Button
