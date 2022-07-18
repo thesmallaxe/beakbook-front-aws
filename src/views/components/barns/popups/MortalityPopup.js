@@ -20,7 +20,7 @@ export const MortalityPopup = ({ barn_id, cycle }) => {
   const showModel = cycle_state.mortality_modal ? "modal--show" : "modal--hide";
 
   const handleChange = (props) => (event) => {
-    if (event.target.value > 0) {
+    if (event.target.value >= 0) {
       setMortality((mortality) => ({
         ...mortality,
         [props]: event.target.value,
@@ -93,7 +93,7 @@ export const MortalityPopup = ({ barn_id, cycle }) => {
               }}
               onInput={handleChange("mortality_number")}
               value={mortality?.mortality_number}
-              min="1"
+              min="0"
               fullWidth
               required
             />
