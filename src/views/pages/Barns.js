@@ -22,6 +22,8 @@ import { ShimmerTable } from "react-shimmer-effects";
 import Paginator from "../components/Paginator";
 import Header from "../components/Header";
 import { DownloadPopup } from "../components/barns/popups/DownloadPopup";
+import { NewCycleModel } from "../components/barns/popups/NewCycleModel";
+import { showCyclePopup } from "../../app/actions/CycleActions";
 
 const Barns = (props) => {
   const {
@@ -80,6 +82,15 @@ const Barns = (props) => {
     });
 
     props.showPopup(cycles);
+  };
+
+  const addNewCycle = (barn_id) => {
+    setBarn({
+      ...barn,
+      barn_id: barn_id,
+    });
+
+    props.showNewCycle();
   };
 
   return (
@@ -142,6 +153,7 @@ const Barns = (props) => {
                                 showRenamebarn={handleShowRenameBarn}
                                 addToFavourite={addToFavourite}
                                 removeFromFavourite={removeFromFavourite}
+                                showNewCycle={addNewCycle}
                               />
                             );
                           })}
@@ -210,6 +222,7 @@ const Barns = (props) => {
               user={user}
             />
           )}
+          <NewCycleModel barn_id={barn.barn_id} />
         </div>
       </div>
     </div>
@@ -240,6 +253,7 @@ const mapDispatchToProps = (dispatch) => {
     renameBarn: (obj) => dispatch(renameBarnAction(obj)),
     addToFavourite: (obj) => dispatch(addToFavourite(obj)),
     removeFromFavourite: (obj) => dispatch(removeFromFavourite(obj)),
+    showNewCycle: () => dispatch(showCyclePopup()),
   };
 };
 

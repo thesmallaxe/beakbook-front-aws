@@ -109,6 +109,7 @@ export const CycleDetails = (props) => {
           name="harvest_weight"
           onChange={handleChange}
           className="widget__field"
+          title="Desired Harvest Weight"
           label="Desired Harvest Weight"
           value={cycle?.harvest_weight ?? ""}
           variant="outlined"
