@@ -7,7 +7,7 @@ export const BarnTableItem = (props) => {
   const barn = props.barn;
   const barn_id = barn.barn_id;
   const cycles = barn.cycle_id;
-  const cycle_id = cycles[0]?.cycle_id;
+  const cycle_id = cycles[cycles.length - 1]?.cycle_id;
   const diffClass = barn.weight_diff.toString().includes("-")
     ? "decreased"
     : "increased";
@@ -75,6 +75,9 @@ export const BarnTableItem = (props) => {
             onClick={() => props.showDownloadPopup(barn_id, cycle_id, cycles)}
           >
             Download
+          </a>
+          <a href="#add-new-cycle" onClick={() => props.showNewCycle(barn_id)}>
+            Add new cycle
           </a>
         </div>
       </td>
