@@ -13,6 +13,7 @@ import {
 import { mapSectionsData } from "../../../app/services/Helper";
 import { CustomTooltip } from "./partials/CustomTooltip";
 import { WidgetChild } from "./partials/StandardDeviationWidgetChild";
+import { withPermission } from "../../../app/hooks/with-permission";
 
 export const colors = {
   barn: "#F97916",
@@ -23,7 +24,7 @@ export const colors = {
   s4: "#01B7FF",
 };
 
-export const StandardDeviation = ({ graph, loading }) => {
+const StandardDeviation = ({ graph, loading }) => {
   const [deviation, setDeviation] = useState({
     current: "barn",
     data: {},
@@ -125,3 +126,5 @@ export const StandardDeviation = ({ graph, loading }) => {
     </Widget>
   );
 };
+
+export default withPermission(StandardDeviation, "deviation");

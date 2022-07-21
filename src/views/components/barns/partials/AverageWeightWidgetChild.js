@@ -6,6 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { colors } from "../AverageWeight";
 import { submitGraphVisible } from "../../../../app/actions/BarnDetailActions";
 import { useParams } from "react-router-dom";
+import { checkPermission } from "../../../../app/hooks/with-permission";
 
 export const WidgetChild = (props) => {
   const { barn_id, cycle_id } = useParams();
@@ -19,6 +20,8 @@ export const WidgetChild = (props) => {
   });
 
   const [graph, setGraph] = useState([]);
+  const hasPermission = checkPermission("average-weight-section");
+  const hasBarnPermission = checkPermission("add-remove-graph");
 
   const HandleChange = (e) => {
     let updatedValue = { current: e.target.value };
@@ -62,27 +65,31 @@ export const WidgetChild = (props) => {
       </div>
 
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <Select
-          id="demo-select-small"
-          value={averageWeight.current}
-          onChange={HandleChange}
-        >
-          <MenuItem value="barn">Barn</MenuItem>
-          {allSections && <MenuItem value="all">All Sections</MenuItem>}
-          {allSections &&
-            allSections.map((section, i) => (
-              <MenuItem key={i} value={"s" + (i + 1)}>
-                {section.sectionName}
-              </MenuItem>
-            ))}
-        </Select>
+        {hasPermission && (
+          <Select
+            id="demo-select-small"
+            value={averageWeight.current}
+            onChange={HandleChange}
+          >
+            <MenuItem value="barn">Barn</MenuItem>
+            {allSections && <MenuItem value="all">All Sections</MenuItem>}
+            {allSections &&
+              allSections.map((section, i) => (
+                <MenuItem key={i} value={"s" + (i + 1)}>
+                  {section.sectionName}
+                </MenuItem>
+              ))}
+          </Select>
+        )}
       </FormControl>
-      <button
-        className="btn btn--icon btn--gray"
-        onClick={handleRemove("graph1")}
-      >
-        <i className="icon icon-trash"></i>
-      </button>
+      {hasBarnPermission && (
+        <button
+          className="btn btn--icon btn--gray"
+          onClick={handleRemove("graph1")}
+        >
+          <i className="icon icon-trash"></i>
+        </button>
+      )}
     </div>
   );
 };

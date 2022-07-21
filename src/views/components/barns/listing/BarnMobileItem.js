@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { checkPermission } from "../../../../app/hooks/with-permission";
 
 export const BarnMobileItem = (props) => {
+  const favAddPermission = checkPermission("Favouriting-barn");
+  const renamePermission = checkPermission("rename-barn");
+  const barnDownloadPermission = checkPermission("download-barn");
+  const sectionDownloadPermission = checkPermission("download-sectionwise");
   const [fav, setFav] = useState(false);
   const location = useLocation();
   const barn = props.barn;
@@ -63,33 +68,39 @@ export const BarnMobileItem = (props) => {
       </div>
       <div className="barns__item__content">
         <div className="barns__head__left">
-          <button
-            className="btn btn--link"
-            onClick={() => props.showRenamebarn(barn_id, barn.name)}
-          >
-            Rename the barn
-          </button>
+          {renamePermission && (
+            <button
+              className="btn btn--link"
+              onClick={() => props.showRenamebarn(barn_id, barn.name)}
+            >
+              Rename the barn
+            </button>
+          )}
         </div>
         <div className="barns__head__right">
-          <button
-            className="btn btn--link btn--link--green"
-            onClick={() => props.showDownloadPopup(barn_id, cycle_id, cycles)}
-          >
-            <i className="icon icon-download"></i> Download
-          </button>
-          <button
-            onClick={!fav ? handleFavourite : handleFavouriteRemove}
-            className={
-              "add_favourite " +
-              (!fav ? "add_favourite--not" : "add_favourite--add")
-            }
-          >
-            <i
+          {(barnDownloadPermission || sectionDownloadPermission) && (
+            <button
+              className="btn btn--link btn--link--green"
+              onClick={() => props.showDownloadPopup(barn_id, cycle_id, cycles)}
+            >
+              <i className="icon icon-download"></i> Download
+            </button>
+          )}
+          {favAddPermission && (
+            <button
+              onClick={!fav ? handleFavourite : handleFavouriteRemove}
               className={
-                "icon " + (!fav ? "icon-favourite" : "icon-favourite-alt")
+                "add_favourite " +
+                (!fav ? "add_favourite--not" : "add_favourite--add")
               }
-            ></i>
-          </button>
+            >
+              <i
+                className={
+                  "icon " + (!fav ? "icon-favourite" : "icon-favourite-alt")
+                }
+              ></i>
+            </button>
+          )}
         </div>
       </div>
     </div>

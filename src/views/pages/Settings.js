@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
-import { ChangePasswordForm } from "../components/settings/ChangePasswordForm";
+import ChangePasswordForm from "../components/settings/ChangePasswordForm";
+import FeedbackForm from "../components/settings/FeedbackForm";
 import { submitUpdatePassword } from "../../app/actions/AuthActions";
-import { FeedbackForm } from "../components/settings/FeedbackForm";
 import { submitFeedbackRequest } from "../../app/actions/SettingActions";
 import Header from "../components/Header";
 
@@ -32,6 +32,9 @@ const Settings = (props) => {
             <ChangePasswordForm {...props} />
           </div>
           <div className="settings__share-feedback">
+            <h3 className="settings__share-feedback__title">
+              Share Your Feedback
+            </h3>
             <FeedbackForm submitFeedback={submitFeedback} />
           </div>
         </div>

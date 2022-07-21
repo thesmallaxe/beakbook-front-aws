@@ -1,7 +1,17 @@
-export { AverageWeight } from "./AverageWeight";
-export { BarnAnalysis } from "./BarnAnalysis";
-export { BarnOverview } from "./BarnOverview";
-export { CycleDetails } from "./CycleDetails";
-export { StandardDeviation } from "./StandardDeviation";
-export { TotalActivity } from "./TotalAtivity";
-export { CycleSelection } from "./CycleSelection";
+import BarnAnalysis from "./BarnAnalysis";
+import BarnOverview from "./BarnOverview";
+import CycleDetails from "./CycleDetails";
+import AverageWeight from "./AverageWeight";
+import TotalActivity from "./TotalAtivity";
+import StandardDeviation from "./StandardDeviation";
+import { CycleSelection } from "./CycleSelection";
+
+export {
+  BarnAnalysis,
+  BarnOverview,
+  AverageWeight,
+  CycleDetails,
+  StandardDeviation,
+  TotalActivity,
+  CycleSelection,
+};

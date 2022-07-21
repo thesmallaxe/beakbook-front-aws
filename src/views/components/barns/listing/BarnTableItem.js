@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { checkPermission } from "../../../../app/hooks/with-permission";
 
 export const BarnTableItem = (props) => {
+  const cycleAddPermission = checkPermission("add-cycle");
+  const favAddPermission = checkPermission("Favouriting-barn");
+  const renamePermission = checkPermission("rename-barn");
+  const barnDownloadPermission = checkPermission("download-barn");
+  const sectionDownloadPermission = checkPermission("download-sectionwise");
   const [fav, setFav] = useState(false);
   const location = useLocation();
   const barn = props.barn;
@@ -45,40 +51,52 @@ export const BarnTableItem = (props) => {
       <td>{barn.farm}</td>
       <td>{barn.mortality}</td>
       <td>
-        <button
-          className={
-            "add_favourite " +
-            (!fav ? "add_favourite--not" : "add_favourite--add")
-          }
-          onClick={!fav ? handleFavourite : handleFavouriteRemove}
-        >
-          <i
+        {favAddPermission && (
+          <button
             className={
-              "icon " + (!fav ? "icon-favourite" : "icon-favourite-alt")
+              "add_favourite " +
+              (!fav ? "add_favourite--not" : "add_favourite--add")
             }
-          ></i>
-        </button>
+            onClick={!fav ? handleFavourite : handleFavouriteRemove}
+          >
+            <i
+              className={
+                "icon " + (!fav ? "icon-favourite" : "icon-favourite-alt")
+              }
+            ></i>
+          </button>
+        )}
       </td>
       <td>
         <button className="barns__table__options-icon">
           <i className="icon icon-kebab"></i>
         </button>
         <div className="barns__table__options">
-          <a
-            href="#rename"
-            onClick={() => props.showRenamebarn(barn_id, barn.name)}
-          >
-            Rename
-          </a>
-          <a
-            href="#download"
-            onClick={() => props.showDownloadPopup(barn_id, cycle_id, cycles)}
-          >
-            Download
-          </a>
-          <a href="#add-new-cycle" onClick={() => props.showNewCycle(barn_id)}>
-            Add new cycle
-          </a>
+          {renamePermission && (
+            <a
+              href="#rename"
+              onClick={() => props.showRenamebarn(barn_id, barn.name)}
+            >
+              Rename
+            </a>
+          )}
+          {(barnDownloadPermission || sectionDownloadPermission) && (
+            <a
+              href="#download"
+              onClick={() => props.showDownloadPopup(barn_id, cycle_id, cycles)}
+            >
+              Download
+            </a>
+          )}
+
+          {cycleAddPermission && (
+            <a
+              href="#add-new-cycle"
+              onClick={() => props.showNewCycle(barn_id)}
+            >
+              Add new cycle
+            </a>
+          )}
         </div>
       </td>
     </tr>

@@ -7,9 +7,11 @@ import UserReducer from "./UserReducer";
 import DeviceReducer from "./DeviceReducer";
 import SettingReducer from "./SettingReducer";
 import CycleReducer from "./CycleReducer";
+import PermssionReducer from "../slices/PermssionSlice";
 
 const RootReducer = combineReducers({
   auth: UserReducer,
+  user_permissions: PermssionReducer,
   dashboard: DashboardReducer,
   devices: DeviceReducer,
   barns: BarnReducer,

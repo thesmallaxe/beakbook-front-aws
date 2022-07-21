@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { fetchDashboardData } from "../../app/actions/DashboardActions";
-import { BarnItem } from "../components/dashboard/BarnItem";
 import { ShimmerThumbnail } from "react-shimmer-effects";
-import { StaticBox } from "../components/dashboard/StaticBox";
+import StaticBox from "../components/dashboard/StaticBox";
 import { formatNumber } from "../../app/services/Helper";
 import Header from "../components/Header";
+import FavouriteBarns from "../components/dashboard/FavouriteBarns";
 
 const Dashboard = (props) => {
   const { getData, favourite_barns, stats, loading, user } = props;
@@ -51,25 +51,11 @@ const Dashboard = (props) => {
                 </div>
               )}
               {!loading && barns && (
-                <div className="dashboard__barns">
-                  {Object.keys(barns).map((key) => (
-                    <Link
-                      key={key}
-                      state={{ from: location }}
-                      to={
-                        "/barns/" +
-                        barns[key].barnId +
-                        "/cycle/" +
-                        barns[key].cycleId
-                      }
-                    >
-                      <BarnItem
-                        barn={barns[key]}
-                        color={pickColor(key, colors)}
-                      />
-                    </Link>
-                  ))}
-                </div>
+                <FavouriteBarns
+                  barns={barns}
+                  colors={colors}
+                  location={location}
+                />
               )}
             </div>
           </div>
@@ -108,7 +94,7 @@ const pickIcon = (index) => {
   return icons[id];
 };
 
-const pickColor = (index, colors) => {
+export const pickColor = (index, colors) => {
   const length = colors.length - 1;
   const id = index % ~length;
   return colors[id];

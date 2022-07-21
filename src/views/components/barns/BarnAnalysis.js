@@ -1,8 +1,9 @@
 import React from "react";
 import { Widget } from "../partials/Widget";
 import { ShimmerCategoryList } from "react-shimmer-effects";
+import { withPermission } from "../../../app/hooks/with-permission";
 
-export const BarnAnalysis = (props) => {
+const BarnAnalysis = (props) => {
   const barns = props.analysis;
 
   if (props.loading) {
@@ -35,3 +36,5 @@ const pickColorClass = (index) => {
   const id = index % ~length;
   return colors[id];
 };
+
+export default withPermission(BarnAnalysis, "view-all-barn-analysis");

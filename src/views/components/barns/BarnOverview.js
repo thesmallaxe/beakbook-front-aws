@@ -4,23 +4,30 @@ import { Widget } from "../partials/Widget";
 import { TextField } from "@mui/material";
 import { ShimmerCategoryList } from "react-shimmer-effects";
 import { updateBarnOverviewAction } from "../../../app/actions/BarnDetailActions";
+import {
+  checkPermission,
+  withPermission,
+} from "../../../app/hooks/with-permission";
 
-export const BarnOverview = (props) => {
+const BarnOverview = (props) => {
   // Defining method variables
   const state = props.barn;
   const barn_overview = state.barn_overview;
   const overview = barn_overview.data;
   const [barn, setBarn] = useState({});
   const dispatch = useDispatch();
+  const hasPermision = checkPermission("edit-all-barn-overview");
 
   const WidgetChild = () => {
     return (
-      <button
-        onClick={() => state.editBarnOverview()}
-        className="btn btn--icon widget__button"
-      >
-        <i className="icon icon-edit"></i>
-      </button>
+      hasPermision && (
+        <button
+          onClick={() => state.editBarnOverview()}
+          className="btn btn--icon widget__button"
+        >
+          <i className="icon icon-edit"></i>
+        </button>
+      )
     );
   };
 
@@ -84,7 +91,7 @@ export const BarnOverview = (props) => {
         }}
         fullWidth
       />
-      {barn_overview.update && (
+      {hasPermision && barn_overview.update && (
         <button type="submit" onClick={handleSubmit} className="btn">
           Update
         </button>
@@ -92,3 +99,5 @@ export const BarnOverview = (props) => {
     </Widget>
   );
 };
+
+export default withPermission(BarnOverview, "view-all-barn-overview");
