@@ -14,6 +14,7 @@ import {
 import { mapSectionsData } from "../../../app/services/Helper";
 import { CustomTooltip } from "./partials/CustomTooltip";
 import { WidgetChild } from "./partials/AverageWeightWidgetChild";
+import { withPermission } from "../../../app/hooks/with-permission";
 
 export const colors = {
   barn: "#F97916",
@@ -24,7 +25,7 @@ export const colors = {
   s4: "#01B7FF",
 };
 
-export const AverageWeight = ({ graph = {}, loading }) => {
+const AverageWeight = ({ graph = {}, loading }) => {
   const [averageWeight, setAverageWeight] = useState({
     current: "barn",
     data: {},
@@ -39,10 +40,6 @@ export const AverageWeight = ({ graph = {}, loading }) => {
     }));
   }, [setAverageWeight, graph]);
 
-  let colorName =
-    averageWeight.current === "all"
-      ? colors["barn"]
-      : colors[averageWeight.current];
   let data = averageWeight.data;
   data = data[averageWeight.current];
 
@@ -106,7 +103,7 @@ export const AverageWeight = ({ graph = {}, loading }) => {
                 data={data}
                 name={graph.graphName}
                 unit="g"
-                color={colorName}
+                colors={colors}
               />
             }
           />
@@ -164,3 +161,5 @@ export const AverageWeight = ({ graph = {}, loading }) => {
     </Widget>
   );
 };
+
+export default withPermission(AverageWeight, "average-weight");

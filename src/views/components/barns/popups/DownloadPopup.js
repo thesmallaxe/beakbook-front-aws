@@ -4,6 +4,7 @@ import {
   hideDwnloadPopup,
   triggerDownload,
 } from "../../../../app/actions/BarnDetailActions";
+import { checkPermission } from "../../../../app/hooks/with-permission";
 import Alert from "../../partials/Alert";
 
 export const DownloadPopup = ({
@@ -13,12 +14,15 @@ export const DownloadPopup = ({
   cycles = [],
   user,
 }) => {
+  const barnPermission = checkPermission("download-barn");
+  const sectionPermission = checkPermission("download-sectionwise");
+
   const dispatch = useDispatch();
   const [download, setDownload] = useState({
     barnId: barn_id,
     cycleId: cycle_id,
     fileType: "CSV",
-    downloadType: "barn",
+    downloadType: barnPermission && sectionPermission ? "barn" : (barnPermission ? "barn" : "section" ),
     userId: user?.id,
   });
 
@@ -80,27 +84,32 @@ export const DownloadPopup = ({
             <div className="form-group">
               <label>Statistics Type</label>
               <div className="check_input_wrapper">
-                <div className="check_input">
-                  <input
-                    type="radio"
-                    name="downloadType"
-                    value="barn"
-                    id="Barn"
-                    onChange={handleChange}
-                    defaultChecked
-                  />
-                  <label htmlFor="Barn">Barn</label>
-                </div>
-                <div className="check_input">
-                  <input
-                    type="radio"
-                    name="downloadType"
-                    value="section"
-                    onChange={handleChange}
-                    id="SECTION"
-                  />
-                  <label htmlFor="SECTION">All Sections</label>
-                </div>
+                {barnPermission && (
+                  <div className="check_input">
+                    <input
+                      type="radio"
+                      name="downloadType"
+                      value="barn"
+                      id="Barn"
+                      onChange={handleChange}
+                      checked={download.downloadType === "barn"}
+                    />
+                    <label htmlFor="Barn">Barn</label>
+                  </div>
+                )}
+                {sectionPermission && (
+                  <div className="check_input">
+                    <input
+                      type="radio"
+                      name="downloadType"
+                      value="section"
+                      onChange={handleChange}
+                      id="SECTION"
+                      checked={download.downloadType === "section"}
+                    />
+                    <label htmlFor="SECTION">All Sections</label>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -133,15 +142,17 @@ export const DownloadPopup = ({
           </div>
           <footer className="download_popup__footer">
             <div className="download_popup__action">
-              <button
-                className={
-                  "btn btn--green " +
-                  (Object.keys(cycles).length === 0 ? "btn--disabled" : "")
-                }
-                onClick={handleDownload}
-              >
-                Download
-              </button>
+              {(barnPermission || sectionPermission) && (
+                <button
+                  className={
+                    "btn btn--green " +
+                    (Object.keys(cycles).length === 0 ? "btn--disabled" : "")
+                  }
+                  onClick={handleDownload}
+                >
+                  Download
+                </button>
+              )}
               <button className="btn btn--light-orange" onClick={handleCancel}>
                 Cancel
               </button>

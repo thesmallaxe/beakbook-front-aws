@@ -12,34 +12,15 @@ import {
   addToFavourite,
   removeFromFavourite,
 } from "../../app/actions/FavouriteActions";
-import {
-  BarnTableItem,
-  AddBarnModel,
-  BarnMobileItem,
-  RenameBarnModel,
-} from "../components/barns/listing";
-import { ShimmerTable } from "react-shimmer-effects";
-import Paginator from "../components/Paginator";
 import Header from "../components/Header";
-import { DownloadPopup } from "../components/barns/popups/DownloadPopup";
-import { NewCycleModel } from "../components/barns/popups/NewCycleModel";
 import { showCyclePopup } from "../../app/actions/CycleActions";
+import { checkPermission } from "../../app/hooks/with-permission";
+import BarnContainer from "../components/barns/listing/BarnContainer";
 
 const Barns = (props) => {
-  const {
-    loading,
-    success,
-    error,
-    user,
-    barns,
-    searchBarns,
-    renameBarn,
-    addToFavourite,
-    removeFromFavourite,
-    addNewBarn,
-    farm_details,
-    pagination,
-  } = props;
+  const { user, barns, searchBarns, farm_details } = props;
+
+  const cycleAddPermission = checkPermission("add-cycle");
 
   const [search, setSearch] = useState({ search: null, page: 1 });
   const [barnDetail, setBarnDetail] = useState({ barn_id: "", name: "" });
@@ -109,121 +90,24 @@ const Barns = (props) => {
             </p>
           </div>
         </div>
-        <div className="barns">
-          <div className="barns__overview">
-            <div className="barns__table-title-block">
-              <h3 className="barns__table-title">Barn Overview</h3>
-              <form className="barns__search-form">
-                <i className="icon icon-search"></i>
-                <input
-                  className="barns__search-input"
-                  type="search"
-                  placeholder="Search Barns"
-                  onInput={handleChange}
-                />
-              </form>
-            </div>
-            {window.innerWidth >= 768 ? (
-              <>
-                <div className="barns__table-content">
-                  {Object.keys(barns).length === 0 && loading && (
-                    <ShimmerTable row={5} col={5} />
-                  )}
-                  {barns && (
-                    <table className="barns__table">
-                      <thead>
-                        <tr>
-                          <th>Barn Name</th>
-                          <th>Weight</th>
-                          <th>Farm</th>
-                          <th>Mortality</th>
-                          <th></th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {barns &&
-                          Object.keys(barns).map((key) => {
-                            return (
-                              <BarnTableItem
-                                user={user}
-                                key={key}
-                                barn={barns[key]}
-                                showDownloadPopup={handleShowPopup}
-                                showRenamebarn={handleShowRenameBarn}
-                                addToFavourite={addToFavourite}
-                                removeFromFavourite={removeFromFavourite}
-                                showNewCycle={addNewCycle}
-                              />
-                            );
-                          })}
-                      </tbody>
-                    </table>
-                  )}
-                </div>
-              </>
-            ) : (
-              <div className="barns__list">
-                {barns &&
-                  Object.keys(barns).map((key) => {
-                    return (
-                      <BarnMobileItem
-                        user={user}
-                        key={key}
-                        barn={barns[key]}
-                        showDownloadPopup={handleShowPopup}
-                        showRenamebarn={handleShowRenameBarn}
-                        addToFavourite={addToFavourite}
-                        removeFromFavourite={removeFromFavourite}
-                      />
-                    );
-                  })}
-              </div>
-            )}
-            <Paginator
-              path="barns"
-              data={pagination}
-              paginateAction={handlePagination}
-              search={search.search}
-            />
-          </div>
-          <button
-            className="barns__add-new"
-            id="myBtn"
-            onClick={handleShowBarn}
-          >
-            <i className="icon icon-add"></i>
-          </button>
-          <RenameBarnModel
-            barn={barnDetail}
-            show={showRename}
-            loading={loading}
-            success={success}
-            error={error}
-            cancelAction={handleShowRenameBarn}
-            handleRenameAction={renameBarn}
-          />
-          <AddBarnModel
-            farm_details={farm_details}
-            show={show}
-            loading={loading}
-            success={success}
-            error={error}
-            cancelAction={handleShowBarn}
-            handleCreateAction={addNewBarn}
-          />
-          {props.download.show && (
-            <DownloadPopup
-              state={props}
-              show={props.download.show}
-              barn_id={barn.barn_id}
-              cycle_id={barn.cycle_id}
-              cycles={barn.cycles}
-              user={user}
-            />
-          )}
-          <NewCycleModel barn_id={barn.barn_id} />
-        </div>
+        <BarnContainer
+          {...props}
+          length={Object.keys(barns).length}
+          barn={barn}
+          cycleAddPermission={cycleAddPermission}
+          search={search.search}
+          barnDetail={barnDetail}
+          showRename={showRename}
+          show={show}
+          handleChange={handleChange}
+          handlePagination={handlePagination}
+          handleShowBarn={handleShowBarn}
+          handleShowRenameBarn={handleShowRenameBarn}
+          handleShowPopup={handleShowPopup}
+          addNewCycle={addNewCycle}
+          download={props.download}
+          props={props}
+        ></BarnContainer>
       </div>
     </div>
   );

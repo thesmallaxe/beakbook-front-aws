@@ -10,6 +10,7 @@ import {
 } from "../constants/types/AuthTypes";
 import HttpRequest from "../services/api/HttpRequest";
 import { createToast, toastError, toastSuccess } from "../services/ToastHelper";
+import { initPermissions } from "../slices/PermssionSlice";
 
 // Constant variables
 const LOGIN_URL = `login`;
@@ -94,6 +95,12 @@ export const submitLoginRequest = (user_data = {}) => {
 
         // Login user with user object
         dispatch(authenticateUser(res));
+
+        sessionStorage.removeItem("permissions");
+        sessionStorage.setItem("permissions", JSON.stringify(res.permissions));
+
+        // Init the permissions
+        dispatch(initPermissions(res));
       })
       .catch((error) => {
         // Error log

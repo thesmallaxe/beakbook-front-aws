@@ -7,23 +7,30 @@ import { updateCycleDetailAction } from "../../../app/actions/BarnDetailActions"
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { format } from "date-fns";
+import {
+  checkPermission,
+  withPermission,
+} from "../../../app/hooks/with-permission";
 
-export const CycleDetails = (props) => {
+const CycleDetails = (props) => {
   // Defining method variables
   const state = props.cycle;
   const cycle_details = state.cycle_details;
   const cycle_data = state.cycle_details.data;
   const [cycle, setCycle] = useState({});
   const dispatch = useDispatch();
+  const hasPermission = checkPermission("edit-all-cycles");
 
   const WidgetChild = () => {
     return (
-      <button
-        onClick={() => state.editCycleDetails()}
-        className="btn btn--icon widget__button"
-      >
-        <i className="icon icon-edit"></i>
-      </button>
+      hasPermission && (
+        <button
+          onClick={() => state.editCycleDetails()}
+          className="btn btn--icon widget__button"
+        >
+          <i className="icon icon-edit"></i>
+        </button>
+      )
     );
   };
 
@@ -158,7 +165,7 @@ export const CycleDetails = (props) => {
           )}
         />
       </LocalizationProvider>
-      {cycle_details.update && (
+      {hasPermission && cycle_details.update && (
         <button type="submit" className="btn" onClick={handleSubmit}>
           Update
         </button>
@@ -166,3 +173,5 @@ export const CycleDetails = (props) => {
     </Widget>
   );
 };
+
+export default withPermission(CycleDetails, "view-all-cycles");

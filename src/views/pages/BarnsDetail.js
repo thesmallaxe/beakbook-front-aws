@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import {
-  AverageWeight,
   BarnAnalysis,
   BarnOverview,
+  AverageWeight,
   CycleDetails,
   StandardDeviation,
   TotalActivity,
@@ -25,11 +25,15 @@ import {
 } from "../../app/actions/CycleActions";
 import { mapGraphs } from "../../app/services/Helper";
 import { ShimmerThumbnail } from "react-shimmer-effects";
-import { NewCycleModel } from "../components/barns/popups/NewCycleModel";
+import NewCycleModel from "../components/barns/popups/NewCycleModel";
 import { MortalityPopup } from "../components/barns/popups/MortalityPopup";
 import { AddGraphPopup } from "../components/barns/popups/AddGraphPopup";
+import { checkPermission } from "../../app/hooks/with-permission";
 
 const BarnsDetail = (props) => {
+  const barnRemovePermission = checkPermission("add-remove-graph");
+  const cycleAddPermission = checkPermission("add-cycle");
+  const mortalityPermission = checkPermission("add-mortality");
   const { barn_id, cycle_id } = useParams();
   const location = useLocation();
   const {
@@ -67,15 +71,20 @@ const BarnsDetail = (props) => {
   return (
     <div className="container--fluid">
       <Header back={back_btn}>
-        <button className="btn" onClick={() => showNewCycle()}>
-          Add new cycle
-        </button>
-        <button
-          className="btn btn--white btn--border"
-          onClick={() => showNewMotality()}
-        >
-          Add mortality count
-        </button>
+        {cycleAddPermission && (
+          <button className="btn" onClick={() => showNewCycle()}>
+            Add new cycle
+          </button>
+        )}
+
+        {mortalityPermission && (
+          <button
+            className="btn btn--white btn--border"
+            onClick={() => showNewMotality()}
+          >
+            Add mortality count
+          </button>
+        )}
       </Header>
       <div className="container">
         <div className="barn_details">
@@ -170,13 +179,16 @@ const BarnsDetail = (props) => {
                       return "";
                   }
                 })}
-              <NewCycleModel barn_id={barn_id} />
-              <MortalityPopup
-                barn_id={barn_id}
-                cycle={barn_single.cycleDetails}
-              />
-              <AddGraphPopup barn_id={barn_id} />
-              {graph_status &&
+              {cycleAddPermission && <NewCycleModel barn_id={barn_id} />}
+              {mortalityPermission && (
+                <MortalityPopup
+                  barn_id={barn_id}
+                  cycle={barn_single.cycleDetails}
+                />
+              )}
+              {barnRemovePermission && <AddGraphPopup barn_id={barn_id} />}
+              {barnRemovePermission &&
+              graph_status &&
               Object.values(graph_status).every(
                 (x) => x.value === "0" || x.value === 0
               ) ? (
