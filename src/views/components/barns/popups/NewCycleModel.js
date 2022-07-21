@@ -9,8 +9,9 @@ import {
   hideCyclePopup,
 } from "../../../../app/actions/CycleActions";
 import { format } from "date-fns";
+import { withPermission } from "../../../../app/hooks/with-permission";
 
-export const NewCycleModel = ({ barn_id }) => {
+const NewCycleModel = ({ barn_id }) => {
   const dispatch = useDispatch();
   const { success, cycle_modal, loading, cycle } = useSelector(
     (state) => state.cycle
@@ -198,3 +199,5 @@ export const NewCycleModel = ({ barn_id }) => {
     </div>
   );
 };
+
+export default withPermission(NewCycleModel, "add-cycle");

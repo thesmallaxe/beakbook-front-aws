@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
+import { withPermission } from "../../../app/hooks/with-permission";
 
-export const FeedbackForm = (props) => {
+const FeedbackForm = (props) => {
   const { submitFeedback } = props;
   const { loading, success } = useSelector((state) => ({
     loading: state.setting.loading,
@@ -37,7 +38,6 @@ export const FeedbackForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3 className="settings__share-feedback__title">Share Your Feedback</h3>
       <TextField
         id="outlined-multiline-static"
         label="Feedback"
@@ -54,3 +54,5 @@ export const FeedbackForm = (props) => {
     </form>
   );
 };
+
+export default withPermission(FeedbackForm, "send-feedback", true);

@@ -6,8 +6,11 @@ import MenuItem from "@mui/material/MenuItem";
 import { colors } from "../TotalAtivity";
 import { submitGraphVisible } from "../../../../app/actions/BarnDetailActions";
 import { useParams } from "react-router-dom";
+import { checkPermission } from "../../../../app/hooks/with-permission";
 
 export const WidgetChild = (props) => {
+  const hasPermission = checkPermission("activity-sectionwise");
+  const hasBarnPermission = checkPermission("add-remove-graph");
   const { barn_id, cycle_id } = useParams();
   const allSections = props.graph.allSections ?? {};
   const totalActivity = props.totalActivity;
@@ -62,27 +65,31 @@ export const WidgetChild = (props) => {
       </div>
 
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <Select
-          id="demo-select-small"
-          value={totalActivity.current}
-          onChange={HandleChange}
-        >
-          <MenuItem value="barn">Barn</MenuItem>
-          {allSections && <MenuItem value="all">All Sections</MenuItem>}
-          {allSections &&
-            allSections.map((section, i) => (
-              <MenuItem key={i} value={"s" + (i + 1)}>
-                {section.sectionName}
-              </MenuItem>
-            ))}
-        </Select>
+        {hasPermission && (
+          <Select
+            id="demo-select-small"
+            value={totalActivity.current}
+            onChange={HandleChange}
+          >
+            <MenuItem value="barn">Barn</MenuItem>
+            {allSections && <MenuItem value="all">All Sections</MenuItem>}
+            {allSections &&
+              allSections.map((section, i) => (
+                <MenuItem key={i} value={"s" + (i + 1)}>
+                  {section.sectionName}
+                </MenuItem>
+              ))}
+          </Select>
+        )}
       </FormControl>
-      <button
-        className="btn btn--icon btn--gray"
-        onClick={handleRemove("graph2")}
-      >
-        <i className="icon icon-trash"></i>
-      </button>
+      {hasBarnPermission && (
+        <button
+          className="btn btn--icon btn--gray"
+          onClick={handleRemove("graph2")}
+        >
+          <i className="icon icon-trash"></i>
+        </button>
+      )}
     </div>
   );
 };

@@ -10,8 +10,9 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Button from "@mui/material/Button";
 import { FormHelperText } from "@mui/material";
 import { useEffect } from "react";
+import { withPermission } from "../../../app/hooks/with-permission";
 
-export const ChangePasswordForm = (props) => {
+const ChangePasswordForm = (props) => {
   const { user, loading, updatePassword, success } = props;
 
   const [state, setState] = useState({
@@ -192,3 +193,5 @@ export const ChangePasswordForm = (props) => {
     </form>
   );
 };
+
+export default withPermission(ChangePasswordForm, "change-password", true);

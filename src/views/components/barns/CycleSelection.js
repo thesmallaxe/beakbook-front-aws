@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { showDownloadPopup } from "../../../app/actions/BarnDetailActions";
+import { checkPermission } from "../../../app/hooks/with-permission";
 import { DownloadPopup } from "./popups/DownloadPopup";
 
 export const CycleSelection = (props) => {
+  const barnDownloadPermission = checkPermission("download-barn");
+  const sectionDownloadPermission = checkPermission("download-sectionwise");
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const { barn_id, cycle_id } = useParams();
@@ -39,17 +42,22 @@ export const CycleSelection = (props) => {
             </option>
           ))}
       </select>
-      <button className="cycle_selection__download" onClick={showDownload}>
-        <i className="icon icon-download"></i> Download
-      </button>
-      <DownloadPopup
-        user={user}
-        state={props.cycle}
-        show={show_popup}
-        barn_id={barn_id}
-        cycle_id={cycle_id}
-        cycles={cycles}
-      />
+
+      {(barnDownloadPermission || sectionDownloadPermission) && (
+        <>
+          <button className="cycle_selection__download" onClick={showDownload}>
+            <i className="icon icon-download"></i> Download
+          </button>
+          <DownloadPopup
+            user={user}
+            state={props.cycle}
+            show={show_popup}
+            barn_id={barn_id}
+            cycle_id={cycle_id}
+            cycles={cycles}
+          />
+        </>
+      )}
     </div>
   );
 };

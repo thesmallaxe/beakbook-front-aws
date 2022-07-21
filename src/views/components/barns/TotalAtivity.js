@@ -13,6 +13,7 @@ import {
 import { mapSectionsData } from "../../../app/services/Helper";
 import { CustomTooltip } from "./partials/CustomTooltip";
 import { WidgetChild } from "./partials/TotalActivityWidgetChild";
+import { withPermission } from "../../../app/hooks/with-permission";
 
 export const colors = {
   barn: "#6A3EFF",
@@ -23,7 +24,7 @@ export const colors = {
   s4: "#01B7FF",
 };
 
-export const TotalActivity = ({ graph, loading }) => {
+const TotalActivity = ({ graph, loading }) => {
   const [totalActivity, setTotalActivity] = useState({
     current: "barn",
     data: {},
@@ -134,3 +135,5 @@ export const TotalActivity = ({ graph, loading }) => {
     </Widget>
   );
 };
+
+export default withPermission(TotalActivity, 'activity');

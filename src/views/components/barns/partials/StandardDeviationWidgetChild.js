@@ -6,8 +6,11 @@ import MenuItem from "@mui/material/MenuItem";
 import { colors } from "../StandardDeviation";
 import { submitGraphVisible } from "../../../../app/actions/BarnDetailActions";
 import { useParams } from "react-router-dom";
+import { checkPermission } from "../../../../app/hooks/with-permission";
 
 export const WidgetChild = (props) => {
+  const hasPermission = checkPermission("deviation-sectionwise");
+  const hasBarnPermission = checkPermission("add-remove-graph");
   const { barn_id, cycle_id } = useParams();
   const allSections = props.graph.allSections ?? {};
   const deviation = props.deviation;
@@ -30,7 +33,9 @@ export const WidgetChild = (props) => {
   };
 
   const handleRemove = (props) => (event) => {
+
     let value = event.target.checked;
+    
     const updatedGrapObj = Object.values(graph).map((element, index) => {
       if (element.graph === props) {
         element.value = value ? "1" : "0";
@@ -62,27 +67,31 @@ export const WidgetChild = (props) => {
           ))}
       </div>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <Select
-          id="demo-select-small"
-          value={deviation.current}
-          onChange={HandleChange}
-        >
-          <MenuItem value="barn">Barn</MenuItem>
-          {allSections && <MenuItem value="all">All Sections</MenuItem>}
-          {allSections &&
-            allSections.map((section, i) => (
-              <MenuItem key={i} value={"s" + (i + 1)}>
-                {section.sectionName}
-              </MenuItem>
-            ))}
-        </Select>
+        {hasPermission && (
+          <Select
+            id="demo-select-small"
+            value={deviation.current}
+            onChange={HandleChange}
+          >
+            <MenuItem value="barn">Barn</MenuItem>
+            {allSections && <MenuItem value="all">All Sections</MenuItem>}
+            {allSections &&
+              allSections.map((section, i) => (
+                <MenuItem key={i} value={"s" + (i + 1)}>
+                  {section.sectionName}
+                </MenuItem>
+              ))}
+          </Select>
+        )}
       </FormControl>
-      <button
-        className="btn btn--icon btn--gray"
-        onClick={handleRemove("graph3")}
-      >
-        <i className="icon icon-trash"></i>
-      </button>
+      {hasBarnPermission && (
+        <button
+          className="btn btn--icon btn--gray"
+          onClick={handleRemove("graph3")}
+        >
+          <i className="icon icon-trash"></i>
+        </button>
+      )}
     </div>
   );
 };

@@ -4,7 +4,8 @@ import { BarChart, Bar, XAxis, YAxis, Cell } from "recharts";
 export const CustomizedLabel = (props) => {
   const { x, y, width, value, unit, name } = props;
 
-  let miniValue = name === "Total Activity" ? value : parseFloat(value).toFixed(2);
+  let miniValue =
+    name === "Total Activity" ? value : parseFloat(value).toFixed(2);
 
   return (
     <text
@@ -20,14 +21,7 @@ export const CustomizedLabel = (props) => {
   );
 };
 
-export const CustomTooltip = ({
-  name,
-  active,
-  payload,
-  label,
-  unit,
-  color,
-}) => {
+export const CustomTooltip = ({ name, active, payload, label, unit }) => {
   if (active && payload && payload.length) {
     let data = payload[0].payload.miniGraph ?? [];
     // let value = parseFloat(payload[0].payload.value).toFixed(2);
@@ -75,13 +69,15 @@ export const CustomTooltip = ({
 
               <Bar
                 dataKey="value"
-                fill={color}
                 barSize={10}
                 radius={[10, 10, 10, 10]}
                 label={<CustomizedLabel unit={unit} name={name} />}
               >
                 {payload.map((entry, index) => {
-                  return <Cell key={`cell-${index}`} fill={entry.color} />;
+                  if (entry.value > 0) {
+                    return <Cell key={`cell-${index}`} fill={entry.color} />;
+                  }
+                  return null;
                 })}
               </Bar>
             </BarChart>
