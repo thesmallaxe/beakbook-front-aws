@@ -188,26 +188,26 @@ const BarnsDetail = (props) => {
               )}
               {barnRemovePermission && <AddGraphPopup barn_id={barn_id} />}
               {barnRemovePermission &&
-              graph_status &&
-              Object.values(graph_status).every(
-                (x) => x.value === "0" || x.value === 0
-              ) ? (
-                <div className="barn_details__no_graph">
-                  <p>
-                    Graphs are not availble for the movment.
-                    <br /> Please add the graph{" "}
-                  </p>
-                  <button className="btn btn--green" onClick={showGraphModal}>
-                    + Add a graph
-                  </button>
-                </div>
-              ) : (
-                <div className="barn_details__graphs__actions">
-                  <button className="btn btn--green" onClick={showGraphModal}>
-                    + Add a graph
-                  </button>
-                </div>
-              )}
+                (graph_status &&
+                Object.values(graph_status).every(
+                  (x) => x.value === "0" || x.value === 0
+                ) ? (
+                  <div className="barn_details__no_graph">
+                    <p>
+                      Graphs are not availble for the movment.
+                      <br /> Please add the graph{" "}
+                    </p>
+                    <button className="btn btn--green" onClick={showGraphModal}>
+                      + Add a graph
+                    </button>
+                  </div>
+                ) : (
+                  <div className="barn_details__graphs__actions">
+                    <button className="btn btn--green" onClick={showGraphModal}>
+                      + Add a graph
+                    </button>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
