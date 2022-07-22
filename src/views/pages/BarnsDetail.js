@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Header from "../components/Header";
 import {
   BarnAnalysis,
@@ -29,6 +30,11 @@ import NewCycleModel from "../components/barns/popups/NewCycleModel";
 import { MortalityPopup } from "../components/barns/popups/MortalityPopup";
 import { AddGraphPopup } from "../components/barns/popups/AddGraphPopup";
 import { checkPermission } from "../../app/hooks/with-permission";
+
+const sort_order = {
+  section_1: ["barn_analysis", "barn_overview", "cycle_details"],
+  section_2: ["average_weight", "total_activity", "standard_deviation"],
+};
 
 const BarnsDetail = (props) => {
   const barnRemovePermission = checkPermission("add-remove-graph");
@@ -89,16 +95,59 @@ const BarnsDetail = (props) => {
       <div className="container">
         <div className="barn_details">
           <div className="barn_details__wrapper">
-            <div className="barn_details__actions">
-              {window.innerWidth >= 768 && (
-                <BarnAnalysis
-                  loading={loading}
-                  analysis={barn_single.barnAnalysis}
-                />
-              )}
-              <BarnOverview barn={props} />
-              <CycleDetails cycle={props} />
-            </div>
+            <DragDropContext>
+              <Droppable droppableId="droppable-1">
+                {(provided) => (
+                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                    <div className="barn_details__actions">
+                      {window.innerWidth >= 768 && (
+                        <Draggable
+                          draggableId="barn_analysis"
+                          index={0}
+                          key={0}
+                        >
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <BarnAnalysis
+                                loading={loading}
+                                analysis={barn_single.barnAnalysis}
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      )}
+                      <Draggable draggableId="barn_overview" index={1} key={1}>
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <BarnOverview barn={props} />
+                          </div>
+                        )}
+                      </Draggable>
+                      <Draggable draggableId="cycle_details" index={2} key={2}>
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <CycleDetails cycle={props} />
+                          </div>
+                        )}
+                      </Draggable>
+                    </div>
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
             <div className="barn_details__graphs">
               {window.innerWidth <= 768 && (
                 <div className="barn_details__links">

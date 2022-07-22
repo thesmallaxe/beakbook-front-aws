@@ -10,7 +10,7 @@ const BarnAnalysis = (props) => {
     return <ShimmerCategoryList title items={4} categoryStyle="STYLE_FOUR" />;
   } else {
     return (
-      <Widget title="Barn Analysis">
+      <Widget title="Barn Analysis" >
         {barns &&
           barns.map((barn, index) => (
             <div className="widget__list_item" key={index}>
