@@ -48,7 +48,9 @@ export const MortalityPopup = ({ barn_id, cycle }) => {
   };
 
   useEffect(() => {
+    
     const formatted_date = format(new Date(), "yyyy-MM-dd");
+
     dispatch(
       updateMortality((mortality) => ({
         ...mortality,
