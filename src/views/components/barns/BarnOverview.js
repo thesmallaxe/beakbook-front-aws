@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { Widget } from "../partials/Widget";
 import { TextField } from "@mui/material";
-import { ShimmerCategoryList } from "react-shimmer-effects";
 import { updateBarnOverviewAction } from "../../../app/actions/BarnDetailActions";
 import {
   checkPermission,
@@ -46,10 +45,6 @@ const BarnOverview = (props) => {
     const barn_data = overview ? overview[0] : {};
     setBarn(barn_data);
   }, [overview]);
-
-  if (state.loading) {
-    return <ShimmerCategoryList title items={3} categoryStyle="STYLE_FOUR" />;
-  }
 
   return (
     <Widget

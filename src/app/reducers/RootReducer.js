@@ -8,6 +8,7 @@ import DeviceReducer from "./DeviceReducer";
 import SettingReducer from "./SettingReducer";
 import CycleReducer from "./CycleReducer";
 import PermssionReducer from "../slices/PermssionSlice";
+import BarnOrderReducer from "../slices/BarnOrderSlice";
 
 const RootReducer = combineReducers({
   auth: UserReducer,
@@ -16,6 +17,7 @@ const RootReducer = combineReducers({
   devices: DeviceReducer,
   barns: BarnReducer,
   barn_detail: BarnDetailReducer,
+  barn_order: BarnOrderReducer,
   cycle: CycleReducer,
   setting: SettingReducer,
 });

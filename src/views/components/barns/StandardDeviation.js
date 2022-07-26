@@ -104,6 +104,7 @@ const StandardDeviation = ({ graph, loading }) => {
               let dataKey = name === "barn" || name === "all" ? "value" : name;
               return (
                 <Line
+                  key={name}
                   type="monotone"
                   strokeWidth={2}
                   dataKey={dataKey}

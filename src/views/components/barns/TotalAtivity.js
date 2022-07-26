@@ -117,6 +117,7 @@ const TotalActivity = ({ graph, loading }) => {
               let dataKey = name === "barn" || name === "all" ? "value" : name;
               return (
                 <Bar
+                  key={name}
                   dataKey={dataKey}
                   fill={"url(#ta_" + name + ")"}
                   radius={[10, 10, 10, 10]}
@@ -136,4 +137,4 @@ const TotalActivity = ({ graph, loading }) => {
   );
 };
 
-export default withPermission(TotalActivity, 'activity');
+export default withPermission(TotalActivity, "activity");
