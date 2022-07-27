@@ -9,11 +9,18 @@ import {
   START_LOADING,
 } from "../constants/types/AuthTypes";
 import HttpRequest from "../services/api/HttpRequest";
-import { createToast, toastError, toastSuccess } from "../services/ToastHelper";
+import {
+  createToast,
+  notifyError,
+  notifySuccess,
+  toastError,
+  toastSuccess,
+} from "../services/ToastHelper";
 import { initPermissions } from "../slices/PermssionSlice";
 
 // Constant variables
 const LOGIN_URL = `login`;
+const LOGOUT_URL = `logout`;
 const FORGOT_URL = `forgot-password`;
 const RESET_URL = `reset-password`;
 const UPDATE_PASSWORD_URL = `change-password`;
@@ -243,5 +250,29 @@ export const submitUpdatePassword = (data) => {
 export const logoutUser = () => {
   return {
     type: LOGOUT_USER,
+  };
+};
+
+export const logout = () => {
+  return (dispatch) => {
+    // Initiate a request
+    const request = new HttpRequest();
+
+    request
+      .post(LOGOUT_URL)
+      .then((res) => {
+        // Display notification
+        notifySuccess();
+
+        localStorage.clear();
+        sessionStorage.clear();
+
+        // Logout session
+        dispatch(logoutUser());
+      })
+      .catch((error) => {
+        // Error log
+        notifyError(error?.message);
+      });
   };
 };
