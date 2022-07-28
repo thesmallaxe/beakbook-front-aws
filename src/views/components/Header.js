@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { checkPermission } from "../../app/hooks/with-permission";
 
 const Header = (props) => {
   const { back } = props;
@@ -70,13 +71,18 @@ const Header = (props) => {
             </ul>
           </div>
 
-          <Link
-            className="btn btn--icon btn--white btn--round btn--notification"
-            to="/"
-          >
-            {/* <i className='icon icon-bell'></i> */}
-            <img src="/assets/icons/notification-bell.png" alt="Notification" />
-          </Link>
+          {checkPermission("receive-notifications") && (
+            <Link
+              className="btn btn--icon btn--white btn--round btn--notification"
+              to="/"
+            >
+              {/* <i className='icon icon-bell'></i> */}
+              <img
+                src="/assets/icons/notification-bell.png"
+                alt="Notification"
+              />
+            </Link>
+          )}
 
           {props.children}
         </div>

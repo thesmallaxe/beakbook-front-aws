@@ -262,7 +262,7 @@ export const logout = () => {
       .post(LOGOUT_URL)
       .then((res) => {
         // Display notification
-        notifySuccess();
+        notifySuccess(res?.message);
 
         localStorage.clear();
         sessionStorage.clear();
