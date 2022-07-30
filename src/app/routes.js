@@ -16,6 +16,7 @@ import { BaseLayout } from "../views/layouts/BaseLayout";
 import { AuthLayout } from "../views/layouts/AuthLayout";
 import Logout from "../views/components/partials/Logout";
 import { AnimatePresence } from "framer-motion";
+import { checkPermission } from "./hooks/with-permission";
 
 export const LocalRoutes = () => {
   const location = useLocation();
@@ -40,15 +41,25 @@ export const LocalRoutes = () => {
         {/* Dashboard Routes */}
         <Route element={<BaseLayout />}>
           <Route index exact path="/" element={<Dashboard />}></Route>
-          <Route exact path="/barns" element={<Barns />}></Route>
+          {checkPermission("view-barn") && (
+            <Route exact path="/barns" element={<Barns />}></Route>
+          )}
+
           <Route
             exact
             path="/barns/:barn_id/cycle/:cycle_id"
             element={<BarnsDetail />}
           ></Route>
-          <Route exact path="/devices" element={<Devices />}></Route>
-          <Route exact path="/alerts" element={<Alerts />}></Route>
-          <Route exact path="/settings" element={<Settings />}></Route>
+          {checkPermission("view-devices") && (
+            <Route exact path="/devices" element={<Devices />}></Route>
+          )}
+          {checkPermission("receive-notifications") && (
+            <Route exact path="/alerts" element={<Alerts />}></Route>
+          )}
+          {(checkPermission("change-password") ||
+            checkPermission("send-feedback")) && (
+            <Route exact path="/settings" element={<Settings />}></Route>
+          )}
         </Route>
         <Route exact path="/logout" element={<Logout />}></Route>
         <Route path="*" element={<NotFound />}></Route>
