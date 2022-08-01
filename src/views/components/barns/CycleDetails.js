@@ -40,8 +40,8 @@ const CycleDetails = (props) => {
     }));
   };
 
-  const handleSubmit = () => {
-    console.log(cycle);
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(updateCycleDetailAction(cycle));
   };
 
@@ -56,52 +56,108 @@ const CycleDetails = (props) => {
       title="Cycle Details"
       widget_action={{ edit: cycle_details.edit, child: <WidgetChild /> }}
     >
-      <TextField
-        name="breed"
-        className="widget__field"
-        onChange={handleChange}
-        label="Breed"
-        value={cycle?.breed ?? ""}
-        variant="outlined"
-        InputProps={{
-          readOnly: cycle_details.read_only,
-        }}
-        required
-      />
-      <TextField
-        name="starting_age"
-        onChange={handleChange}
-        className="widget__field"
-        label="Starting Age (days)"
-        value={cycle?.starting_age ?? ""}
-        variant="outlined"
-        InputProps={{
-          readOnly: cycle_details.read_only,
-        }}
-        required
-      />
-      <TextField
-        name="sex"
-        onChange={handleChange}
-        className="widget__field"
-        label="Sex"
-        value={cycle?.sex ?? ""}
-        variant="outlined"
-        InputProps={{
-          readOnly: cycle_details.read_only,
-        }}
-      />
-      <div className="widget__row">
+      <form onSubmit={handleSubmit} className="widget__body">
+        <TextField
+          name="breed"
+          className="widget__field"
+          onChange={handleChange}
+          label="Breed"
+          value={cycle?.breed ?? ""}
+          variant="outlined"
+          InputProps={{
+            readOnly: cycle_details.read_only,
+          }}
+          required
+        />
+        <TextField
+          name="starting_age"
+          onChange={handleChange}
+          className="widget__field"
+          label="Starting Age (days)"
+          value={cycle?.starting_age ?? ""}
+          variant="outlined"
+          InputProps={{
+            readOnly: cycle_details.read_only,
+          }}
+          required
+        />
+        <TextField
+          name="sex"
+          onChange={handleChange}
+          className="widget__field"
+          label="Sex"
+          value={cycle?.sex ?? ""}
+          variant="outlined"
+          InputProps={{
+            readOnly: cycle_details.read_only,
+          }}
+        />
+        <div className="widget__row">
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label="Starting date"
+              wrapperClassName="date-picker"
+              readOnly={cycle_details.read_only}
+              value={new Date(cycle?.starting_date ?? "")}
+              onChange={(value) => {
+                setCycle({
+                  ...cycle,
+                  starting_date: format(new Date(value), "yyyy-MM-dd"),
+                });
+              }}
+              renderInput={(params) => (
+                <TextField {...params} className="widget__field" required />
+              )}
+            />
+          </LocalizationProvider>
+          <TextField
+            name="harvest_weight"
+            onChange={handleChange}
+            className="widget__field"
+            title="Desired Harvest Weight"
+            label="Desired Harvest Weight"
+            value={cycle?.harvest_weight ?? ""}
+            variant="outlined"
+            InputProps={{
+              readOnly: cycle_details.read_only,
+            }}
+            required
+          />
+        </div>
+        <TextField
+          name="origin"
+          onChange={handleChange}
+          className="widget__field"
+          label="Origin"
+          value={cycle?.origin ?? ""}
+          variant="outlined"
+          InputProps={{
+            readOnly: cycle_details.read_only,
+          }}
+          required
+        />
+        <TextField
+          name="population_number"
+          onChange={handleChange}
+          className="widget__field"
+          label="Number of Chickens"
+          value={cycle?.population_number ?? ""}
+          variant="outlined"
+          InputProps={{
+            readOnly: cycle_details.read_only,
+          }}
+        />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
-            label="Starting date"
+            label="Desired Harvest Date"
             wrapperClassName="date-picker"
             readOnly={cycle_details.read_only}
-            value={new Date(cycle?.starting_date ?? "")}
+            minDate={new Date(cycle?.starting_date ?? "")}
+            value={new Date(cycle?.end_date ?? "")}
             onChange={(value) => {
               setCycle({
                 ...cycle,
-                starting_date: format(new Date(value), "yyyy-MM-dd"),
+                end_date: format(new Date(value), "yyyy-MM-dd"),
               });
             }}
             renderInput={(params) => (
@@ -109,66 +165,12 @@ const CycleDetails = (props) => {
             )}
           />
         </LocalizationProvider>
-        <TextField
-          name="harvest_weight"
-          onChange={handleChange}
-          className="widget__field"
-          title="Desired Harvest Weight"
-          label="Desired Harvest Weight"
-          value={cycle?.harvest_weight ?? ""}
-          variant="outlined"
-          InputProps={{
-            readOnly: cycle_details.read_only,
-          }}
-          required
-        />
-      </div>
-      <TextField
-        name="origin"
-        onChange={handleChange}
-        className="widget__field"
-        label="Origin"
-        value={cycle?.origin ?? ""}
-        variant="outlined"
-        InputProps={{
-          readOnly: cycle_details.read_only,
-        }}
-        required
-      />
-      <TextField
-        name="population_number"
-        onChange={handleChange}
-        className="widget__field"
-        label="Number of Chickens"
-        value={cycle?.population_number ?? ""}
-        variant="outlined"
-        InputProps={{
-          readOnly: cycle_details.read_only,
-        }}
-      />
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
-          label="Desired Harvest Date"
-          wrapperClassName="date-picker"
-          readOnly={cycle_details.read_only}
-          minDate={new Date(cycle?.starting_date ?? "")}
-          value={new Date(cycle?.end_date ?? "")}
-          onChange={(value) => {
-            setCycle({
-              ...cycle,
-              end_date: format(new Date(value), "yyyy-MM-dd"),
-            });
-          }}
-          renderInput={(params) => (
-            <TextField {...params} className="widget__field" required />
-          )}
-        />
-      </LocalizationProvider>
-      {hasPermission && cycle_details.update && (
-        <button type="submit" className="btn" onClick={handleSubmit}>
-          Update
-        </button>
-      )}
+        {hasPermission && cycle_details.update && (
+          <button type="submit" className="btn">
+            Update
+          </button>
+        )}
+      </form>
     </Widget>
   );
 };
