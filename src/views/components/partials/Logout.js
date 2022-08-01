@@ -1,40 +1,29 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { connect } from "react-redux";
-import { Navigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Navigate } from "react-router-dom";
 import { logout } from "../../../app/actions/AuthActions";
 
-function Logout({ logoutUser, user }) {
-  const location = useLocation();
-  const [logout, setLogout] = useState(true);
+function Logout() {
+  const [logoff, setLogoff] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    logoutUser();
-  }, [logoutUser]);
+  dispatch(logout());
 
   useEffect(() => {
     if (!user.is_logged) {
-      setLogout(false);
+      console.log(user);
+      setLogoff(true);
     }
   }, [user]);
 
-  return logout ? (
-    <p>Redirecting...</p>
+  return !logoff ? (
+    <div className="container">
+      <p>Redirecting user to login...</p>
+    </div>
   ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
+    <Navigate to="/login" />
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.auth.user,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logoutUser: () => dispatch(logout()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Logout);
+export default Logout;
