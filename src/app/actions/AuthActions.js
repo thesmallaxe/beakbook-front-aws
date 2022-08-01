@@ -263,16 +263,17 @@ export const logout = () => {
       .then((res) => {
         // Display notification
         notifySuccess(res?.message);
-
+      })
+      .catch((error) => {
+        // Error log
+        notifyError(error?.message);
+      })
+      .finally(() => {
         localStorage.clear();
         sessionStorage.clear();
 
         // Logout session
         dispatch(logoutUser());
-      })
-      .catch((error) => {
-        // Error log
-        notifyError(error?.message);
       });
   };
 };
