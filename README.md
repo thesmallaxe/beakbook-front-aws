@@ -8,15 +8,14 @@ In the project directory, you can run:
 
 Starting the application on localhost:
 
+### `npm run build`
+
+Builds the app for devlopment files to the `build` folder.\
+It correctly bundles React in devlopment mode and optimizes the build for the best performance.
 ### `npm run build:staging`
 
 Builds the app for staging files to the `build` folder.\
 It correctly bundles React in staging mode and optimizes the build for the best performance.
-
-### `npm run build:devlopment`
-
-Builds the app for devlopment files to the `build` folder.\
-It correctly bundles React in devlopment mode and optimizes the build for the best performance.
 
 ### `npm run build:prduction`
 
