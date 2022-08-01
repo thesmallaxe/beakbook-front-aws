@@ -1,7 +1,7 @@
 export const graphNames = {
-  area: "graph1",
-  bar: "graph2",
-  line: "graph3",
+  area: "average_weight",
+  bar: "total_activity",
+  line: "standard_deviation",
 };
 
 export const mapGraphs = (graphs) => {
@@ -9,10 +9,11 @@ export const mapGraphs = (graphs) => {
 
   if (Object.keys(graphs).length > 0) {
     graphs.forEach((graph) => {
-      if (!graphArray[graph.chartType]) {
-        graphArray[graph.chartType] = {};
+      let key = graphNames[graph.chartType];
+      if (!graphArray[key]) {
+        graphArray[key] = {};
       }
-      graphArray[graph.chartType] = graph;
+      graphArray[key] = graph;
     });
   }
 

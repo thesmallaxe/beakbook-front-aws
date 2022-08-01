@@ -28,6 +28,7 @@ import {
   UPDATE_BARN_OVERVIEW,
   UPDATE_CYCLE_DETAILS,
 } from "../constants/types/BarnDetailTypes";
+import { initSortOrder } from "../slices/BarnOrderSlice";
 
 // Endpoints
 const BARN_UPDATE_URL = `update/barn`;
@@ -122,6 +123,8 @@ export const getSingleBarnDetails = (id = null, cycle_id = null) => {
 
         if (res.status) {
           dispatch(updateSingleBarnDetails(res));
+
+          dispatch(initSortOrder(res));
 
           const graphNames = [
             "Average Weight",

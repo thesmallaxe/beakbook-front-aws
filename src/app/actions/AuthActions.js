@@ -266,9 +266,10 @@ export const logout = () => {
       })
       .catch((error) => {
         // Error log
-        notifyError(error?.message);
+        notifyError(error?.message);                         
       })
       .finally(() => {
+        // Clear Storage
         localStorage.clear();
         sessionStorage.clear();
 
