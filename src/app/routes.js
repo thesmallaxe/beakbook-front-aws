@@ -60,8 +60,8 @@ export const LocalRoutes = () => {
             checkPermission("send-feedback")) && (
             <Route exact path="/settings" element={<Settings />}></Route>
           )}
+          <Route exact path="/logout" element={<Logout />}></Route>
         </Route>
-        <Route exact path="/logout" element={<Logout />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </AnimatePresence>

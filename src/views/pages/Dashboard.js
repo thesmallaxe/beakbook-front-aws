@@ -7,6 +7,7 @@ import StaticBox from "../components/dashboard/StaticBox";
 import { formatNumber } from "../../app/services/Helper";
 import Header from "../components/Header";
 import FavouriteBarns from "../components/dashboard/FavouriteBarns";
+import { checkPermission } from "../../app/hooks/with-permission";
 
 const Dashboard = (props) => {
   const { getData, favourite_barns, stats, loading, user } = props;
@@ -35,9 +36,11 @@ const Dashboard = (props) => {
               here is an overview of your favorite{" "}
               <span className="highlight">barns.</span>
             </p>
-            <Link className="dashboard__welcome_link" to="/barns">
-              View All Barns
-            </Link>
+            {checkPermission("view-barn") && (
+              <Link className="dashboard__welcome_link" to="/barns">
+                View All Barns
+              </Link>
+            )}
           </div>
         </div>
         <section className="dashboard">

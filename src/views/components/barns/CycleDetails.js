@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { Widget } from "../partials/Widget";
 import { TextField } from "@mui/material";
-import { ShimmerCategoryList } from "react-shimmer-effects";
 import { updateCycleDetailAction } from "../../../app/actions/BarnDetailActions";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -52,10 +51,6 @@ const CycleDetails = (props) => {
     }
   }, [cycle_data]);
 
-  if (state.loading) {
-    return <ShimmerCategoryList title items={7} categoryStyle="STYLE_FOUR" />;
-  }
-
   return (
     <Widget
       title="Cycle Details"
@@ -71,6 +66,7 @@ const CycleDetails = (props) => {
         InputProps={{
           readOnly: cycle_details.read_only,
         }}
+        required
       />
       <TextField
         name="starting_age"
@@ -82,6 +78,7 @@ const CycleDetails = (props) => {
         InputProps={{
           readOnly: cycle_details.read_only,
         }}
+        required
       />
       <TextField
         name="sex"
@@ -123,6 +120,7 @@ const CycleDetails = (props) => {
           InputProps={{
             readOnly: cycle_details.read_only,
           }}
+          required
         />
       </div>
       <TextField
@@ -135,6 +133,7 @@ const CycleDetails = (props) => {
         InputProps={{
           readOnly: cycle_details.read_only,
         }}
+        required
       />
       <TextField
         name="population_number"
