@@ -28,8 +28,8 @@ export const AuthLayout = () => {
                 Welcome To <abbr>BeakBook</abbr>
               </label>
               <p>
-                The Place where you can get all the info of your scales and
-                barns
+                The place where you can get all the information for your scales
+                and barns
               </p>
             </figcaption>
           </figure>

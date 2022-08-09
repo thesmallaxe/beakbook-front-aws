@@ -1,9 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  notifyError,
-  notifySuccess,
-} from "../services/ToastHelper";
-import axios from "../axios";
+import { notifyError, notifySuccess } from "../services/ToastHelper";
+import axios from "../hooks/axios";
 
 const initialState = {
   loading: false,
