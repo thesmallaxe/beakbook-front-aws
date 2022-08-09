@@ -55,13 +55,13 @@ const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
     user_farm: state.auth.farm_details,
-    loading: state.devices.loading,
-    download: state.devices.download,
-    devices: state.devices.all_devices,
-    pagination: state.devices.results.meta,
-    search: state.devices.search,
-    success: state.devices.success,
-    error: state.devices.error,
+    loading: state.devices.listing.loading,
+    download: state.devices.listing.download,
+    devices: state.devices.listing.all_devices,
+    pagination: state.devices.listing.results.meta,
+    search: state.devices.listing.search,
+    success: state.devices.listing.success,
+    error: state.devices.listing.error,
   };
 };
 

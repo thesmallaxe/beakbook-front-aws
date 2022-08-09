@@ -171,28 +171,34 @@
     }
 
     &__options-icon {
-      img {
-        &:hover {
-          .devices__table__options {
-            display: block;
-          }
-        }
+      &:hover ~ .devices__table__options {
+        display: block;
       }
     }
 
     &__options {
-      @include padding(20px 10px 10px);
+      @include padding(0.25rem 0.875px);
       position: absolute;
       right: 27px;
       top: 44px;
-      width: 121px;
+      width: max-content;
       background: $whiteColor;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       display: none;
+      z-index: 999;
+
+      &:hover {
+        display: block;
+      }
 
       a {
         display: block;
-        margin-bottom: 10px;
+        padding: 0.625rem 1.375rem;
+        border-radius: 5px;
+
+        &:hover {
+          background-color: $primaryColorLight;
+        }
       }
     }
   }
@@ -223,7 +229,6 @@
       &--show {
         display: block;
       }
-      
     }
 
     &__modal-content {
@@ -241,7 +246,7 @@
       animation-name: animatetop;
       animation-duration: 0.4s;
 
-      @include devices(mobile){
+      @include devices(mobile) {
         width: 90%;
       }
     }
