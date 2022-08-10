@@ -37,7 +37,7 @@ const SideBar = ({ user }) => {
             </div>
             <div className="sidebar__profile">
               <h4>{user.name}</h4>
-              <span>Farm Admin</span>
+              <span>{user.roles[0].name}</span>
             </div>
           </Link>
         </div>

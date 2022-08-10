@@ -16,32 +16,34 @@ const initialState = {
   },
 };
 
-export const getDashboardDataRequest = createAsyncThunk(
-  "dashboard/data",
-  async (company_id = null, text = null, page = null) => {
-    let url = DEVICE_END_POINT + `?companyId=${company_id}`;
-    url += text !== null ? `&searchText=${text}` : "";
-    url += page !== null ? `&page=${page}` : "&page=1";
+export const fetchDeviceRequest = createAsyncThunk(
+  "device/data",
+  async (data = {}, thunkApi) => {
+    console.log(data);
+    let url = DEVICE_END_POINT + `?companyId=${data.company_id}`;
+    url += data.text !== null ? `&searchText=${data.text}` : "";
+    url += data.page !== null ? `&page=${data.page}` : "&page=1";
     return await axios.get(url);
   }
 );
 
 const DashboardData = createSlice({
-  name: "dashboard_data",
+  name: "device_data",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getDashboardDataRequest.pending, (state) => {
+    builder.addCase(fetchDeviceRequest.pending, (state) => {
       state.loading = true;
     });
 
-    builder.addCase(getDashboardDataRequest.fulfilled, (state, action) => {
+    builder.addCase(fetchDeviceRequest.fulfilled, (state, action) => {
       state.loading = false;
-      state.results = action.payload;
-      state.stats = action.payload.data.otherStatistics?.statistics?.allBarns;
+      state.results = action.payload.data;
+      state.all_devices = action.payload.data.data;
+      state.search.current_page = action.payload.data.meta.current_page;
     });
 
-    builder.addCase(getDashboardDataRequest.rejected, (state, action) => {
+    builder.addCase(fetchDeviceRequest.rejected, (state, action) => {
       state.loading = false;
     });
   },
