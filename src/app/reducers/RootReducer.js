@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import DashboardReducer from "./DashboardReducer";
+import DashboardReducer from "../slices/DashboardDataSlice";
 import BarnReducer from "./BarnReducer";
 import BarnDetailReducer from "./BarnDetailReducer";
 import UserReducer from "./UserReducer";

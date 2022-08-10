@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { fetchDashboardData } from "../../app/actions/DashboardActions";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 import StaticBox from "../components/dashboard/StaticBox";
 import { formatNumber } from "../../app/services/Helper";
 import Header from "../components/Header";
 import FavouriteBarns from "../components/dashboard/FavouriteBarns";
 import { checkPermission } from "../../app/hooks/with-permission";
+import { getDashboardDataRequest } from "../../app/slices/DashboardDataSlice";
 
 const Dashboard = (props) => {
   const { getData, favourite_barns, stats, loading, user } = props;
@@ -72,7 +72,8 @@ const Dashboard = (props) => {
                 </div>
               )}
 
-              {statisticts &&
+              {!loading &&
+                statisticts &&
                 Object.keys(statisticts).map((key) => (
                   <StaticBox
                     key={key}
@@ -114,7 +115,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getData: () => dispatch(fetchDashboardData()),
+    getData: () => dispatch(getDashboardDataRequest()),
   };
 };
 
