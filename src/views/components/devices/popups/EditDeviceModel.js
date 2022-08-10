@@ -13,7 +13,7 @@ const EditDeviceModel = () => {
   const { loading, show, device } = useSelector(
     (state) => state.devices.update_device
   );
-  const { data } = useSelector((state) => state.data.farm_data);
+  const { data } = useSelector((state) => state.data.farm_data.data);
   const { meta } = useSelector((state) => state.devices.listing.results);
   const showModel = show ? "modal--show" : "";
   const [deviceData, setDeviceData] = useState(device);
@@ -21,13 +21,15 @@ const EditDeviceModel = () => {
   const handleInput = (prop) => (e) => {
     let update = { [prop]: e.target.value };
 
-    if (prop === "farm_id" && Object.keys(data).length > 0) {
+    if (data && prop === "farm_id" && Object.keys(data).length > 0) {
       let farm_id = parseInt(e.target.value);
 
-      let farm = data.find((item) => {
-        return item.id === farm_id;
-      });
-      update = { ...update, farm: farm, barn: {} };
+      if (data) {
+        let farm = data.find((item) => {
+          return item.id === farm_id;
+        });
+        update = { ...update, farm: farm, barn: {} };
+      }
     }
 
     if (prop === "barn_id" && deviceData?.farm?.barns) {
@@ -54,13 +56,14 @@ const EditDeviceModel = () => {
 
     update = { ...update, page: meta?.current_page };
 
-    if (device.farm_id !== null && Object.keys(data).length > 0) {
+    if (data && device.farm_id !== null && Object.keys(data).length > 0) {
       let farm_id = parseInt(device.farm_id);
-
-      let farm = data.find((item) => {
-        return item.id === farm_id;
-      });
-      update = { ...update, farm: farm, barn: {} };
+      if (data) {
+        let farm = data.find((item) => {
+          return item.id === farm_id;
+        });
+        update = { ...update, farm: farm, barn: {} };
+      }
     }
 
     if (device.barn_id !== null && update?.farm?.barns) {
@@ -138,7 +141,7 @@ const EditDeviceModel = () => {
                 required
               >
                 <option value="">Farm Name</option>
-                {Object.keys(data).length > 0 &&
+                {data > 0 &&
                   data.map((item) => {
                     return (
                       <option value={item.id} key={item.id}>

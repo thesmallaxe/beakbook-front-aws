@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { notifyError } from "../services/ToastHelper";
 import axios from "../hooks/axios";
 
 const FARM_LIST_END_POINT = "getFarmDetails";
@@ -11,15 +10,10 @@ const initialState = {
   data: {},
 };
 
-export const getFarmListRequest = createAsyncThunk("farm/list", async () => {
-  try {
-    const response = await axios.get(FARM_LIST_END_POINT);
-    return response.data;
-  } catch (error) {
-    notifyError(error);
-    return error;
-  }
-});
+export const getFarmListRequest = createAsyncThunk(
+  "farm/list",
+  async () => await axios.get(FARM_LIST_END_POINT)
+);
 
 const FarmDataList = createSlice({
   name: "farm_data",
@@ -37,7 +31,6 @@ const FarmDataList = createSlice({
     });
 
     builder.addCase(getFarmListRequest.rejected, (state, action) => {
-      console.log("rejected", action);
       state.loading = false;
       state.error = action.error?.message;
     });

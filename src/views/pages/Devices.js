@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import { createDevice, searchDevices } from "../../app/actions/DeviceActions";
 import Header from "../components/Header";
 import DeviceContainer from "../components/devices/DeviceContainer";
+import { fetchDeviceRequest } from "../../app/slices/DeviceSlice";
 
 const Devices = (props) => {
   const { user, user_farm, searchDevices } = props;
@@ -67,9 +67,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    searchDevices: (arg, arg2, arg3) =>
-      dispatch(searchDevices(arg, arg2, arg3)),
-    addNewDevice: (obj) => dispatch(createDevice(obj)),
+    searchDevices: (company_id, text, page) =>
+      dispatch(fetchDeviceRequest({ company_id, text, page })),
   };
 };
 

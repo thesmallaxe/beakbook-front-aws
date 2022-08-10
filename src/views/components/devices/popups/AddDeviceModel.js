@@ -15,7 +15,9 @@ const AddDeviceModel = () => {
   const { data } = useSelector((state) => state.data.farm_data);
   const { user } = useSelector((state) => state.auth);
   const showModel = show ? "modal--show" : "";
-  const [device, setDevice] = useState({ company_id: user.company_id });
+  const [device, setDevice] = useState({
+    company_id: user.company_id,
+  });
 
   const handleInput = (prop) => (e) => {
     let update = { [prop]: e.target.value };
@@ -53,6 +55,8 @@ const AddDeviceModel = () => {
         ...device,
         page: meta?.current_page,
         company_id: user?.company_id,
+        aws_region: "eu-west-2",
+        status: "tested",
       });
     },
     [meta, user]
@@ -121,7 +125,7 @@ const AddDeviceModel = () => {
                 required
               >
                 <option value="">Farm Name</option>
-                {Object.keys(data).length > 0 &&
+                {data > 0 &&
                   data.map((item) => {
                     return (
                       <option value={item.id} key={item.id}>

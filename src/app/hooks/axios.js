@@ -1,5 +1,6 @@
 import axios from "axios";
 import { HttpConfig } from "../constants/config/HttpConfig";
+import { notifyError } from "../services/ToastHelper";
 
 let getToken = () => {
   return localStorage.getItem("token")
@@ -21,11 +22,23 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export const config = {
-  headers: {
-    ContentType: "application/json",
-    Authorization: "Bearer " + getToken(),
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
   },
-};
+  (error) => {
+    if (
+      error.response.status === 401 &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      window.location.href = "/logout";
+    }
+
+    if (error.response?.data?.message) {
+      notifyError(error.response?.data?.message);
+    }
+    return error;
+  }
+);
 
 export default axiosInstance;
