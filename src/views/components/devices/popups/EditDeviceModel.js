@@ -1,77 +1,93 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import {
-  addDeviceRequest,
+  updateDeviceRequest,
   hideModal,
-} from "../../../../app/slices/DeviceAddSlice";
+} from "../../../../app/slices/DeviceUpdateSlice";
 import { withPermission } from "../../../../app/hooks/with-permission";
 
-const AddDeviceModel = () => {
+const EditDeviceModel = () => {
   const dispatch = useDispatch();
-  const { loading, show } = useSelector((state) => state.devices.add_device);
+  const { loading, show, device } = useSelector(
+    (state) => state.devices.update_device
+  );
+  const { data } = useSelector((state) => state.data.farm_data.data);
   const { meta } = useSelector((state) => state.devices.listing.results);
-  const { data } = useSelector((state) => state.data.farm_data);
-  const { user } = useSelector((state) => state.auth);
   const showModel = show ? "modal--show" : "";
-  const [device, setDevice] = useState({
-    company_id: user.company_id,
-  });
+  const [deviceData, setDeviceData] = useState(device);
 
   const handleInput = (prop) => (e) => {
     let update = { [prop]: e.target.value };
 
-    if (prop === "farm_id" && Object.keys(data).length > 0) {
+    if (data && prop === "farm_id" && Object.keys(data).length > 0) {
       let farm_id = parseInt(e.target.value);
 
-      let farm = data.find((item) => {
-        return item.id === farm_id;
-      });
-      update = { ...update, farm: farm, barn: {} };
+      if (data) {
+        let farm = data.find((item) => {
+          return item.id === farm_id;
+        });
+        update = { ...update, farm: farm, barn: {} };
+      }
     }
 
-    if (prop === "barn_id" && device?.farm?.barns) {
+    if (prop === "barn_id" && deviceData?.farm?.barns) {
       let barn_id = parseInt(e.target.value);
 
-      let barn = device?.farm?.barns.find((item) => {
+      let barn = deviceData?.farm?.barns.find((item) => {
         return item.id === barn_id;
       });
 
       update = { ...update, barn: barn };
     }
-    setDevice({ ...device, ...update });
+
+    setDeviceData({ ...deviceData, ...update });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(addDeviceRequest(device));
+    dispatch(updateDeviceRequest(deviceData));
   };
 
-  useEffect(
-    (device) => {
-      setDevice({
-        ...device,
-        page: meta?.current_page,
-        company_id: user?.company_id,
-        aws_region: "eu-west-2",
-        status: "tested",
+  useEffect(() => {
+    let update = device;
+
+    update = { ...update, page: meta?.current_page };
+
+    if (data && device.farm_id !== null && Object.keys(data).length > 0) {
+      let farm_id = parseInt(device.farm_id);
+      if (data) {
+        let farm = data.find((item) => {
+          return item.id === farm_id;
+        });
+        update = { ...update, farm: farm, barn: {} };
+      }
+    }
+
+    if (device.barn_id !== null && update?.farm?.barns) {
+      let barn_id = parseInt(device.barn_id);
+
+      let barn = update?.farm?.barns.find((item) => {
+        return item.id === barn_id;
       });
-    },
-    [meta, user]
-  );
+
+      update = { ...update, barn: barn };
+    }
+
+    setDeviceData(update);
+  }, [device, data, meta]);
 
   return (
-    <div className={"modal " + showModel} id="AddDevice">
+    <div className={"modal " + showModel} id="UpdateDevice">
       <div className="modal__content">
         <form className="modal__body" onSubmit={handleSubmit}>
           <h1 className="modal__body__title">
-            Register a <span>new Device</span>
+            Edit a <span>Device</span>
           </h1>
           <p className="modal__body__description">
-            The scale should be <u>connected</u> to the internet during
-            registration.
+            The scale should be <u>connected</u> to the internet during edit.
           </p>
           <p className="modal__body__description">
             The <b>serial number</b> should be located on a sticker placed on
@@ -82,7 +98,7 @@ const AddDeviceModel = () => {
               <TextField
                 label="Serial Number"
                 variant="outlined"
-                value={device?.serial_number ?? ""}
+                value={deviceData?.serial_number}
                 onInput={handleInput("serial_number")}
                 InputProps={{
                   readOnly: loading,
@@ -99,7 +115,7 @@ const AddDeviceModel = () => {
                 InputProps={{
                   readOnly: loading,
                 }}
-                value={device?.aws_region ?? ""}
+                value={deviceData?.aws_region}
                 fullWidth
               />
             </div>
@@ -108,19 +124,19 @@ const AddDeviceModel = () => {
             <div className="modal__body__field">
               <select
                 onChange={handleInput("status")}
-                value={device.status}
+                value={deviceData.status}
                 style={{ width: "100%", borderRadius: "5px" }}
                 required
               >
                 <option value="">Status</option>
                 <option value="tested">Tested</option>
-                <option value="untested">Untested</option>
+                <option value="not_tested">Not Tested</option>
               </select>
             </div>
             <div className="modal__body__field">
               <select
                 onChange={handleInput("farm_id")}
-                value={device.farm_id}
+                value={deviceData.farm_id}
                 style={{ width: "100%", borderRadius: "5px" }}
                 required
               >
@@ -140,13 +156,13 @@ const AddDeviceModel = () => {
             <div className="modal__body__field">
               <select
                 onChange={handleInput("barn_id")}
-                value={device.barn_id}
+                value={deviceData.barn_id}
                 style={{ width: "100%", borderRadius: "5px" }}
                 required
               >
                 <option value="">Barn Name</option>
-                {device?.farm?.barns &&
-                  device?.farm?.barns.map((item) => {
+                {deviceData?.farm?.barns &&
+                  deviceData?.farm?.barns.map((item) => {
                     return (
                       <option value={item.id} key={item.id}>
                         {item.name}
@@ -158,13 +174,13 @@ const AddDeviceModel = () => {
             <div className="modal__body__field">
               <select
                 onChange={handleInput("section_id")}
-                value={device.section_id}
+                value={deviceData.section_id}
                 style={{ width: "100%", borderRadius: "5px" }}
                 required
               >
                 <option value="">Section</option>
-                {device?.barn?.section &&
-                  device?.barn?.section.map((item) => {
+                {deviceData?.barn?.section &&
+                  deviceData?.barn?.section.map((item) => {
                     return (
                       <option value={item.id} key={item.id}>
                         {item.name}
@@ -177,7 +193,7 @@ const AddDeviceModel = () => {
 
           <div className="modal__body__action_wrapper">
             <Button type="submit" variant="contained">
-              Register Device
+              Update Device
             </Button>
             <Button variant="contained" onClick={() => dispatch(hideModal())}>
               Cancel
@@ -189,4 +205,4 @@ const AddDeviceModel = () => {
   );
 };
 
-export default withPermission(AddDeviceModel, "add-device");
+export default withPermission(EditDeviceModel, "edit-device");

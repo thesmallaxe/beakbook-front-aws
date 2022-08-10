@@ -1,17 +1,27 @@
+import { useEffect } from "react";
 import {
   checkPermission,
   withPermission,
 } from "../../../app/hooks/with-permission";
 import { ShimmerTable } from "react-shimmer-effects";
-import { AddDeviceModel } from "./popups/AddDeviceModel";
+import AddDeviceModel from "./popups/AddDeviceModel";
+import EditDeviceModel from "./popups/EditDeviceModel";
 import { DeviceTableItem } from "./partials/DeviceTableItem";
 import { DeviceMobileItem } from "./partials/DeviceMobileItem";
 import Paginator from "../Paginator";
 import DeviceSearchInput from "./partials/DeviceSearchInput";
+import { useDispatch } from "react-redux/es/exports";
+import { showModal } from "../../../app/slices/DeviceAddSlice";
+import { getFarmListRequest } from "../../../app/slices/FarmDataListSlice";
 
 const DeviceContainer = (props) => {
   const deviceAddPermission = checkPermission("add-device");
   const devices = props.devices;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getFarmListRequest()).unwrap();
+  }, [dispatch]);
 
   return (
     <div className="devices">
@@ -64,19 +74,16 @@ const DeviceContainer = (props) => {
       </div>
       {deviceAddPermission && (
         <>
-          <button className="barns__add-new" onClick={props.handleShowDevice}>
+          <button
+            className="barns__add-new"
+            onClick={() => dispatch(showModal())}
+          >
             <i className="icon icon-add"></i>
           </button>
-          <AddDeviceModel
-            show={props.show}
-            loading={props.loading}
-            success={props.success}
-            error={props.error}
-            cancelAction={props.handleShowDevice}
-            handleCreateAction={props.addNewDevice}
-          />
+          <AddDeviceModel />
         </>
       )}
+      <EditDeviceModel />
     </div>
   );
 };

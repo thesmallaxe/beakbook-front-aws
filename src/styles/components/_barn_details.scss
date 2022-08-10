@@ -278,6 +278,11 @@
       font-size: 1rem;
     }
 
+    @include devices(mini) {
+      flex-direction: column;
+      gap: 0;
+    }
+
     small {
       font-size: 0.875rem;
       opacity: 0.6;

@@ -1,4 +1,15 @@
+import { useDispatch } from "react-redux";
+import { checkPermission } from "../../../../app/hooks/with-permission";
+import { showModal } from "../../../../app/slices/DeviceUpdateSlice";
+
 export const DeviceMobileItem = ({ device }) => {
+  const dispatch = useDispatch();
+  const deviceEditPermission = checkPermission("edit-device");
+
+  const handleClick = () => {
+    dispatch(showModal(device));
+  };
+
   return (
     <div className="barns__item">
       <div className="barns__item__content">
@@ -22,11 +33,11 @@ export const DeviceMobileItem = ({ device }) => {
           <div className="barns__head__item">
             <label>Status</label>
             <p>
-              Connected
+              {device.is_connected === 1 ? "Connected" : "Disconnected"}
               <span
                 className={
                   "barns__head__item__status " +
-                  (device.status === 1 ? "active" : "deactive")
+                  (device.is_connected === 1 ? "active" : "deactive")
                 }
               ></span>
             </p>
@@ -35,7 +46,11 @@ export const DeviceMobileItem = ({ device }) => {
       </div>
       <div className="barns__item__content">
         <div className="barns__head__left">
-          <button className="btn btn--link">Edit device information</button>
+          {deviceEditPermission && (
+            <button onClick={handleClick} className="btn btn--link">
+              Edit device information
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import { createDevice, searchDevices } from "../../app/actions/DeviceActions";
 import Header from "../components/Header";
 import DeviceContainer from "../components/devices/DeviceContainer";
+import { fetchDeviceRequest } from "../../app/slices/DeviceSlice";
 
 const Devices = (props) => {
   const { user, user_farm, searchDevices } = props;
@@ -55,21 +55,20 @@ const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
     user_farm: state.auth.farm_details,
-    loading: state.devices.loading,
-    download: state.devices.download,
-    devices: state.devices.all_devices,
-    pagination: state.devices.results.meta,
-    search: state.devices.search,
-    success: state.devices.success,
-    error: state.devices.error,
+    loading: state.devices.listing.loading,
+    download: state.devices.listing.download,
+    devices: state.devices.listing.all_devices,
+    pagination: state.devices.listing.results.meta,
+    search: state.devices.listing.search,
+    success: state.devices.listing.success,
+    error: state.devices.listing.error,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    searchDevices: (arg, arg2, arg3) =>
-      dispatch(searchDevices(arg, arg2, arg3)),
-    addNewDevice: (obj) => dispatch(createDevice(obj)),
+    searchDevices: (company_id, text, page) =>
+      dispatch(fetchDeviceRequest({ company_id, text, page })),
   };
 };
 

@@ -108,6 +108,10 @@
       fieldset {
         border: 1px solid rgba(0, 0, 0, 0.1);
       }
+
+      select {
+        font-size: 1rem;
+      }
     }
 
     &__action_wrapper {
@@ -182,6 +186,36 @@
       @include devices(mobile) {
         max-width: 90%;
       }
+    }
+  }
+
+  &#AddDevice,
+  &#UpdateDevice {
+    .modal__content {
+      max-width: 24.375rem;
+    }
+
+    .modal__body__title {
+      text-align: center;
+    }
+
+    .modal__body__description {
+      text-align: center;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal__body__field {
+      margin-bottom: 1.125rem;
+    }
+
+    .modal__body__row {
+      grid-template-columns: 1fr;
+    }
+
+    .modal__body__action_wrapper .MuiButton-contained {
+      padding: 1rem;
+      flex-grow: 1;
     }
   }
 }

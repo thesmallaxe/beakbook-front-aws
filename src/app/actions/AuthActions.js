@@ -94,6 +94,7 @@ export const submitLoginRequest = (user_data = {}) => {
           localStorage.setItem("user_data", JSON.stringify(res.user_details));
           localStorage.setItem("farm_data", JSON.stringify(res.farm_details));
           localStorage.setItem("token", JSON.stringify(res.access_token));
+          sessionStorage.setItem("token", JSON.stringify(res.access_token));
         } else {
           sessionStorage.setItem("token", JSON.stringify(res.access_token));
           sessionStorage.setItem("user_data", JSON.stringify(res.user_details));
@@ -266,7 +267,7 @@ export const logout = () => {
       })
       .catch((error) => {
         // Error log
-        notifyError(error?.message);                         
+        notifyError(error?.message);
       })
       .finally(() => {
         // Clear Storage

@@ -27,6 +27,12 @@ Media Query Mixins for Responsive
       @content;
     }
   }
+
+  @if $breakpoint == mini {
+    @media (max-width: 376px) {
+      @content;
+    }
+  }
 }
 
 /* 
