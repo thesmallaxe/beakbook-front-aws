@@ -27,7 +27,7 @@ const FarmDataList = createSlice({
     builder.addCase(getFarmListRequest.fulfilled, (state, action) => {
       state.loading = false;
       state.error = "";
-      state.data = action.payload;
+      state.data = action.payload.data;
     });
 
     builder.addCase(getFarmListRequest.rejected, (state, action) => {

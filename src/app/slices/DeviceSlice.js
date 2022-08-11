@@ -18,8 +18,7 @@ const initialState = {
 
 export const fetchDeviceRequest = createAsyncThunk(
   "device/data",
-  async (data = {}, thunkApi) => {
-    console.log(data);
+  async (data = {}) => {
     let url = DEVICE_END_POINT + `?companyId=${data.company_id}`;
     url += data.text !== null ? `&searchText=${data.text}` : "";
     url += data.page !== null ? `&page=${data.page}` : "&page=1";
