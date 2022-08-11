@@ -13,7 +13,7 @@ const EditDeviceModel = () => {
   const { loading, show, device } = useSelector(
     (state) => state.devices.update_device
   );
-  const { data } = useSelector((state) => state.data.farm_data.data);
+  const { data } = useSelector((state) => state.data.farm_data);
   const { meta } = useSelector((state) => state.devices.listing.results);
   const showModel = show ? "modal--show" : "";
   const [deviceData, setDeviceData] = useState(device);
@@ -21,10 +21,10 @@ const EditDeviceModel = () => {
   const handleInput = (prop) => (e) => {
     let update = { [prop]: e.target.value };
 
-    if (data && prop === "farm_id" && Object.keys(data).length > 0) {
+    if (Object.keys(data).length && prop === "farm_id") {
       let farm_id = parseInt(e.target.value);
 
-      if (data) {
+      if (Object.keys(data).length) {
         let farm = data.find((item) => {
           return item.id === farm_id;
         });
@@ -56,9 +56,9 @@ const EditDeviceModel = () => {
 
     update = { ...update, page: meta?.current_page };
 
-    if (data && device.farm_id !== null && Object.keys(data).length > 0) {
+    if (Object.keys(data).length && device.farm_id !== null) {
       let farm_id = parseInt(device.farm_id);
-      if (data) {
+      if (Object.keys(data).length) {
         let farm = data.find((item) => {
           return item.id === farm_id;
         });
@@ -98,7 +98,7 @@ const EditDeviceModel = () => {
               <TextField
                 label="Serial Number"
                 variant="outlined"
-                value={deviceData?.serial_number}
+                value={deviceData?.serial_number ?? ""}
                 onInput={handleInput("serial_number")}
                 InputProps={{
                   readOnly: loading,
@@ -115,7 +115,7 @@ const EditDeviceModel = () => {
                 InputProps={{
                   readOnly: loading,
                 }}
-                value={deviceData?.aws_region}
+                value={deviceData?.aws_region ?? ""}
                 fullWidth
               />
             </div>
@@ -124,7 +124,7 @@ const EditDeviceModel = () => {
             <div className="modal__body__field">
               <select
                 onChange={handleInput("status")}
-                value={deviceData.status}
+                value={deviceData.status ?? ""}
                 style={{ width: "100%", borderRadius: "5px" }}
                 required
               >
@@ -136,12 +136,12 @@ const EditDeviceModel = () => {
             <div className="modal__body__field">
               <select
                 onChange={handleInput("farm_id")}
-                value={deviceData.farm_id}
+                value={deviceData.farm_id ?? ""}
                 style={{ width: "100%", borderRadius: "5px" }}
                 required
               >
                 <option value="">Farm Name</option>
-                {data > 0 &&
+                {Object.keys(data).length &&
                   data.map((item) => {
                     return (
                       <option value={item.id} key={item.id}>
@@ -156,7 +156,7 @@ const EditDeviceModel = () => {
             <div className="modal__body__field">
               <select
                 onChange={handleInput("barn_id")}
-                value={deviceData.barn_id}
+                value={deviceData.barn_id ?? ""}
                 style={{ width: "100%", borderRadius: "5px" }}
                 required
               >
@@ -174,7 +174,7 @@ const EditDeviceModel = () => {
             <div className="modal__body__field">
               <select
                 onChange={handleInput("section_id")}
-                value={deviceData.section_id}
+                value={deviceData.section_id ?? ""}
                 style={{ width: "100%", borderRadius: "5px" }}
                 required
               >

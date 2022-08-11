@@ -120,12 +120,12 @@ const AddDeviceModel = () => {
             <div className="modal__body__field">
               <select
                 onChange={handleInput("farm_id")}
-                value={device.farm_id}
+                value={device.farm_id ?? ""}
                 style={{ width: "100%", borderRadius: "5px" }}
                 required
               >
                 <option value="">Farm Name</option>
-                {data > 0 &&
+                {Object.keys(data).length &&
                   data.map((item) => {
                     return (
                       <option value={item.id} key={item.id}>
@@ -140,7 +140,7 @@ const AddDeviceModel = () => {
             <div className="modal__body__field">
               <select
                 onChange={handleInput("barn_id")}
-                value={device.barn_id}
+                value={device.barn_id ?? ""}
                 style={{ width: "100%", borderRadius: "5px" }}
                 required
               >
@@ -158,7 +158,7 @@ const AddDeviceModel = () => {
             <div className="modal__body__field">
               <select
                 onChange={handleInput("section_id")}
-                value={device.section_id}
+                value={device.section_id ?? ""}
                 style={{ width: "100%", borderRadius: "5px" }}
                 required
               >
