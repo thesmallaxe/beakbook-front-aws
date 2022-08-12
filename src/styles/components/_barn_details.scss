@@ -218,6 +218,16 @@
       border: none;
       gap: 0.75rem;
     }
+
+    &:nth-child(4),
+    &:nth-child(2) {
+      .widget__count {
+        @include devices(mini) {
+          flex-direction: column;
+          gap: 0;
+        }
+      }
+    }
   }
 
   &__icon_block {
@@ -276,11 +286,6 @@
 
     @include devices(mobile) {
       font-size: 1rem;
-    }
-
-    @include devices(mini) {
-      flex-direction: column;
-      gap: 0;
     }
 
     small {
