@@ -29,7 +29,7 @@ Media Query Mixins for Responsive
   }
 
   @if $breakpoint == mini {
-    @media (max-width: 400px) {
+    @media (max-width: 420px) {
       @content;
     }
   }
