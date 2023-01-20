@@ -14,6 +14,9 @@ export const AuthLayout = () => {
     <main className="auth">
       <section className="auth__wrapper">
         <div className="auth__content">
+          <Link to="/" className="auth__content__logo">
+            <img src="/assets/img/logo.svg" alt="Logo" />
+          </Link>
           <Outlet />
         </div>
         <div className="auth__image">
