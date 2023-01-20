@@ -27,7 +27,7 @@ export const DeviceTableItem = ({ device }) => {
         {device.is_connected === 1 ? "Connected" : "Disconnected"}
       </td>
       <td>{device.location}</td>
-      <td>22h 12m 32 min</td>
+      <td>{device.uptime == null ? "" : "22h 12m 32 min"}</td>
       <td>
         <button className="devices__table__options-icon">
           <i className="icon icon-kebab"></i>
