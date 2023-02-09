@@ -43,9 +43,9 @@ function ResetPassword({ loading, error, reset_password, submitReset }) {
 
   return (
     <div className="login login--reset">
-      <Link to="/" className="auth__logo">
+      {/* <Link to="/" className="auth__logo">
         <img src="/assets/img/logo.svg" alt="Logo" />
-      </Link>
+      </Link> */}
       <div className="login__content">
         <p>Reset Password</p>
         {error?.message && <Alert action="error" message={error.message} />}
