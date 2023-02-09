@@ -31,9 +31,9 @@ function ForgotPassword({
 
   return (
     <div className="login login--forget">
-      <Link to="/" className="auth__logo">
+      {/* <Link to="/" className="auth__logo">
         <img src="/assets/img/logo.svg" alt="Logo" />
-      </Link>
+      </Link> */}
       <div className="login__content">
         <Link to="/login" className="login__back">
           <i className="icon icon-arrow-left"></i> <abbr>Back to Login</abbr>
